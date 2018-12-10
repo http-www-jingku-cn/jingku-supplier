@@ -1,0 +1,124 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/manage/order-list"></ion-back-button>
+        </ion-buttons>
+        <ion-title>订单详情</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-card class="card send-out" *ngIf="orderStatus!=2">
+        <h3>待发货</h3>
+        <p>请尽快发货，客户正在等您发货</p>
+        <ion-icon class="arming" src="./assets/icons/arming.svg"></ion-icon>
+    </ion-card>
+    <ion-card class="card send-out" *ngIf="orderStatus==2">
+        <h3>已发货</h3>
+        <p>商品已发货，正在等待客户确认收货</p>
+        <ion-icon class="arming" src="./assets/icons/shipped.svg"></ion-icon>
+    </ion-card>
+    <ion-card class="card receiving-info" *ngIf="orderStatus!=1">
+        <div class="head">
+            <h1>发货信息</h1>
+        </div>
+        <div class="body">
+            <p>
+                <span class="key">收货人　：</span> <span class="value">{{data?.order_info?.consignee}}</span>
+            </p>
+            <p>
+                <span class="key">联系方式：</span> <span class="value">{{data?.order_info?.mobile}}</span>
+            </p>
+            <p>
+                <span class="key">收货地址：</span> <span class="value">{{data?.order_info?.province +
+                    data?.order_info?.city + data?.order_info?.district + data?.order_info?.address }}</span>
+            </p>
+            <p>
+                <span class="key">配送方式：</span> <span class="value">{{data?.order_info?.consignee}}</span>
+            </p>
+            <p>
+                <span class="key">备注说明：</span> <span class="value" style="color: #036CFF;">{{data?.order_info?.consignee}}</span>
+            </p>
+        </div>
+    </ion-card>
+    <ion-card class="card goods-info" *ngIf="data">
+        <div class="list">
+            <div class="goods" *ngFor="let goods of data?.goods_list">
+                <div class="name">{{goods.goods_name}}</div>
+                <p>
+                    <span class="key">商品号　：</span> <span class="value">1212121221</span>
+                </p>
+                <p>
+                    <span class="key">货品编号：</span> <span class="value">{{goods?.product_sn}}</span>
+                </p>
+                <div class="goods-body">
+                    <div class="img">
+                        <ion-img [src]="goods.goods_img"></ion-img>
+                    </div>
+                    <div class="right">
+                        <div class="top">
+                            <p>
+                                <span class="key">规格：</span> <span class="value">{{goods?.goods_attr}}</span>
+                            </p>
+                            <p>
+                                <span class="key">单价：</span> <span class="value">{{goods?.formated_goods_price}}</span>
+                            </p>
+                            <p>
+                                <span class="key">优惠：</span> <span class="value">{{goods?.formated_zReducePrice}}</span>
+                            </p>
+                            <p>
+                                <span class="key">数量：</span> <span class="value">{{goods?.goods_number}}</span>
+                            </p>
+                            <p>
+                                <span class="key">存货：</span> <span class="value">{{goods?.goods_attr}}</span>
+                            </p>
+                        </div>
+                        <div class="edit-num" *ngIf="orderStatus==1">
+                            <pre>此单发货数量</pre>
+                            <s-count-input [value]="12"></s-count-input>
+                        </div>
+                        <p class="price" *ngIf="orderStatus!=1">
+                            <span class="key">小计：</span><span class="value ">{{goods?.formated_subtotal}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="liquidation-list" *ngIf="orderStatus!=1">
+            <p>
+                <span class="key"><span class="icon" style="background: #74B979;">数</span>商品总数量</span><span class="value">{{data?.order_info?.consignee}}</span>
+            </p>
+            <p>
+                <span class="key"><span class="icon" style="background: #FE4E68;">近</span>商品总价格</span><span class="value red">{{data?.order_info?.consignee}}</span>
+            </p>
+            <p>
+                <span class="key"><span class="icon" style="background: #FB9A3C;">扣</span>折扣</span><span class="value red">{{data?.order_info?.consignee}}</span>
+            </p>
+            <p>
+                <span class="key"><span class="icon" style="background: #DE1000;">减</span>满减优惠</span><span class="value red">{{data?.order_info?.consignee}}</span>
+            </p>
+            <p>
+                <span class="key"><span class="icon" style="background: #74B979;">配</span>配送费用</span><span class="value">{{data?.order_info?.consignee}}</span>
+            </p>
+        </div>
+        <div class="sum">
+            <span class="count">共{{data?.order_info?.consignee}}件商品&nbsp;&nbsp;</span>
+            <span>
+                <span>合计：</span>
+                <span class="price">¥{{data?.order_info?.order_amount}}</span>
+            </span>
+        </div>
+    </ion-card>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <div class="btns">
+            <button *ngIf="orderStatus==1" class="bac" [routerLink]="['/manage/write-express-number',orderId]">出库</button>
+            <button *ngIf="orderStatus!=1">配货</button>
+            <button *ngIf="orderStatus!=1" class="bac" [routerLink]="['/manage/order-info',orderId,{order_status:1}]">发货</button>
+            <button *ngIf="orderStatus==2" [routerLink]="['/manage/ship-order']">发货记录</button>
+            <button *ngIf="orderStatus==2" class="bac" [routerLink]="['/manage/logistics-tracking',orderId]">物流跟踪</button>
+        </div>
+    </ion-toolbar>
+</ion-footer>

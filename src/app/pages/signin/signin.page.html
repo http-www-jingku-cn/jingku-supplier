@@ -1,0 +1,199 @@
+<ion-title style="display: none;">注册</ion-title>
+
+<ion-content>
+
+  <div class="head">
+    <div class="logo">
+      <img src="./assets/icons/login_logo.png" alt="">
+    </div>
+    <span>注册</span>
+    <div class="close">
+      <ion-back-button icon="close" defaultHref="/login"></ion-back-button>
+    </div>
+  </div>
+  <section class="group">
+    <header class="tit">
+      账户信息
+    </header>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*用户名</div>
+      </div>
+      <div class="input">
+        <ion-input clearInput></ion-input>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*请设置密码</div>
+      </div>
+      <div class="input">
+        <ion-input clearInput></ion-input>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*请确认密码</div>
+      </div>
+      <div class="input">
+        <ion-input clearInput></ion-input>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*手机号</div>
+      </div>
+      <div class="input">
+        <ion-input clearInput></ion-input>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*验证码</div>
+      </div>
+      <div class="item-main">
+        <div class="input">
+          <ion-input clearInput></ion-input>
+        </div>
+        <div class="get-mobile-code">获取手机验证码</div>
+      </div>
+    </div>
+  </section>
+  <section class="group">
+    <header class="tit">
+      法人信息
+    </header>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*法人姓名</div>
+      </div>
+      <div class="input">
+        <ion-input clearInput></ion-input>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*身份证号</div>
+      </div>
+      <div class="input">
+        <ion-input clearInput></ion-input>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*身份证复印件<br /><br />正面</div>
+        <div class="choose">
+          <ion-icon src="./assets/icons/upload_img.svg"></ion-icon>
+          <span>点此上传</span>
+          <input type="file">
+        </div>
+        <div class="show">
+          <ion-img src="./assets/icons/upload_img.svg"></ion-img>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*身份证复印件<br /><br />反面</div>
+        <div class="choose">
+          <ion-icon src="./assets/icons/upload_img.svg"></ion-icon>
+          <span>点此上传</span>
+          <input type="file">
+        </div>
+        <div class="show">
+          <ion-img src="./assets/icons/upload_img.svg"></ion-img>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="group">
+    <header class="tit">
+      企业基本信息
+    </header>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*企业姓名</div>
+      </div>
+      <div class="input">
+        <ion-input clearInput></ion-input>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*所在城市</div>
+      </div>
+      <div class="select">
+        <ion-select placeholder="请选择" okText="确定" cancelText="取消">
+          <ion-select-option value="brown">Brown</ion-select-option>
+          <ion-select-option value="blonde">Blonde</ion-select-option>
+          <ion-select-option value="black">Black</ion-select-option>
+          <ion-select-option value="red">Red</ion-select-option>
+        </ion-select>
+        <ion-select placeholder="请选择" okText="确定" cancelText="取消">
+          <ion-select-option value="brown">Brown</ion-select-option>
+          <ion-select-option value="blonde">Blonde</ion-select-option>
+          <ion-select-option value="black">Black</ion-select-option>
+          <ion-select-option value="red">Red</ion-select-option>
+        </ion-select>
+        <ion-select placeholder="请选择" okText="确定" cancelText="取消">
+          <ion-select-option value="brown">Brown</ion-select-option>
+          <ion-select-option value="blonde">Blonde</ion-select-option>
+          <ion-select-option value="black">Black</ion-select-option>
+          <ion-select-option value="red">Red</ion-select-option>
+        </ion-select>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*详细地址</div>
+      </div>
+      <div class="input">
+        <ion-input clearInput></ion-input>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*营业执照号</div>
+      </div>
+      <div class="input">
+        <ion-input clearInput></ion-input>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*营业执照</div>
+        <div class="choose">
+          <ion-icon src="./assets/icons/upload_img.svg"></ion-icon>
+          <span>点此上传</span>
+          <input type="file">
+        </div>
+        <div class="show">
+          <ion-img src="./assets/icons/upload_img.svg"></ion-img>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-name">*营业期限</div>
+      </div>
+      <div class="datetime">
+        <div class="date">
+          <ion-datetime displayFormat="YYYY-MM-DD" placeholder="请选择" cancelText="取消" doneText="确定"></ion-datetime>
+          <ion-icon src="./assets/icons/icon_date.svg"></ion-icon>
+        </div>
+        <span>—</span>
+        <div class="date">
+          <ion-datetime displayFormat="YYYY-MM-DD" max="2118" placeholder="请选择" cancelText="取消" doneText="确定"></ion-datetime>
+          <ion-icon src="./assets/icons/icon_date.svg"></ion-icon>
+        </div>
+      </div>
+    </div>
+    <div class="login">
+      <span>已有账号，</span>
+      <a (click)="login()">立即登录</a>
+    </div>
+    <div class="btn-wrap">
+      <button type="submit" href>登录</button>
+    </div>
+  </section>
+</ion-content>

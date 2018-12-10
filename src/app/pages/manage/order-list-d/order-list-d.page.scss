@@ -1,0 +1,47 @@
+ion-content {
+    --ion-background-color: #F1F3F5;
+}
+
+.list {
+    padding: 12px;
+
+    .li {
+        background: #ffffff;
+        border-radius: 4px;
+        padding: 0 12px;
+        margin-bottom: 12px;
+
+        .head {
+            padding: 10px 4px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: var(--border-width) solid #f0f0f0;
+
+            .tit {
+                letter-spacing: 4px;
+            }
+
+            .status {
+                color: #67A6FF;
+            }
+        }
+
+        .body {
+
+            padding: 8px 8px 15px;
+
+            .it {
+                display: flex;
+                line-height: 1.8;
+
+                .key {
+                    color: #cccccc;
+                }
+
+                .value {
+                    color: #666666;
+                }
+            }
+        }
+    }
+}

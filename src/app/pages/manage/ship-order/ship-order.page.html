@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>发货单</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let order of data?.list">
+    <div class="head">
+      <span class="sn">订单编号：{{order?.order_sn}}</span>
+      <div class="status">待发货</div>
+    </div>
+    <div class="goods-list">
+      <div class="goods" *ngFor="let goods of [{},{},{}]">
+        <div class="img">
+          <ion-img [src]="goods.goods_img"></ion-img>
+        </div>
+        <div class="right">
+          <div class="info">
+            <div class="info-wrap">
+              <h1 class="name">名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称</h1>
+              <div class="obj">
+                <pre class="key">规　　格：</pre>
+                <pre class="value">{{goods?.goods_attr}}</pre>
+              </div>
+              <div class="obj">
+                <pre class="key">品　　牌：</pre>
+                <pre class="value">{{goods?.formated_goods_price}}</pre>
+              </div>
+              <div class="obj">
+                <pre class="key">发货数量：</pre>
+                <pre class="value">{{goods?.formated_zReducePrice}}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

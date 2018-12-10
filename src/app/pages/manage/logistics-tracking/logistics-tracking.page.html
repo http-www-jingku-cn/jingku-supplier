@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button defaultHref="/manage/order-list"></ion-back-button>
+    <ion-title>物流跟踪</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="noinfo" *ngIf="data?.length==0">
+    <ion-icon src="./assets/icons/noship.svg"></ion-icon>
+    <p>暂无物流信息</p>
+  </div>
+  <ng-container *ngFor="let box of data">
+    <div class="track-wrap">
+      <div class="new-order-track">
+        <span style="margin-bottom: 6px;">物流单号：{{box?.invoice_no || '无'}}</span>
+        <span>物流公司：{{box?.shipping_name}}</span>
+      </div>
+      <div *ngIf="!box?.list" style="padding: 10px;color: #666;">{{box.msg}}</div>
+      <div id="changeContent1" style="padding: 10px 0px 10px 20px;background: #fff;" *ngIf="box?.list">
+        <div class="new-order-flow new-p-re">
+          <span class="new-order-arr"></span>
+          <ul class="new-of-storey">
+            <ng-container *ngFor="let item of box?.list | reverse;let i = index">
+              <li class="time">{{item?.time}}</li>
+              <li *ngFor="let wuliu of item?.data | reverse;let j = index">
+                <div class="li-inner">
+                  <span class="line-l"></span>
+                  <span class="icon" [class.on]="i==0&&j==0"><span></span></span>
+                  <span [innerHtml]="wuliu?.context | findTele | bypassSecurityTrustHtml"></span>
+                  <span style="margin-top: 5px;">{{wuliu?.time}}</span>
+                </div>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+      <div id="changeContent2" class="new-order-map" style="display:none"></div>
+    </div>
+  </ng-container>
+
+</ion-content>

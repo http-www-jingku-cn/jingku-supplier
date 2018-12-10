@@ -1,0 +1,119 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>个人中心</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div class="page-wrap">
+    <div class="card card1">
+      <div class="user">
+        <div class="avatar">
+          <img src="./assets/icons/my11.png" alt="">
+        </div>
+        <div class="info">
+          <div class="name">孙山杉</div>
+          <div class="time">上次登录时间：2020-2-20 10:25:44</div>
+        </div>
+      </div>
+      <!-- <div class="log">
+        <ion-icon name="calendar"></ion-icon>
+        <div class="txt">日志</div>
+        <ion-icon style="font-size: 16px;" src="./assets/icons/right-w.svg"></ion-icon>
+      </div> -->
+
+    </div>
+    <div class="card card2">
+      <div class="head">
+        <div class="title">普通订单</div>
+        <div class="all" routerLink="/manage/order-list">
+          <span>查看全部</span>
+          <ion-icon src="./assets/icons/right-w.svg"></ion-icon>
+        </div>
+      </div>
+      <div class="body">
+        <div class="item" tappable [routerLink]="['/manage/order-list',{ pageindex: 1 }]" [queryParams]="{ pageindex: 1 }">
+          <div class="img">
+            <img src="./assets/icons/my11.png">
+            <div class="label">10</div>
+          </div>
+          <div class="item-name">待支付</div>
+        </div>
+        <div class="item">
+          <div class="img">
+            <img src="./assets/icons/my10.png">
+            <div class="label">10</div>
+          </div>
+          <div class="item-name">待发货</div>
+        </div>
+        <div class="item">
+          <div class="img">
+            <img src="./assets/icons/my9.png">
+            <div class="label">10</div>
+          </div>
+          <div class="item-name">部分发货</div>
+        </div>
+        <div class="item">
+          <div class="img">
+            <img src="./assets/icons/my7.png">
+            <div class="label">10</div>
+          </div>
+          <div class="item-name">待收货</div>
+        </div>
+        <div class="item">
+          <div class="img">
+            <img src="./assets/icons/my8.png">
+            <div class="label">10</div>
+          </div>
+          <div class="item-name">已完成</div>
+        </div>
+        <div class="item">
+          <div class="img">
+            <img src="./assets/icons/my6.png">
+            <div class="label">10</div>
+          </div>
+          <div class="item-name">已取消</div>
+        </div>
+      </div>
+    </div>
+    <div class="card card3">
+      <div class="head">
+        <div class="title">铺货订单</div>
+        <div class="all">
+          <span>查看全部</span>
+          <ion-icon src="./assets/icons/right-w.svg"></ion-icon>
+        </div>
+      </div>
+      <div class="body">
+        <div class="item" routerLink="/manage/order-list-d">
+          <div class="img">
+            <img src="./assets/icons/my5.png">
+            <div class="label">10</div>
+          </div>
+          <div class="item-name">待审核</div>
+        </div>
+        <div class="item">
+          <div class="img">
+            <img src="./assets/icons/my4.png">
+            <div class="label">10</div>
+          </div>
+          <div class="item-name">待盖章</div>
+        </div>
+        <div class="item">
+          <div class="img">
+            <img src="./assets/icons/my3.png">
+            <div class="label">10</div>
+          </div>
+          <div class="item-name">生效中</div>
+        </div>
+        <div class="item">
+          <div class="img">
+            <img src="./assets/icons/my2.png">
+            <div class="label">10</div>
+          </div>
+          <div class="item-name">已失效</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

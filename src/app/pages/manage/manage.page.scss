@@ -1,0 +1,147 @@
+ion-content {
+    --ion-background-color: #f3f6fc;
+}
+
+.page-wrap {
+
+    padding: 12px;
+    background: #f3f6fc;
+    box-shadow: 0 0 4px #f0f0f0;
+
+    .card {
+        border-radius: 10px;
+        position: relative;
+        background: #ffffff;
+        margin-bottom: 16px;
+        overflow: hidden;
+
+        &.card1 {
+            background: url('../../../assets/icons/my1.png') no-repeat center center/100% 100%;
+            min-height: 150px;
+            color: #ffffff;
+            padding: 24px 0 0 18px;
+
+            .user {
+                display: flex;
+                align-items: center;
+
+                .avatar {
+                    flex-shrink: 0;
+                    border-radius: 50%;
+                    background: #ffffff;
+                    height: 65px;
+                    width: 65px;
+                    margin-right: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .info {
+                    .name {
+                        margin-bottom: 10px;
+                        font-size: 16px;
+                    }
+
+                    .time {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            .log {
+                background: linear-gradient(90deg, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0) 100%);
+                position: absolute;
+                bottom: 30px;
+                right: 0;
+                display: flex;
+                align-items: center;
+                font-size: 14px;
+                padding: 5px 1var(--border-width);
+                border-radius: 15px 0 0 15px;
+
+                .txt {
+                    margin: 0 8px 0 4px;
+                }
+
+                ion-icon {
+                    color: #ffffff;
+                    font-size: 18px;
+                }
+            }
+        }
+
+        &.card2,
+        &.card3 {
+            .head {
+                border-bottom: var(--border-width) solid #f0f0f0;
+                padding: 14px 10px;
+                display: flex;
+                justify-content: space-between;
+
+                .title {
+                    color: #333333;
+                    font-weight: 600;
+                }
+
+                .all {
+                    font-size: 12px; 
+                    display: flex;
+                        color: #a0a0a0;
+                        align-items: center;
+                    ion-icon{
+                        color: #a0a0a0;
+                    }
+                }
+            }
+
+            .body {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 8px 8px;
+
+                .item {
+                    text-align: center;
+                    width: 33.33%;
+                    color: #666666;
+                    padding: 16px 0;
+
+                    .img {
+                        position: relative;
+                        width: 28px;
+                        height: 28px;
+                        margin: auto;
+                        margin-bottom: 10px;
+
+                        .label {
+                            color: #0682db;
+                            border: 1px solid #0682db;
+                            background: #ffffff;
+                            font-size: 12px;
+                            padding: 0px 6px;
+                            position: absolute;
+                            top: -8px;
+                            right: -8px;
+                            border-radius: 9px;
+                        }
+                    }
+
+                    .item-name {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        &.card3 {
+            .img {
+                width: 26px !important;
+                width: 26px !important;
+            }
+
+            .item {
+                width: 25% !important;
+            }
+        }
+    }
+}

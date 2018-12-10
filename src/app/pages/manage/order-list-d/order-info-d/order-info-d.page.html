@@ -1,0 +1,103 @@
+<ion-header translucent>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/manage/orderList"></ion-back-button>
+      </ion-buttons>
+      <ion-title>订单详情</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="top">
+      <div class="sn">llds123123123123123123</div>
+      <div class="status">生效中</div>
+  </div>
+  <div class="card card1">
+      <div class="head">
+          <div class="name">MUYU</div>
+      </div>
+      <div class="body">
+          <div class="list">
+              <div class="goods" *ngFor="let item of [{},{},{},{},{},{},{},{},{},{}]">
+                  <div class="img">
+                      <img src="" alt="">
+                  </div>
+                  <div class="center">
+                      <div class="goods-name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</div>
+                      <div class="attr">规格：2mlx3</div>
+                  </div>
+                  <div class="right">
+                      <div class="price">
+                          ￥12.00
+                      </div>
+                      <div class="num">
+                          x2
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="more">
+              <span>查看更多（商品共100）</span>
+          </div>
+      </div>
+      <div class="foot">
+          <div class="it">
+              <div class="key">订单金额：</div>
+              <div class="value">￥222.00</div>
+          </div>
+          <div class="it red">
+              <div class="key">应付金额：</div>
+              <div class="value">￥222.00</div>
+          </div>
+      </div>
+  </div>
+  <div class="card card2">
+      <div class="types between">
+          <div class="body">
+              <div class="it">
+                  <div class="key">合同开始时间：</div>
+                  <div class="value">￥222.00</div>
+              </div>
+              <div class="it red">
+                  <div class="key">合同结束时间：</div>
+                  <div class="value">￥222.00</div>
+              </div>
+          </div>
+      </div>
+      <div class="types">
+          <div class="head">收货信息</div>
+          <div class="body">
+              <div class="it">
+                  <div class="key">收货人：</div>
+                  <div class="value">￥222.00</div>
+              </div>
+              <div class="it">
+                  <div class="key">联系电话：</div>
+                  <div class="value">￥222.00</div>
+              </div>
+              <div class="it">
+                  <div class="key">收货地址：</div>
+                  <div class="value">￥222.00</div>
+              </div>
+          </div>
+      </div>
+      <div class="types">
+          <div class="head">
+              <div class="tit">收货信息</div>
+              <div class="go">
+                  <span>查看物流</span>
+                  <ion-icon src="./assets/icons/detail.svg"></ion-icon>
+              </div>
+          </div>
+      </div>
+      <div class="types">
+          <div class="head">
+              <div class="tit">近30铺货数量</div>
+              <div class="go">
+                  <span>查看物流</span>
+                  <ion-icon src="./assets/icons/detail.svg"></ion-icon>
+              </div>
+          </div>
+      </div>
+  </div>
+</ion-content>

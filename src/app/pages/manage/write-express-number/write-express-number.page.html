@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/manage/order-list"></ion-back-button>
+    </ion-buttons>
+    <ion-title>填写快递单号</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="head">
+    <ion-icon name="md-notifications"></ion-icon>
+    <span>请核对订单信息后，再发货，上门取货不需要填写直接提交</span>
+  </div>
+  <ion-card>
+    <h1>发货单号</h1>
+    <ion-input clearInput placeholder="请填写发货单号"></ion-input>
+    <h1>发货单号</h1>
+    <ion-select [disabled]="!shippingList" okText="确定" cancelText="取消" placeholder="请选择" [interfaceOptions]="customAlertOptions">
+      <ion-select-option [value]="ship.key" *ngFor="let ship of shippingList">{{ship.value}}</ion-select-option>
+    </ion-select>
+  </ion-card>
+  <div class="btns">
+    <button (click)="cancel()">取消</button>
+    <button class="bac" (click)="confirm()">确定</button>
+  </div>
+</ion-content>

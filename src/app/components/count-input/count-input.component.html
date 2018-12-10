@@ -1,0 +1,8 @@
+<div class="btn" tappable (click)="reduce()" [class.disabled]="(value <= minValue) || (rank> 1&&(value <= rank))">
+  <ion-icon name="remove"></ion-icon>
+</div>
+<input type="number" [(ngModel)]="value" (input)="input(value)" (blur)="inputEvent()" [ngStyle]="{'background':rank>1?'#e0e0e0':'null'}"
+  [disabled]="disabled" tappable>
+<div class="btn" tappable (click)="increase()" [class.disabled]="(maxValue || maxValue==0) && (maxValue - value) < rank">
+  <ion-icon name="add"></ion-icon>
+</div>

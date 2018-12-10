@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/(manage:manage)"></ion-back-button>
+    </ion-buttons>
+    <ion-title>订单列表</ion-title>
+  </ion-toolbar>
+  <ion-toolbar no-padding>
+    <s-my-tabs [slidesPerView]="5" [selectedIndex]="pageIndex" [slides]="['全部', '待审核', '待盖章', '生效中','已失效']"
+      (slideClick)="segmentChanged($event)"></s-my-tabs>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="list">
+    <div class="li" *ngFor="let item of [{},{},{},{},{},{},{},{},{},{}]">
+      <div class="head">
+        <div class="tit">铺货</div>
+        <div class="status">待审核</div>
+      </div>
+      <div class="body">
+        <div class="it">
+          <div class="key">用户名：</div>
+          <div class="value">2525252</div>
+        </div>
+        <div class="it">
+          <div class="key">用户名：</div>
+          <div class="value">2525252</div>
+        </div>
+        <div class="it">
+          <div class="key">用户名：</div>
+          <div class="value">2525252</div>
+        </div>
+        <div class="it">
+          <div class="key">用户名：</div>
+          <div class="value">2525252</div>
+        </div>
+        <div class="it">
+          <div class="key">用户名：</div>
+          <div class="value">2525252</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

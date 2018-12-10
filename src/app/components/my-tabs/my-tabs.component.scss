@@ -1,0 +1,23 @@
+$slide-height-small: 41px;
+$slide-height-large: 50px;
+
+.slides {
+    width: 100%;
+    color: #666666;
+    padding: 0;
+}
+
+.slide-title-unit {
+    font-size: 14px;
+    white-space: nowrap;
+    height: $slide-height-small;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.slide-title-active {
+    color: #66A6FF;
+    border-bottom: 2px solid #66A6FF;
+}

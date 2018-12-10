@@ -1,0 +1,25 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BypassSecurityTrustHtmlPipe } from './bypass-security-trust-html/bypass-security-trust-html.pipe';
+import { FindTelePipe } from './find-tele/find-tele.pipe';
+import { PhoneNumberFiterPipe } from './phone-number-fiter/phone-number-fiter.pipe';
+import { ReversePipe } from './reverse/reverse.pipe';
+
+@NgModule({
+  declarations: [
+    BypassSecurityTrustHtmlPipe,
+    FindTelePipe,
+    PhoneNumberFiterPipe,
+    ReversePipe
+  ],
+  imports: [
+    CommonModule
+  ],
+  exports: [
+    BypassSecurityTrustHtmlPipe,
+    FindTelePipe,
+    PhoneNumberFiterPipe,
+    ReversePipe
+  ]
+})
+export class PipesModule { }

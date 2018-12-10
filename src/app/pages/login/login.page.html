@@ -1,0 +1,32 @@
+<ion-content>
+  <div class="form-wrap">
+    <form #loginForm="ngForm" (ngSubmit)="goToHome(loginForm)" (keyup.enter)="goToHome(loginForm)" novalidate>
+      <div class="login-txt">登录</div>
+
+      <ion-item>
+        <ion-icon class="input-icon" src="./assets/icons/user.svg"></ion-icon>
+        <ion-input autocomplete="off" autocorrect="off" [(ngModel)]="loginInfo.member" clearInput="true" name="loginusername"
+          type="text" spellcheck="false" placeholder="用户名" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon class="input-icon" src="./assets/icons/lock-o.svg"></ion-icon>
+        <ion-input autocomplete="off" autocorrect="off" [(ngModel)]="loginInfo.pass" clearInput="true" name="loginpassword"
+          [type]="showPsw?'text':'password'" required placeholder="输入密码">
+        </ion-input>
+        <div class="s_h" item-end tappable (click)="showPsw=!showPsw">
+          <img *ngIf="showPsw" src="./assets/icons/psw_hide_3.png" alt="">
+          <img *ngIf="!showPsw" src="./assets/icons/psw_show_3.png" alt="">
+        </div>
+      </ion-item>
+
+      <div class="btn-wrap">
+        <button type="submit">登录</button>
+      </div>
+    </form>
+  </div>
+  <div class="signin-forgot">
+    <a routerLink="/signin">免费注册</a>&nbsp;/&nbsp;<a href="">忘记密码</a>
+  </div>
+</ion-content>

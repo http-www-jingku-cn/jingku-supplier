@@ -1,0 +1,98 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/manage"></ion-back-button>
+        </ion-buttons>
+        <ion-title>订单列表</ion-title>
+    </ion-toolbar>
+    <ion-toolbar no-padding>
+        <!-- <ion-segment mode="md" (ionChange)="segmentChanged($event)">
+            <ion-segment-button mode="md" checked value="1">
+                待审核
+            </ion-segment-button>
+            <ion-segment-button mode="md" value="2">
+                待盖章
+            </ion-segment-button>
+            <ion-segment-button mode="md" value="3">
+                生效中
+            </ion-segment-button>
+            <ion-segment-button mode="md" value="4">
+                已失效
+            </ion-segment-button>
+        </ion-segment> -->
+        <s-my-tabs [slidesPerView]="5" [selectedIndex]="pageIndex" [slides]="['全部', '待支付', '部分发货', '待收货','已完成','已取消']"
+            (slideClick)="segmentChanged($event)"></s-my-tabs>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="list">
+        <div class="card" *ngFor="let order of orderList">
+            <div class="head">
+                <div class="name">
+                    <ion-icon class="input-icon" src="./assets/icons/user.svg"></ion-icon>
+                    <span>{{order.consignee}}</span>
+                </div>
+                <div class="status">{{order.status}}</div>
+            </div>
+            <div class="its">
+                <div class="it">
+                    <div class="key">订单号　：</div>
+                    <div class="value">{{order.sn}}</div>
+                </div>
+                <div class="it">
+                    <div class="key">下单时间：</div>
+                    <div class="value">{{order.add_time}}</div>
+                </div>
+            </div>
+            <ng-container *ngIf="order?.goods_list?.length==1">
+                <div class="goods-info" *ngFor="let goods of order?.goods_list" [routerLink]="['/manage/order-info',order.id]">
+                    <div class="img">
+                        <ion-img [src]="goods.goods_img"></ion-img>
+                    </div>
+                    <div class="center">
+                        <div class="goods-name">{{goods.goods_name}}</div>
+                        <div class="attr">
+                            <span *ngIf="goods.qiujing">球镜：{{goods.qiujing}}</span>
+                            <span *ngIf="goods.zhujing">柱镜：{{goods.zhujing}}</span>
+                            <span *ngIf="goods.zhouwei">轴位：{{goods.zhouwei}}</span>
+                            <span [innerHtml]="goods.goods_attr"></span>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="price">
+                            {{goods.formated_goods_price}}
+                        </div>
+                        <div class="num">
+                            x{{goods.goods_number}}
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="order?.goods_list?.length>1">
+                <div class="goods-info">
+                    <div class="img" *ngFor="let goods of order?.goods_list">
+                        <ion-img [src]="goods.goods_img"></ion-img>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="sum">
+                <span class="count">共{{1}}件商品&nbsp;&nbsp;</span>
+                <span>
+                    <span>合计：</span>
+                    <span class="price">¥{{order.order_amount}}</span>
+                </span>
+            </div>
+            <div class="btns">
+                <ion-button fill="outline" size="small" color="medium">去发货</ion-button>
+                <ion-button fill="outline" size="small" [routerLink]="['/manage/order-info',order.id]"
+                    queryParamsHandling="merge">去发货</ion-button>
+            </div>
+        </div>
+    </div>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
