@@ -36,11 +36,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'customer',
+        path: 'messages',
         children: [
           {
             path: '',
-            loadChildren: '../customer-services/customer-services.module#CustomerServicesPageModule'
+            loadChildren: '../message-list/message-list.module#MessageListPageModule'
           }
         ]
       },

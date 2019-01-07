@@ -1,11 +1,12 @@
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap, finalize } from 'rxjs/operators';
+import { Observable, of, throwError, from } from 'rxjs';
+import { catchError, map, tap, finalize, switchMap } from 'rxjs/operators';
 import { StartupService } from './startup.service';
 import { Router } from '@angular/router';
 import { PopoversService } from './popovers/popovers.service';
+import { LoadingController } from '@ionic/angular';
 
 export interface HttpOptions {
   showLoading?: boolean;
@@ -27,6 +28,7 @@ export class HttpDataService {
     public startupServ: StartupService,
     private injector: Injector,
     private popoversServ: PopoversService,
+    public loadingController: LoadingController,
 
   ) {
 
@@ -58,19 +60,33 @@ export class HttpDataService {
       showToast: true,
       ...options
     };
-    options.showLoading && this.popoversServ.presentLoading();
-
-    return this.http.post(url, Object.assign(data, { session: this.startupServ.sessionToken })).pipe(
-      map((res) => {
-        return this.extractData(res, options);
-      }),
-      finalize(() => {
-        options.showLoading && this.popoversServ.closeLoading();
-      }),
-      catchError((err: HttpErrorResponse) => {
-        return this.handleData(err, options);
+    let loadingElm: Promise<HTMLIonLoadingElement> | Promise<{}>;
+    if (options.showLoading) {
+      loadingElm = this.loadingController.create({
+        duration: 20000,
+        message: '',
+        translucent: true,
+        cssClass: 'custom-class custom-loading'
+      });
+    } else {
+      loadingElm = new Promise(resolve => resolve(false));
+    }
+    return from<any>(loadingElm).pipe(
+      switchMap(loading => {
+        loading && loading.present();
+        return this.http.post(url, Object.assign(data, { session: this.startupServ.sessionToken })).pipe(
+          map((res) => {
+            return this.extractData(res, options);
+          }),
+          finalize(() => {
+            loading && loading.dismiss();
+          }),
+          catchError((err: HttpErrorResponse) => {
+            return this.handleData(err, options);
+          })
+        );
       })
-    );
+    )
   }
   /**
    * PUT请求处理（一般用于更新数据）
@@ -228,8 +244,40 @@ export class HttpDataService {
   sealinfo(data?, options?: HttpOptions) {//铺货合同签署
     return this.post('/public/scrm/seal/info', data, options);
   }
-  /* infourlseal(data?, options?: HttpOptions) {//下载合同签署
-    return this.post('/public/scrm/seal/infourlseal', data, options);
-  } */
-
+  order_num(data?, options?: HttpOptions) {//个人中心订单技术
+    return this.post('/public/scrm/Order/order_num', data, options);
+  }
+  downloadpdf(data?, options?: HttpOptions) {//下载合同签署
+    return this.post('/public/scrm/seal/downloadpdf', data, options);
+  }
+  supplierInfo(data?, options?: HttpOptions) {//供货商信息
+    return this.post('/public/scrm/Supplier/info', data, options);
+  }
+  shipping_ino_name(data?, options?: HttpOptions) {//查询物流公司
+    return this.post('/public/scrm/Order/shipping_ino_name', data, options);
+  }
+  prepare(data?, options?: HttpOptions) {//订单配货
+    return this.post('/public/scrm/Order/prepare', data, options);
+  }
+  updateShippingNo(data?, options?: HttpOptions) {//修改物流
+    return this.post('/public/scrm/Order/updateShippingNo', data, options);
+  }
+  opc_order(data?, options?: HttpOptions) {//导入opc
+    return this.post('/public/scrm/Order/opc_order', data, options);
+  }
+  plan_list(data?, options?: HttpOptions) {//行情列表
+    return this.post('/public/scrm/Plan/plan_list', data, options);
+  }
+  plan_info(data?, options?: HttpOptions) {//行情详情
+    return this.post('/public/scrm/Plan/plan_info', data, options);
+  }
+  click_zan(data?, options?: HttpOptions) {//点赞
+    return this.post('/public/scrm/Plan/click_zan', data, options);
+  }
+  writeComment(data?, options?: HttpOptions) {//评论
+    return this.post('/public/scrm/Plan/comment', data, options);
+  }
+  getFileImg(data?, options?: HttpOptions) {//评论
+    return this.post('/public/scrm/Publics/GetFileImg', data, options);
+  }
 }

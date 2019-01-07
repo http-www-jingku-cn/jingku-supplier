@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class LogisticsTrackingPage implements OnInit {
   orderId: string;
   data: any;
+  is_delivery: boolean;
 
   constructor(
     public httpServ: HttpDataService,
@@ -19,14 +20,23 @@ export class LogisticsTrackingPage implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.orderId = params.get('id');
-      this.getData(this.orderId);
+      this.is_delivery = params.get('is_delivery') == '1';
+      this.getData();
     });
   }
 
-  getData(id) {
-    this.httpServ.order_shipping({ id: id }).subscribe(res => {
+  getData() {
+    let params;
+    if (this.is_delivery) {
+      params = { did: this.orderId };
+    } else {
+      params = { id: this.orderId };
+    }
+    this.httpServ.order_shipping(params).subscribe(res => {
       if (res.status == 1) {
         this.data = res.data;
+      } else {
+        this.data = [];
       }
     })
   }

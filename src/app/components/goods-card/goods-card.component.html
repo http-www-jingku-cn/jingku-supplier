@@ -1,0 +1,18 @@
+<ion-card *ngFor="let item of animateItems; let i = index;" (click)="goInfoPage(item.id)">
+  <div class="card-wrap" tappable [ngClass]="animateClass">
+    <div class="img">
+      <ion-img [sImgLazyLoad]="item.goods_img"></ion-img>
+      <div class="chips">
+        <!-- <div class="sale" *ngIf="item.is_promote==1">SALE</div>
+        <div class="hot" *ngIf="item.is_hot==1">HOT</div>
+        <div class="new" *ngIf="item.is_new==1">NEW</div> -->
+      </div>
+    </div>
+    <div class="info">
+      <div class="text">{{item.name}}</div>
+      <div class="price">
+        <span>{{item.shop_price}}</span>&nbsp;
+      </div>
+    </div>
+  </div>
+</ion-card>

@@ -1,0 +1,14 @@
+ion-content {
+    --ion-background-color: #f3f6fc;
+}
+
+ion-item {
+    --inner-border-width: 0px;
+    --background: #fff;
+
+    ion-avatar {
+        width: 70px;
+        height: 70px;
+        margin: 10px 12px 10px 0;
+    }
+}

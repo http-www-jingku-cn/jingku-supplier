@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/goods"></ion-back-button>
+    </ion-buttons>
+    <ion-title>商品详情</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let item of data?.goods_gallery">
+      <h1>{{img_original}}</h1>
+      <ion-img [sImgLazyLoad]="item.img_original"></ion-img>
+    </ion-slide>
+  </ion-slides>
+  <!-- <div padding *ngIf="data&&!data?.goods_info?.goods_desc">无商品详情</div> -->
+  <div class="desc" [innerHTML]="data?.goods_info?.goods_desc | bypassSecurityTrustHtml"></div>
+</ion-content>
+
+
+<ion-footer>
+  <ion-button no-margin expand="full" (click)="goodsOnSale()">{{data?.goods_info?.is_on_sale?'下架':'上架'}}</ion-button>
+</ion-footer>

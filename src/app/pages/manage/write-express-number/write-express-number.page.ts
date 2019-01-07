@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AlertOptions } from '@ionic/core';
 import { HttpDataService } from 'src/app/providers/http-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, Events } from '@ionic/angular';
+import { PopoversService } from 'src/app/providers/popovers/popovers.service';
 
 @Component({
   selector: 's-write-express-number',
@@ -17,17 +18,26 @@ export class WriteExpressNumberPage implements OnInit {
   };
   shippingList: any[] = [];
   orderId: string;
+  invoice_no: string;
+  shipping_code: string;
+  id: string;
+  edit: boolean;
 
   constructor(
     public httpServ: HttpDataService,
     public route: ActivatedRoute,
     public router: Router,
     public navCtrl: NavController,
+    public msgServ: PopoversService,
+    public events: Events,
   ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.orderId = params.get('id');
+      this.id = params.get('id');
+      this.orderId = params.get('order_id');
+      this.edit = +params.get('edit') == 1;
+      this.invoice_no = params.get('invoice_no');
     });
     this.getkShippingList();
   }
@@ -42,13 +52,60 @@ export class WriteExpressNumberPage implements OnInit {
             this.shippingList.push({ key: key, value: ship });
           }
         }
+        setTimeout(() => {
+          this.route.paramMap.subscribe(params => {
+            this.shipping_code = params.get('shipping_code');
+          });
+        }, 500);
+      }
+    })
+  }
+  inputChange() {
+    this.httpServ.shipping_ino_name({
+      no: this.invoice_no
+    }, { showLoading: false }).subscribe(res => {
+      if (res.status == 1) {
+        this.shipping_code = Object.keys(res.data)[0];
       }
     })
   }
   cancel() {
-    this.navCtrl.navigateBack(['/manage/order-info', this.orderId], { relativeTo: this.route })
+    if (this.edit) {
+      this.navCtrl.goBack();
+      return;
+    }
+    this.navCtrl.navigateForward(['/manage/order-info', this.orderId, { xxx: 'xxx' }]);
   }
   confirm() {
-    this.navCtrl.navigateBack(['/manage/order-info', this.orderId, { order_status: 2 }], { relativeTo: this.route })
+    /* if (!this.invoice_no) {
+      this.msgServ.presentToast('请填写发货单号');
+      return;
+    }
+    if (!this.shipping_code) {
+      this.msgServ.presentToast('请选择物流公司');
+      return;
+    } */
+    if (this.edit) {
+      this.httpServ.updateShippingNo({
+        id: this.id,
+        shipping_code: this.shipping_code,
+        invoice_no: this.invoice_no
+      }).subscribe(res => {
+        if (res.status == 1) {
+          this.events.publish('ship-order-info:refresh');
+          this.navCtrl.goBack();
+        }
+      })
+      return;
+    }
+    this.httpServ.delivery_ship({
+      id: this.id,
+      shipping_code: this.shipping_code,
+      invoice_no: this.invoice_no
+    }).subscribe(res => {
+      if (res.status == 1) {
+        this.navCtrl.navigateBack(['/manage/order-info', this.orderId, { xxx: 'xxx' }]);
+      }
+    })
   }
 }

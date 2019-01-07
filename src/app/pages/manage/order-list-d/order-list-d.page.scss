@@ -2,14 +2,23 @@ ion-content {
     --ion-background-color: #F1F3F5;
 }
 
-.list {
-    padding: 12px;
+.no-list {
+    text-align: center;
+    padding-top: 60px;
 
+    ion-icon {
+        margin: auto;
+        font-size: 125px;
+    }
+}
+
+
+.list {
     .li {
         background: #ffffff;
         border-radius: 4px;
         padding: 0 12px;
-        margin-bottom: 12px;
+        margin: 12px;
 
         .head {
             padding: 10px 4px;
@@ -33,6 +42,7 @@ ion-content {
             .it {
                 display: flex;
                 line-height: 1.8;
+                font-size: 13px;
 
                 .key {
                     color: #cccccc;
@@ -41,6 +51,16 @@ ion-content {
                 .value {
                     color: #666666;
                 }
+            }
+        }
+
+        .btns {
+            text-align: right;
+            border-top: var(--border-width) solid #f0f0f0;
+
+            ion-button {
+                margin: 10px 0 10px 8px;
+                --border-radius: 30px;
             }
         }
     }

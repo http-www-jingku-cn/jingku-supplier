@@ -1,103 +1,128 @@
-<ion-header translucent>
-  <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button defaultHref="/manage/orderList"></ion-back-button>
-      </ion-buttons>
-      <ion-title>订单详情</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/manage/order-list-d"></ion-back-button>
+        </ion-buttons>
+        <ion-title>订单详情</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="top">
-      <div class="sn">llds123123123123123123</div>
-      <div class="status">生效中</div>
-  </div>
-  <div class="card card1">
-      <div class="head">
-          <div class="name">MUYU</div>
-      </div>
-      <div class="body">
-          <div class="list">
-              <div class="goods" *ngFor="let item of [{},{},{},{},{},{},{},{},{},{}]">
-                  <div class="img">
-                      <img src="" alt="">
-                  </div>
-                  <div class="center">
-                      <div class="goods-name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</div>
-                      <div class="attr">规格：2mlx3</div>
-                  </div>
-                  <div class="right">
-                      <div class="price">
-                          ￥12.00
-                      </div>
-                      <div class="num">
-                          x2
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="more">
-              <span>查看更多（商品共100）</span>
-          </div>
-      </div>
-      <div class="foot">
-          <div class="it">
-              <div class="key">订单金额：</div>
-              <div class="value">￥222.00</div>
-          </div>
-          <div class="it red">
-              <div class="key">应付金额：</div>
-              <div class="value">￥222.00</div>
-          </div>
-      </div>
-  </div>
-  <div class="card card2">
-      <div class="types between">
-          <div class="body">
-              <div class="it">
-                  <div class="key">合同开始时间：</div>
-                  <div class="value">￥222.00</div>
-              </div>
-              <div class="it red">
-                  <div class="key">合同结束时间：</div>
-                  <div class="value">￥222.00</div>
-              </div>
-          </div>
-      </div>
-      <div class="types">
-          <div class="head">收货信息</div>
-          <div class="body">
-              <div class="it">
-                  <div class="key">收货人：</div>
-                  <div class="value">￥222.00</div>
-              </div>
-              <div class="it">
-                  <div class="key">联系电话：</div>
-                  <div class="value">￥222.00</div>
-              </div>
-              <div class="it">
-                  <div class="key">收货地址：</div>
-                  <div class="value">￥222.00</div>
-              </div>
-          </div>
-      </div>
-      <div class="types">
-          <div class="head">
-              <div class="tit">收货信息</div>
-              <div class="go">
-                  <span>查看物流</span>
-                  <ion-icon src="./assets/icons/detail.svg"></ion-icon>
-              </div>
-          </div>
-      </div>
-      <div class="types">
-          <div class="head">
-              <div class="tit">近30铺货数量</div>
-              <div class="go">
-                  <span>查看物流</span>
-                  <ion-icon src="./assets/icons/detail.svg"></ion-icon>
-              </div>
-          </div>
-      </div>
-  </div>
+<ion-content fullscreen>
+    <ng-container *ngIf="data">
+        <div class="top">
+            <div class="sn">{{data?.order_info?.sn}}</div>
+            <div class="status">{{data?.order_info?.distribution_status}}</div>
+        </div>
+        <div class="card card1">
+            <div class="head">
+                <div class="name">{{data?.order_info?.consignee}}</div>
+            </div>
+            <div class="body">
+                <div class="list">
+                    <ng-container *ngFor="let goods of data?.goods_list;let i = index;">
+                        <div class="goods" *ngIf="showmore?i<data?.goods_list?.length:i<4">
+                            <div class="img">
+                                <ion-img [sImgLazyLoad]="goods.goods_img"></ion-img>
+                            </div>
+                            <div class="center">
+                                <div class="goods-name">{{goods.goods_name}}</div>
+                                <div class="attr" *ngIf="goods?.goods_attr">{{goods?.goods_attr}}</div>
+                            </div>
+                            <div class="right">
+                                <div class="price">
+                                    {{goods?.formated_goods_price}}
+                                </div>
+                                <div class="num">
+                                    x{{goods?.goods_number}}
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="more" *ngIf="data?.goods_list?.length>4" tappable (click)="showmore=!showmore">
+                    <span>{{showmore?'收起':'查看更多'}}（商品共{{data?.goods_list?.length}}）</span>
+                </div>
+            </div>
+            <div class="foot">
+                <div class="it">
+                    <div class="key">订单金额：</div>
+                    <div class="value">{{data?.order_info?.formated_total_fee }}</div>
+                </div>
+                <div class="it red">
+                    <div class="key">应付金额：</div>
+                    <div class="value">{{data?.order_info?.formated_total_fee}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="card card2">
+            <div class="types between">
+                <div class="body">
+                    <div class="it">
+                        <div class="key">合同开始时间：</div>
+                        <div class="value">{{data?.order_info?.contractTime}}</div>
+                    </div>
+                    <div class="it red">
+                        <div class="key">合同结束时间：</div>
+                        <div class="value">{{data?.order_info?.endTime}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="types">
+                <div class="head">收货信息</div>
+                <div class="body">
+                    <div class="it">
+                        <div class="key">收货人：</div>
+                        <div class="value">{{data?.order_info?.consignee }}</div>
+                    </div>
+                    <div class="it">
+                        <div class="key">联系电话：</div>
+                        <div class="value">{{data?.order_info?.mobile }}</div>
+                    </div>
+                    <div class="it">
+                        <div class="key">收货地址：</div>
+                        <div class="value">{{data?.order_info?.province + data?.order_info?.city +
+                            data?.order_info?.district + data?.order_info?.address}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="types">
+                <div class="head" tappable [routerLink]="['/manage/logistics-tracking',data?.order_info?.id]">
+                    <div class="tit">收货信息</div>
+                    <div class="go">
+                        <span>查看物流</span>
+                        <ion-icon src="./assets/icons/svg/detail.svg"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="types">
+                <div class="head" tappable [routerLink]="['/manage/recent-goods-list']">
+                    <div class="tit">铺货总数量</div>
+                    <div class="go">
+                        <span>{{data?.distribution_sales_num}}</span>
+                        <!-- <ion-icon src="./assets/icons/svg/detail.svg"></ion-icon> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
 </ion-content>
+
+<ion-footer *ngIf="data && data.order_info?.colligate_order!='ywx' && data.order_info?.colligate_order!='dfk'">
+    <ion-toolbar>
+        <div class="btns">
+            <button class="bac" *ngIf="!!data?.operable_list?.refuse" (click)="refuse()">审核</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.examine" (click)="check(orderId)">审核</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.prepare" (click)="prepare()">配货</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.split&&orderStatus!=1" [routerLink]="['/manage/order-info',orderId,{order_status:1}]">出库</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.split&&orderStatus==1" (click)="generateInvoice()">生成发货单</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.to_delivery" [routerLink]="['/manage/ship-order',{order_id: orderId}]">去发货</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.seal" (click)="seal(orderId)">盖章</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.sign" (click)="sign(orderId)">签署</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.look" (click)="look(orderId)">查看</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.download" (click)="download(orderId)">下载合同</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.opc" (click)="opc_order(orderId)">导入opc</button>
+            <button class="bac" *ngIf="data.order_info?.colligate_order=='yfh' || data.order_info?.colligate_order=='ywc' "
+                [routerLink]="['/manage/logistics-tracking',orderId]">物流跟踪</button>
+        </div>
+    </ion-toolbar>
+</ion-footer>

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ManagePage } from './manage.page';
+import { SharedModule } from 'src/app/shared.module';
 
 const routes: Routes = [
   {
@@ -23,13 +24,16 @@ const routes: Routes = [
     loadChildren: './order-list-d/order-list-d.module#OrderListDPageModule'
   },
   {
-    path: 'order-info-d',
+    path: 'order-info-d/:id',
     loadChildren: './order-list-d/order-info-d/order-info-d.module#OrderInfoDPageModule'
   },
   { path: 'ship-order', loadChildren: './ship-order/ship-order.module#ShipOrderPageModule' },
-  { path: 'ship-order-info', loadChildren: './ship-order-info/ship-order-info.module#ShipOrderInfoPageModule' },
+  { path: 'ship-order-info/:id', loadChildren: './ship-order-info/ship-order-info.module#ShipOrderInfoPageModule' },
   { path: 'write-express-number/:id', loadChildren: './write-express-number/write-express-number.module#WriteExpressNumberPageModule' },
   { path: 'logistics-tracking/:id', loadChildren: './logistics-tracking/logistics-tracking.module#LogisticsTrackingPageModule' },
+  { path: 'recent-goods-list/:id', loadChildren: './order-list/recent-goods-list/recent-goods-list.module#RecentGoodsListPageModule' },
+  { path: 'revise-contract/:id', loadChildren: './order-list-d/revise-contract/revise-contract.module#ReviseContractPageModule' },
+  { path: 'account-management', loadChildren: './account-management/account-management.module#AccountManagementPageModule' },
 ];
 
 @NgModule({
@@ -37,7 +41,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ],
   declarations: [ManagePage]
 })

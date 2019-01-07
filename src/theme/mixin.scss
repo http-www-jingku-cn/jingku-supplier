@@ -5,11 +5,13 @@
         text-overflow: ellipsis;
     }
 
-    @if($clamp==2) {
+    @if($clamp>1) {
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: $clamp;
+        /*! autoprefixer: off */
         -webkit-box-orient: vertical;
+        /* autoprefixer: on */
     }
 }

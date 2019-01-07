@@ -1,9 +1,112 @@
-<ion-header>
+<ion-header translucent>
   <ion-toolbar>
-    <ion-title>ship-order-info</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/manage/order-list"></ion-back-button>
+    </ion-buttons>
+    <ion-title>发货单详情</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
 
+<ion-content fullscreen>
+  <ng-container *ngIf="data">
+    <ion-card class="card send-out">
+      <h3>{{data?.delivery_info?.status_name}}</h3>
+      <ng-container>
+        <p>查看发货单记录，修改发货单物流信息</p>
+        <ion-icon class="arming" src="./assets/icons/svg/send_car.svg"></ion-icon>
+      </ng-container>
+    </ion-card>
+    <ion-card class="card receiving-info">
+      <div class="head">
+        <h1>发货信息</h1>
+      </div>
+      <div class="body">
+        <p>
+          <span class="key">
+            <pre>状　　态：</pre>
+          </span>
+          <span class="value">{{data?.delivery_info?.status_name}}</span>
+        </p>
+        <p>
+          <span class="key">
+            <pre>出库编码：</pre></span> <span class="value">{{data?.delivery_info?.delivery_sn}}</span>
+        </p>
+        <p>
+          <span class="key">
+            <pre>出库时间：</pre></span> <span class="value">{{data?.delivery_info?.add_time}}</span>
+        </p>
+        <ng-container *ngIf="data?.delivery_info?.is_shangm!=1">
+          <p>
+            <span class="key">
+              <pre>物流公司：</pre></span> <span class="value">{{data?.delivery_info?.shipping_name}}</span>
+          </p>
+          <p>
+            <span class="key">
+              <pre>物流单号：</pre></span> <span class="value">{{data?.delivery_info?.invoice_no || '无'}}</span>
+          </p>
+          <p>
+            <span class="key">
+              <pre>物流信息：</pre></span> <span class="value"><span class="details" tappable [routerLink]="['/manage/logistics-tracking',data.delivery_info.order_id,{is_delivery:1}]">查看详情</span></span>
+          </p>
+        </ng-container>
+        <ng-container *ngIf="data?.delivery_info?.is_shangm==1">
+          <p>
+            <span class="key">
+              <pre>配送方式：上门取货</pre></span> <span class="value">{{data?.delivery_info?.invoice_no}}</span>
+          </p>
+        </ng-container>
+      </div>
+    </ion-card>
+    <ion-card class="card goods-info">
+      <div class="list">
+        <div class="goods" *ngFor="let goods of data?.delivery_goods">
+          <div class="name">{{goods.goods_name}}</div>
+          <p *ngIf="goods?.goods_sn">
+            <span class="key">货　号：</span> <span class="value">{{goods?.goods_sn}}</span>
+          </p>
+          <p *ngIf="goods?.product_sn">
+            <span class="key">货品号：</span> <span class="value">{{goods?.product_sn}}</span>
+          </p>
+          <div class="goods-body">
+            <div class="img">
+              <ion-img [sImgLazyLoad]="goods.goods_img"></ion-img>
+            </div>
+            <div class="right">
+              <div class="top">
+                <p>
+                  <span class="key">
+                    <pre>规　　格：</pre>
+                  </span>
+                  <span class="value">
+                    <ng-container><span [innerHtml]="goods?.goods_attr | bypassSecurityTrustHtml"></span>&nbsp;</ng-container>
+                  </span>
+                </p>
+                <p>
+                  <span class="key">
+                    <pre>品　　牌：</pre></span> <span class="value">{{goods?.brand_name}}</span>
+                </p>
+                <p>
+                  <span class="key">
+                    <pre>发货数量：</pre>
+                  </span>
+                  <span class="value">{{goods?.send_number}}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </ion-card>
+  </ng-container>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="btns">
+      <button class="" (click)="delete()">删除</button>
+      <button class="bac" *ngIf="data?.delivery_info?.status==2" (click)="delivery()">发货</button><!-- 0  已发货   1  退货  2 待发货 -->
+      <button class="bac" *ngIf="data?.delivery_info?.status==2&&data?.delivery_info?.is_shangm==0" [routerLink]="['/manage/write-express-number',data.delivery_info.delivery_id,{edit:1,invoice_no:data?.delivery_info?.invoice_no||'',shipping_code:data?.delivery_info?.code||''}]">修改物流</button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

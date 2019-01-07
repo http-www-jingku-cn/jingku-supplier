@@ -1,14 +1,14 @@
-<ion-header>
+<ion-header translucent>
   <ion-toolbar>
     <ion-back-button defaultHref="/manage/order-list"></ion-back-button>
     <ion-title>物流跟踪</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
   <div class="noinfo" *ngIf="data?.length==0">
-    <ion-icon src="./assets/icons/noship.svg"></ion-icon>
-    <p>暂无物流信息</p>
+    <ion-icon src="./assets/icons/svg/noship.svg"></ion-icon>
+    <p>无物流信息</p>
   </div>
   <ng-container *ngFor="let box of data">
     <div class="track-wrap">

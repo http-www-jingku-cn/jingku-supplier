@@ -20,12 +20,22 @@ ion-content {
     }
 }
 
+.no-list {
+    text-align: center;
+    padding-top: 60px;
+
+    ion-icon {
+        margin: auto;
+        font-size: 125px;
+    }
+}
+
 .list {
     padding: 12px;
 
     .card {
         background: #ffffff;
-        border-radius: 16px;
+        border-radius: 8px;
         margin-bottom: 12px;
         box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
         overflow: hidden;
@@ -85,22 +95,34 @@ ion-content {
 
         .goods-info {
             background: #FAFAFA;
-            display: flex;
-            overflow: auto;
-            padding: 0 16px;
+
+            .goods-info-inner {
+                display: flex;
+                overflow: auto;
+                margin: 0 12px;
+            }
 
             .img {
-                width: 100px;
-                height: 100px;
+                width: 85px;
+                height: 85px;
                 background: #ffffff;
                 margin: 10px;
                 margin-left: 0;
                 flex-shrink: 0;
-                border: var(--border-width) solid #e0e0e0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #f0f0f0;
+                overflow: hidden;
+
+                img {
+                    display: block;
+                }
             }
 
             .center {
                 margin: 14px 10px 14px 0;
+                flex: 1;
 
                 .goods-name {
                     @include ellipsis(2);
@@ -130,8 +152,7 @@ ion-content {
 
         .sum {
             text-align: right;
-            padding: 10px;
-            border-bottom: var(--border-width) solid #f0f0f0;
+            padding: 12px;
             font-size: 12px;
 
             .count {
@@ -154,9 +175,10 @@ ion-content {
 
         .btns {
             text-align: right;
-            padding: 8px;
+            border-top: var(--border-width) solid #f0f0f0;
 
-            .ion-button {
+            ion-button {
+                margin: 10px 10px 10px 0;
                 --border-radius: 30px;
             }
         }

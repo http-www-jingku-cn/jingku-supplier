@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { interval, timer, from, zip } from 'rxjs';
 import { take, map, mergeMap } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
+import { send } from 'q';
+import { PopoversService } from 'src/app/providers/popovers/popovers.service';
+import { Events } from '@ionic/angular';
 
 @Component({
   selector: 'app-order-info',
@@ -20,6 +23,8 @@ export class OrderInfoPage implements OnInit {
     public route: ActivatedRoute,
     public router: Router,
     public storage: Storage,
+    public popoversServ: PopoversService,
+    public events: Events,
   ) {
     /* interval(1000).pipe(
       take(10),
@@ -39,20 +44,60 @@ export class OrderInfoPage implements OnInit {
   }
 
   ngOnInit() {
+    this.events.subscribe('order-info:refresh', () => {
+      this.getData();
+    })
     this.route.paramMap.subscribe(params => {
-      console.log(params);
       this.orderId = params.get('id');
       this.orderStatus = params.get('order_status');
-      this.getData(params.get('id'));
+      this.getData();
     });
   }
-
-  getData(id) {
-    this.httpServ.orderInfo({ id: id }).subscribe(res => {
+  ngOnDestroy() {
+    this.events.unsubscribe('order-info:refresh');
+  }
+  getData() {
+    this.httpServ.orderInfo({ id: this.orderId }).subscribe(res => {
       if (res.status == 1) {
         this.data = res.data;
+      }
+
+    })
+  }
+  prepare() {
+    this.httpServ.prepare({
+      id: this.orderId
+    }).subscribe(res => {
+      if (res.status == 1) {
+        this.popoversServ.presentToast(res.info);
+        this.data.operable_list.prepare = false;
+        this.events.publish('order-list:refresh');
+        this.events.publish('order-info:refresh');
       }
     })
   }
 
+  getStatusBySet(status: number, array: Array<number>) {
+    const statusArr = new Set(array);
+    return statusArr.has(status);
+  }
+  generateInvoice() {
+    let send_number = {};
+    this.data.goods_list.map(value => {
+      if (value.select_number || value.select_number == 0) {
+        send_number[value.rec_id] = value.select_number;
+      } else {
+        let num = value.goods_number - value.send_number;
+        num || num == 0 ? send_number[value.rec_id] = num : null;
+      }
+    })
+    this.httpServ.split_order({
+      id: this.orderId,
+      send_number: send_number
+    }).subscribe(res => {
+      if (res.status == 1) {
+        this.router.navigate(['/manage/write-express-number', res.data[0], { order_id: this.orderId }]);
+      }
+    })
+  }
 }

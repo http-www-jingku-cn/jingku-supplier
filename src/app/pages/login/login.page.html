@@ -1,17 +1,17 @@
-<ion-content>
+<ion-content fullscreen>
   <div class="form-wrap">
     <form #loginForm="ngForm" (ngSubmit)="goToHome(loginForm)" (keyup.enter)="goToHome(loginForm)" novalidate>
       <div class="login-txt">登录</div>
 
       <ion-item>
-        <ion-icon class="input-icon" src="./assets/icons/user.svg"></ion-icon>
+        <ion-icon class="input-icon" src="./assets/icons/svg/user.svg"></ion-icon>
         <ion-input autocomplete="off" autocorrect="off" [(ngModel)]="loginInfo.member" clearInput="true" name="loginusername"
           type="text" spellcheck="false" placeholder="用户名" required>
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-icon class="input-icon" src="./assets/icons/lock-o.svg"></ion-icon>
+        <ion-icon class="input-icon" src="./assets/icons/svg/lock-o.svg"></ion-icon>
         <ion-input autocomplete="off" autocorrect="off" [(ngModel)]="loginInfo.pass" clearInput="true" name="loginpassword"
           [type]="showPsw?'text':'password'" required placeholder="输入密码">
         </ion-input>

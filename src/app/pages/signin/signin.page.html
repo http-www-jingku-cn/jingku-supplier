@@ -1,199 +1,202 @@
 <ion-title style="display: none;">注册</ion-title>
 
-<ion-content>
-
-  <div class="head">
-    <div class="logo">
-      <img src="./assets/icons/login_logo.png" alt="">
-    </div>
-    <span>注册</span>
-    <div class="close">
-      <ion-back-button icon="close" defaultHref="/login"></ion-back-button>
-    </div>
-  </div>
-  <section class="group">
-    <header class="tit">
-      账户信息
-    </header>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*用户名</div>
+<ion-content fullscreen>
+  <form #signinForm="ngForm" (ngSubmit)="signin(signinForm)" (keyup.enter)="signin(signinForm)" novalidate>
+    <div class="head">
+      <div class="logo">
+        <ion-img [sImgLazyLoad]="'./assets/icons/login_logo.png'"></ion-img>
       </div>
-      <div class="input">
-        <ion-input clearInput></ion-input>
+      <span>注册</span>
+      <div class="close">
+        <ion-back-button icon="close" defaultHref="/login"></ion-back-button>
       </div>
     </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*请设置密码</div>
-      </div>
-      <div class="input">
-        <ion-input clearInput></ion-input>
-      </div>
-    </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*请确认密码</div>
-      </div>
-      <div class="input">
-        <ion-input clearInput></ion-input>
-      </div>
-    </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*手机号</div>
-      </div>
-      <div class="input">
-        <ion-input clearInput></ion-input>
-      </div>
-    </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*验证码</div>
-      </div>
-      <div class="item-main">
+    <section class="group">
+      <header class="tit">
+        账户信息
+      </header>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*用户名</div>
+        </div>
         <div class="input">
-          <ion-input clearInput></ion-input>
-        </div>
-        <div class="get-mobile-code">获取手机验证码</div>
-      </div>
-    </div>
-  </section>
-  <section class="group">
-    <header class="tit">
-      法人信息
-    </header>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*法人姓名</div>
-      </div>
-      <div class="input">
-        <ion-input clearInput></ion-input>
-      </div>
-    </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*身份证号</div>
-      </div>
-      <div class="input">
-        <ion-input clearInput></ion-input>
-      </div>
-    </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*身份证复印件<br /><br />正面</div>
-        <div class="choose">
-          <ion-icon src="./assets/icons/upload_img.svg"></ion-icon>
-          <span>点此上传</span>
-          <input type="file">
-        </div>
-        <div class="show">
-          <ion-img src="./assets/icons/upload_img.svg"></ion-img>
+          <ion-input clearInput name="user_name" [(ngModel)]="formData.user_name"></ion-input>
         </div>
       </div>
-    </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*身份证复印件<br /><br />反面</div>
-        <div class="choose">
-          <ion-icon src="./assets/icons/upload_img.svg"></ion-icon>
-          <span>点此上传</span>
-          <input type="file">
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*请设置密码</div>
         </div>
-        <div class="show">
-          <ion-img src="./assets/icons/upload_img.svg"></ion-img>
+        <div class="input">
+          <ion-input clearInput type="password" name="password" [(ngModel)]="formData.password"></ion-input>
         </div>
       </div>
-    </div>
-  </section>
-  <section class="group">
-    <header class="tit">
-      企业基本信息
-    </header>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*企业姓名</div>
-      </div>
-      <div class="input">
-        <ion-input clearInput></ion-input>
-      </div>
-    </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*所在城市</div>
-      </div>
-      <div class="select">
-        <ion-select placeholder="请选择" okText="确定" cancelText="取消">
-          <ion-select-option value="brown">Brown</ion-select-option>
-          <ion-select-option value="blonde">Blonde</ion-select-option>
-          <ion-select-option value="black">Black</ion-select-option>
-          <ion-select-option value="red">Red</ion-select-option>
-        </ion-select>
-        <ion-select placeholder="请选择" okText="确定" cancelText="取消">
-          <ion-select-option value="brown">Brown</ion-select-option>
-          <ion-select-option value="blonde">Blonde</ion-select-option>
-          <ion-select-option value="black">Black</ion-select-option>
-          <ion-select-option value="red">Red</ion-select-option>
-        </ion-select>
-        <ion-select placeholder="请选择" okText="确定" cancelText="取消">
-          <ion-select-option value="brown">Brown</ion-select-option>
-          <ion-select-option value="blonde">Blonde</ion-select-option>
-          <ion-select-option value="black">Black</ion-select-option>
-          <ion-select-option value="red">Red</ion-select-option>
-        </ion-select>
-      </div>
-    </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*详细地址</div>
-      </div>
-      <div class="input">
-        <ion-input clearInput></ion-input>
-      </div>
-    </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*营业执照号</div>
-      </div>
-      <div class="input">
-        <ion-input clearInput></ion-input>
-      </div>
-    </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*营业执照</div>
-        <div class="choose">
-          <ion-icon src="./assets/icons/upload_img.svg"></ion-icon>
-          <span>点此上传</span>
-          <input type="file">
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*请确认密码</div>
         </div>
-        <div class="show">
-          <ion-img src="./assets/icons/upload_img.svg"></ion-img>
+        <div class="input">
+          <ion-input clearInput type="password" name="new_pwd" [(ngModel)]="formData.new_pwd"></ion-input>
         </div>
       </div>
-    </div>
-    <div class="item">
-      <div class="item-head">
-        <div class="item-name">*营业期限</div>
-      </div>
-      <div class="datetime">
-        <div class="date">
-          <ion-datetime displayFormat="YYYY-MM-DD" placeholder="请选择" cancelText="取消" doneText="确定"></ion-datetime>
-          <ion-icon src="./assets/icons/icon_date.svg"></ion-icon>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*手机号</div>
         </div>
-        <span>—</span>
-        <div class="date">
-          <ion-datetime displayFormat="YYYY-MM-DD" max="2118" placeholder="请选择" cancelText="取消" doneText="确定"></ion-datetime>
-          <ion-icon src="./assets/icons/icon_date.svg"></ion-icon>
+        <div class="input">
+          <ion-input clearInput name="mobile" [(ngModel)]="formData.mobile"></ion-input>
         </div>
       </div>
-    </div>
-    <div class="login">
-      <span>已有账号，</span>
-      <a (click)="login()">立即登录</a>
-    </div>
-    <div class="btn-wrap">
-      <button type="submit" href>登录</button>
-    </div>
-  </section>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*验证码</div>
+        </div>
+        <div class="item-main">
+          <div class="input">
+            <ion-input clearInput name="mobile_code" [(ngModel)]="formData.mobile_code"></ion-input>
+          </div>
+          <div class="get-mobile-code" [class.disabled]="disabled" tappable (click)="getMobileCode()">{{value}}</div>
+        </div>
+      </div>
+    </section>
+    <section class="group">
+      <header class="tit">
+        法人信息
+      </header>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*法人姓名</div>
+        </div>
+        <div class="input">
+          <ion-input clearInput name="frdb" [(ngModel)]="formData.frdb"></ion-input>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*身份证号</div>
+        </div>
+        <div class="input">
+          <ion-input clearInput name="frdb_code" [(ngModel)]="formData.frdb_code"></ion-input>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*身份证复印件<br /><br />正面</div>
+          <div class="choose">
+            <ion-icon src="./assets/icons/svg/upload_img.svg"></ion-icon>
+            <span>点此上传</span>
+            <input type="file" (sGetImage)="formData.frdb_code_zm = $event.img_url;frdb_code_zm = $event.base64">
+          </div>
+          <div class="show" *ngIf="frdb_code_zm">
+            <ion-img [sImgLazyLoad]="frdb_code_zm"></ion-img>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*身份证复印件<br /><br />反面</div>
+          <div class="choose">
+            <ion-icon src="./assets/icons/svg/upload_img.svg"></ion-icon>
+            <span>点此上传</span>
+            <input type="file" (sGetImage)="formData.frdb_code_fm = $event.img_url;frdb_code_fm = $event.base64">
+          </div>
+          <div class="show" *ngIf="frdb_code_fm">
+            <ion-img [sImgLazyLoad]="frdb_code_fm"></ion-img>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="group">
+      <header class="tit">
+        企业基本信息
+      </header>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*店铺名称</div>
+        </div>
+        <div class="input">
+          <ion-input clearInput name="shop_name" [(ngModel)]="formData.shop_name"></ion-input>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*企业姓名</div>
+        </div>
+        <div class="input">
+          <ion-input clearInput name="company" [(ngModel)]="formData.company"></ion-input>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*所在城市</div>
+        </div>
+        <div class="select">
+          <ion-select placeholder="请选择" okText="确定" [interfaceOptions]="{header: '请选择省份',translucent: true}" [disabled]="!regionlist"
+            (ionChange)="getCityList(formData.province)" cancelText="取消" name="province" [(ngModel)]="formData.province">
+            <ion-select-option [value]="province?.region_id" *ngFor="let province of regionlist">{{province?.region_name}}</ion-select-option>
+          </ion-select>
+          <ion-select placeholder="请选择" okText="确定" [interfaceOptions]="{header: '请选择城市',translucent: true}" [disabled]="!cityList"
+            (ionChange)="getDistrictList(formData.city)" cancelText="取消" name="city" [(ngModel)]="formData.city">
+            <ion-select-option [value]="city?.region_id" *ngFor="let city of cityList">{{city?.region_name}}</ion-select-option>
+          </ion-select>
+          <ion-select placeholder="请选择" okText="确定" [interfaceOptions]="{header: '请选择地区',translucent: true}" [disabled]="!districtList"
+            cancelText="取消" name="district" [(ngModel)]="formData.district">
+            <ion-select-option [value]="district?.region_id" *ngFor="let district of districtList">{{district?.region_name}}</ion-select-option>
+          </ion-select>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*详细地址</div>
+        </div>
+        <div class="input">
+          <ion-input clearInput name="shop_address" [(ngModel)]="formData.shop_address"></ion-input>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*营业执照号</div>
+        </div>
+        <div class="input">
+          <ion-input clearInput name="company_yyzz_sn" [(ngModel)]="formData.company_yyzz_sn"></ion-input>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*营业执照</div>
+          <div class="choose">
+            <ion-icon src="./assets/icons/svg/upload_img.svg"></ion-icon>
+            <span>点此上传</span>
+            <input type="file" (sGetImage)="formData.company_yyzz = $event.img_url;company_yyzz = $event.base64">
+          </div>
+          <div class="show" *ngIf="company_yyzz">
+            <ion-img [sImgLazyLoad]="company_yyzz"></ion-img>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-name">*营业期限</div>
+        </div>
+        <div class="datetime">
+          <div class="date">
+            <ion-datetime displayFormat="YYYY-MM-DD" placeholder="请选择" cancelText="取消" doneText="确定"></ion-datetime>
+            <ion-icon src="./assets/icons/svg/icon_date.svg"></ion-icon>
+          </div>
+          <span>—</span>
+          <div class="date">
+            <ion-datetime displayFormat="YYYY-MM-DD" max="2118" placeholder="请选择" cancelText="取消" doneText="确定"></ion-datetime>
+            <ion-icon src="./assets/icons/svg/icon_date.svg"></ion-icon>
+          </div>
+        </div>
+      </div>
+      <div class="login">
+        <span>已有账号，</span>
+        <a (click)="login()">立即登录</a>
+      </div>
+      <div class="btn-wrap">
+        <button type="submit" href>注册</button>
+      </div>
+    </section>
+  </form>
 </ion-content>

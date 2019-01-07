@@ -1,9 +1,81 @@
-<!-- <ion-header>
+<!-- <ion-header translucent>
   <ion-toolbar>
     <ion-title>行情</ion-title>
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content padding>
+<ion-content (ionScrollStart)="clickContent()" fullscreen>
 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中..."></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="no-list" *ngIf="orderList&&orderList?.length == 0">
+    <ion-icon src="./assets/icons/svg/nolist.svg"></ion-icon>
+    <span></span>
+  </div>
+
+  <section *ngFor="let item of list">
+    <div class="avatar">
+      <ion-img [sImgLazyLoad]="item.avatar"></ion-img>
+    </div>
+    <div class="content">
+      <div class="name">{{item.user_name}}</div>
+      <div class="text">
+        {{item.task_comment}}
+      </div>
+      <div class="pic" [class.multi]="item?.task_img?.length>1">
+        <div class="img" *ngFor="let img of item?.task_img">
+          <ion-img [sImgLazyLoad]="img"></ion-img>
+        </div>
+      </div>
+      <div class="tool">
+        <div class="time">{{item?.add_time}}</div>
+        <div class="btns">
+          <div class="like_comment" [class.show]="item.showbtns">
+            <button class="like" (click)="like(item)">
+              <ion-icon src="./assets/icons/svg/like.svg"></ion-icon>
+              <span>{{item?.is_zan?'取消':'点赞'}}</span>
+            </button>
+            <span class="split"></span>
+            <button class="comment" (click)="writeComment($event, item)">
+              <ion-icon src="./assets/icons/svg/comment.svg"></ion-icon>
+              <span>评论</span>
+            </button>
+          </div>
+          <ion-icon tappable (click)="toggle(item);" class="toggle" src="./assets/icons/svg/likes_comments.svg"></ion-icon>
+        </div>
+      </div>
+      <div class="likes_comments" *ngIf="item?.zan_name || item?.comment?.length>0">
+        <div class="likes" *ngIf="item.zan_name">
+          <ion-icon src="./assets/icons/svg/like.svg"></ion-icon>
+          <span class="people">{{item.zan_name}}</span>
+        </div>
+        <div class="comments" *ngIf="item.comment.length>0">
+          <div class="term" *ngFor="let comment of item.comment;let i = index;" tappable (click)="writeComment($event, item,comment)">
+            <div class="parent">
+              <span class="name">{{comment?.user_name}}：</span>
+              <span class="msg">{{comment?.title}}</span>
+            </div>
+            <div class="children" *ngFor="let children of comment.children;" tappable (click)="writeComment($event, item,children)">
+              <span class="name">{{children?.user_name}} <em style="color: #333333;">回复</em> {{children?.hou_name}}：</span>
+              <span class="msg">{{children?.title}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ion-infinite-scroll threshold="400px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+
+
+<ion-footer *ngIf="showinput">
+  <ion-toolbar>
+    <ion-input #comment autofocus [(ngModel)]="commentValue" (keydown)="submitComment($event)" (ionBlur)="ionBlur(comment)"
+      [placeholder]="currentComment?'回复'+currentComment?.user_name+'：'||'':'评论'"></ion-input>
+  </ion-toolbar>
+</ion-footer>

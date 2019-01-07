@@ -1,9 +1,17 @@
-<!-- <ion-header>
+<!-- <ion-header translucent>
   <ion-toolbar>
     <ion-title>商品</ion-title>
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content padding>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中..."></ion-refresher-content>
+  </ion-refresher>
 
+  <s-goods-card [data]="goodsList"></s-goods-card>
+
+  <ion-infinite-scroll threshold="400px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

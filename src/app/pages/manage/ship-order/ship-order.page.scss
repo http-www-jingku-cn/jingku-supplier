@@ -4,6 +4,16 @@ ion-content {
     --ion-background-color: #F3F6FC;
 }
 
+.no-list {
+    text-align: center;
+    padding-top: 60px;
+
+    ion-icon {
+        margin: auto;
+        font-size: 125px;
+    }
+}
+
 ion-card {
     padding-bottom: 16px;
     background: #ffffff;

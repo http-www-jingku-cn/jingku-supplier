@@ -1,0 +1,133 @@
+@import 'src/theme/mixin.scss';
+
+:host {
+    @-webkit-keyframes fade {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fade {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: .5;
+        }
+    }
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 1%;
+    padding-bottom: 0;
+
+    ion-card {
+        // border: 1px solid #e6e6e6;
+        width: 49.5%;
+        margin: 0;
+        margin-bottom: 1%;
+        position: relative;
+        box-shadow: none;
+        background: #fff;
+
+        .card-wrap {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+
+            .img {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-bottom: solid 1px #fafafa;
+                flex: 1;
+                position: relative;
+                max-height: 300px;
+
+                ion-img{
+                    height: 100%;
+                }
+
+                .chips {
+                    position: absolute;
+                    top: 10px;
+                    right: -1px;
+                    z-index: 100;
+
+                    >div {
+                        background: #b11515;
+                        color: #fff;
+                        text-align: center;
+                        padding: 3px 5px;
+                        font-size: 12px;
+                        border-top-left-radius: 10px;
+                        border-bottom-left-radius: 10px;
+                        margin-bottom: 6px;
+                    }
+
+                    .hot {
+                        background: #ffac5b;
+                    }
+
+                    .new {
+                        background: #3d446b;
+                    }
+                }
+
+                img {
+                    width: auto;
+                }
+            }
+
+            .info {
+                padding: 8px 10px;
+                font-size: 13px;
+
+                .text {
+                    @include ellipsis(2);
+                    color: #808080;
+                    margin-bottom: 5px;
+                }
+
+                .price {
+                    color: #e60000;
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+            }
+        }
+
+        .background {
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            background: #000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            animation: fade 1s;
+        }
+
+        ion-fab[middle] {
+            margin-top: -61px;
+
+            button {
+                margin-bottom: 20px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

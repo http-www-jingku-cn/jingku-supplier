@@ -32,7 +32,7 @@ export class CountInputComponent implements OnInit {
 
   _maxValue: number;
   @Input() set maxValue(maxValue: number) {
-    if (!maxValue) { return };
+    if (!maxValue && maxValue != 0) { return };
     this._maxValue = !isNaN(maxValue) ? +maxValue : null;
   };
   get maxValue() {

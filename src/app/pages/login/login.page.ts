@@ -12,7 +12,7 @@ import { StartupService } from 'src/app/providers/startup.service';
 })
 export class LoginPage implements OnInit {
 
-  public loginInfo: { member?: string, pass?: string } = { member: 'admin', pass: '123456' };
+  public loginInfo: { member?: string, pass?: string } = { member: 'beijing', pass: 'admin123123' };
 
   constructor(
     public httpServ: HttpDataService,
@@ -26,7 +26,12 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.route.paramMap.subscribe(params => {
+      let user_name = params.get('user_name');
+      if (user_name) {
+        this.loginInfo.member = user_name;
+      };
+    });
   }
 
   goToHome(form) {
@@ -41,7 +46,6 @@ export class LoginPage implements OnInit {
     this.httpServ.login(this.loginInfo).subscribe((res) => {
       if (res.status == 1) {
         this.startupServ.setToken(res.data.token);
-        this.startupServ.setStorage('HAS_LOGIN', res.data.token);
         this.startupServ.setStorage('HAS_LOGIN', true);
         this.httpServ.sessiontoken().subscribe(data => {
           this.startupServ.setSessionToken(data.data.session_token);

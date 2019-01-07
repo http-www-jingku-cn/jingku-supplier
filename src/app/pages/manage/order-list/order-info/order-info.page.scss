@@ -14,11 +14,11 @@ ion-content {
     background: linear-gradient(90deg, #7DD2FE 0%, #026CFF 100%);
     color: #ffffff;
     position: relative;
-    padding-left: 30px;
+    padding-left: 24px;
 
     >h3 {
-        font-size: 20px;
-        margin: 22px 0 14px;
+        font-size: 18px;
+        margin: 16px 0 17px
     }
 
     >p {
@@ -30,9 +30,9 @@ ion-content {
         color: #ffffff;
         font-size: 36px;
         position: absolute;
-        top: 24px;
+        top: 22px;
         z-index: 3;
-        right: 46px;
+        right: 36px;
     }
 }
 
@@ -109,7 +109,7 @@ ion-content {
                 }
 
                 .right {
-                    margin: 16px 12px;
+                    margin: 12px 12px;
                     display: flex;
                     flex-direction: column;
                     flex: 1;
@@ -137,7 +137,7 @@ ion-content {
                     p {
                         min-width: 50%;
                         white-space: nowrap;
-                        padding: 0 0 8px 0;
+                        line-height: 1.5;
                         @include ellipsis(1);
                         font-size: 12px;
 
@@ -223,11 +223,12 @@ ion-toolbar {
             flex: 1;
             background: #ffffff;
             color: #333333;
-            font-size: 15px;
-            margin: 8px;
-            padding: 12px;
+            font-size: 14px;
+            margin: 6px;
+            padding: 10px;
             border-radius: 8px;
             border: 1px solid #e0e0e0;
+            white-space: nowrap;
 
             &:active {
                 opacity: .3;

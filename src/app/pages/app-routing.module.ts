@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../providers/auth.guard';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'tabs',
     loadChildren: './tabs/tabs.module#TabsPageModule',
@@ -12,9 +13,10 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'goods', loadChildren: './goods/goods.module#GoodsPageModule' },
   { path: 'manage', loadChildren: './manage/manage.module#ManagePageModule' },
+  { path: 'iframe-browser', loadChildren: './iframe-browser/iframe-browser.module#IframeBrowserPageModule' },
   { path: '404', loadChildren: './not-found/not-found.module#NotFoundPageModule' },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/404' },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, {

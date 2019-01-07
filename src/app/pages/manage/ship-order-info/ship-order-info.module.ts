@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ShipOrderInfoPage } from './ship-order-info.page';
+import { SharedModule } from 'src/app/shared.module';
 
 const routes: Routes = [
   {
@@ -19,8 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ],
   declarations: [ShipOrderInfoPage]
 })
-export class ShipOrderInfoPageModule {}
+export class ShipOrderInfoPageModule { }

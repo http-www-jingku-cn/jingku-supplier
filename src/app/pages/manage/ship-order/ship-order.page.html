@@ -1,38 +1,42 @@
-<ion-header>
+<ion-header translucent>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
+      <ion-back-button defaultHref="/manage/order-list"></ion-back-button>
     </ion-buttons>
     <ion-title>发货单</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
+  <div class="no-list" *ngIf="data&&data?.list?.length == 0">
+    <ion-icon src="./assets/icons/svg/nolist.svg"></ion-icon>
+    <span></span>
+  </div>
   <ion-card *ngFor="let order of data?.list">
     <div class="head">
       <span class="sn">订单编号：{{order?.order_sn}}</span>
-      <div class="status">待发货</div>
+      <div class="status">{{order?.status_name}}</div>
     </div>
     <div class="goods-list">
-      <div class="goods" *ngFor="let goods of [{},{},{}]">
+      <div class="goods" *ngFor="let goods of order?.goods_list" tappable [routerLink]="['/manage/ship-order-info',order.delivery_id,{is_ship:1}]">
         <div class="img">
-          <ion-img [src]="goods.goods_img"></ion-img>
+          <ion-img [sImgLazyLoad]="goods.goods_img"></ion-img>
         </div>
         <div class="right">
           <div class="info">
             <div class="info-wrap">
-              <h1 class="name">名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称</h1>
+              <h1 class="name">{{goods?.goods_name}}</h1>
               <div class="obj">
                 <pre class="key">规　　格：</pre>
                 <pre class="value">{{goods?.goods_attr}}</pre>
               </div>
               <div class="obj">
                 <pre class="key">品　　牌：</pre>
-                <pre class="value">{{goods?.formated_goods_price}}</pre>
+                <pre class="value">{{goods?.brand_name}}</pre>
               </div>
               <div class="obj">
                 <pre class="key">发货数量：</pre>
-                <pre class="value">{{goods?.formated_zReducePrice}}</pre>
+                <pre class="value">{{goods?.send_number}}</pre>
               </div>
             </div>
           </div>

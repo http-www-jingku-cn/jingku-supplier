@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpDataService } from 'src/app/providers/http-data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 's-ship-order',
@@ -8,17 +9,24 @@ import { HttpDataService } from 'src/app/providers/http-data.service';
 })
 export class ShipOrderPage implements OnInit {
   data: any;
+  orderId: string;
 
   constructor(
     public httpServ: HttpDataService,
+    public route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.getData();
+    this.route.paramMap.subscribe(params => {
+      this.orderId = params.get('order_id');
+      this.getData();
+    });
   }
 
   getData() {
-    this.httpServ.delivery_list().subscribe(res => {
+    this.httpServ.delivery_list({
+      id: this.orderId
+    }).subscribe(res => {
       if (res.status == 1) {
         this.data = res.data;
       }

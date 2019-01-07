@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { GoodsPage } from './goods.page';
+import { SharedModule } from 'src/app/shared.module';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
     path: 'goodsList',
     loadChildren: './goods-list/goods-list.module#GoodsListPageModule',
   },
+  { path: 'goods-info/:id', loadChildren: './goods-info/goods-info.module#GoodsInfoPageModule' },
 ];
 
 @NgModule({
@@ -22,7 +24,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ],
   declarations: [GoodsPage]
 })

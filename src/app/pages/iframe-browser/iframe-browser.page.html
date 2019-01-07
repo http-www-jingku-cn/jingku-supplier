@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <!-- <ion-button color="dark"> -->
+      <ion-back-button [defaultHref]="'/manage/order-list-d'"></ion-back-button>
+      <!-- <ion-icon slot="icon-only" name="arrow-back" (click)="back()"></ion-icon> -->
+      <!-- </ion-button> -->
+      <!-- <ion-button color="dark" *ngIf="_browser.isLoaded">
+        <ion-icon slot="icon-only" name="close-circle-outline" (click)="removePage()"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+
+    <ion-title>{{_browser.title}}</ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content class="content">
+  <!--scroll="true" overflow-scroll="true"-->
+  <div class="progress" [hidden]="_browser.isLoaded">
+    <div class="progress-inner" id="progress"></div>
+  </div>
+
+  <iframe #iframe id="iframe" class="iframe" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups allow-forms"
+    [src]="_browser.secUrl | bypassSecurityTrustResourceurl" (load)="loaded()">
+    <!-- http://newpc.jingkoo.net/openFmCredit.html?data=%7B%22biz_type%22%3A1%2C%22return_url%22%3A%22http%3A%5C%2F%5C%2Fnewm.jingkoo.net%5C%2Findex.html%3F%23%5C%2Fnav%5C%2Fn4%5C%2Ftabs%5C%2Ftabs%5C%2Ft0%5C%2Fmy%5C%2Fnew-my%22%2C%22seller_id%22%3A%22992335908659265536%22%2C%22phone%22%3A%2216601160868%22%2C%22seller_buyer_id%22%3A1146%2C%22sign%22%3A%2293544163cc1f7b1b6129bb23ccb03f25%22%2C%22token%22%3A%22e1239d4487a45c3b5764bca6bb75064f%22%7D&url=http%3A%2F%2F39.104.111.43%3A8080%2Fgate -->
+  </iframe>
+</ion-content>
+<!-- <panel-share [(isShow)]="shareConfig.isShow" [share]="_browser.share"></panel-share> -->
