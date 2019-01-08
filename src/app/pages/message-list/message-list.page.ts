@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatService, RecentSessMap } from 'src/app/providers/webim/chat.service';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { HttpDataService } from 'src/app/providers/http-data.service';
 
 @Component({
   selector: 's-message-list',
@@ -7,9 +11,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessageListPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public chatServ: ChatService,
+    public router: Router,
+    public navCtrl: NavController,
+    public httpServ: HttpDataService,
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(
+
+  ) {
+
   }
-
+  CustomeServicesPage(item: RecentSessMap) {
+    let selType = item.SessionType;
+    let selToId = item.SessionId;
+    let name = item.SessionNick;
+    let params = {
+      selType: selType,
+      selToID: selToId,
+      name: name
+    };
+    this.navCtrl.navigateForward(['/tabs/messages/customer-services', params]);
+  }
 }

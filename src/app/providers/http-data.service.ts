@@ -1,8 +1,8 @@
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
-import { Observable, of, throwError, from } from 'rxjs';
-import { catchError, map, tap, finalize, switchMap } from 'rxjs/operators';
+import { Observable, of, throwError, from, zip } from 'rxjs';
+import { catchError, map, tap, finalize, switchMap, mergeMap } from 'rxjs/operators';
 import { StartupService } from './startup.service';
 import { Router } from '@angular/router';
 import { PopoversService } from './popovers/popovers.service';
@@ -19,17 +19,15 @@ export interface HttpOptions {
 })
 export class HttpDataService {
 
-  baseUrl: string = 'http://price.jingkoo.net';
   // baseUrl: string = 'http://newapp.jingkoo.net';
-
+  baseUrl: string = 'http://price.jingkoo.net';
 
   constructor(
     private http: HttpClient,
-    public startupServ: StartupService,
+    private startupServ: StartupService,
     private injector: Injector,
     private popoversServ: PopoversService,
-    public loadingController: LoadingController,
-
+    private loadingController: LoadingController,
   ) {
 
   }
@@ -127,7 +125,9 @@ export class HttpDataService {
     if (body.status == 0) {
       options.showToast && this.popoversServ.presentToast(body.error_description);
     } else if (body.response_code == 2) {
-      this.goTo('/login');
+      this.logout().subscribe(() => {//退出登录
+        this.goTo('/login');
+      });
       options.showToast && this.popoversServ.presentToast(body.msg);
     }
     return body || {};
@@ -144,7 +144,9 @@ export class HttpDataService {
         break;
       case 401: // 未登录状态码
         this.popoversServ.presentToast('401');
-        this.goTo('/login');
+        this.logout().subscribe(() => {//退出登录
+          this.goTo('/login');
+        });
         break;
       case 403:
         this.popoversServ.presentToast('403');
@@ -165,16 +167,36 @@ export class HttpDataService {
   }
 
   login(data?, options?: HttpOptions) {
-    return this.post('/public/scrm/publics/login', data, options).pipe(
-      map(res => {
-        if (res.status == 1) {
-
+    return zip(
+      this.post('/public/scrm/publics/login', data, options),
+      this.sessiontoken()
+    ).pipe(
+      mergeMap(([token, sessionToken]) => {
+        if (token.status == 1 && sessionToken.status == 1) {
+          return zip(//必须等待token设置完成才能返回登录信息
+            from(this.startupServ.setToken(token.data.token)),
+            from(this.startupServ.setSessionToken(sessionToken.data.session_token)),
+            from(this.startupServ.setStorage('LOGIN_INFO', token)),
+          ).pipe(//
+            map(res => {
+              return [token, sessionToken];
+            })
+          )
         }
-        return res;
+        return of([token, sessionToken])
+      }),
+      tap(([token, sessionToken]) => {
+        console.log([token, sessionToken])
       })
     );
   }
-
+  logout() {
+    return zip(
+      from(this.startupServ.removeToken()),
+      from(this.startupServ.removeSessionToken()),
+      from(this.startupServ.removeStorage('LOGIN_INFO')),
+    )
+  }
   sessiontoken(data?, options?: HttpOptions) {
     return this.post('http://price.jingkoo.net/public/scrm/Publics/_sessiontoken', data, options);
   }

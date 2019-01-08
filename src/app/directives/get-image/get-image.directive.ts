@@ -2,6 +2,7 @@ import { Directive, Output, Input, HostListener, EventEmitter } from '@angular/c
 import { HttpDataService } from 'src/app/providers/http-data.service';
 import { ActionSheetController, ModalController, Platform } from '@ionic/angular';
 import { PopoversService } from 'src/app/providers/popovers/popovers.service';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Directive({
   selector: '[sGetImage]'

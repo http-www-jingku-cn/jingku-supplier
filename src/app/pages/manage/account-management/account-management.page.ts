@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { HttpDataService } from 'src/app/providers/http-data.service';
-import { StartupService } from 'src/app/providers/startup.service';
 
 @Component({
   selector: 's-account-management',
@@ -14,7 +13,6 @@ export class AccountManagementPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public httpServ: HttpDataService,
-    public startupServ: StartupService,
   ) { }
 
   ngOnInit() {
@@ -25,9 +23,9 @@ export class AccountManagementPage implements OnInit {
     })
   }
   logout() {
-    this.startupServ.removeStorage('APP_TOKEN');
-    this.startupServ.removeStorage('APP_SESSIONTOKEN');
-    this.navCtrl.navigateBack('/login')
+    this.httpServ.logout().subscribe(res => {
+      this.navCtrl.navigateBack('/login')
+    });
   }
 
 }

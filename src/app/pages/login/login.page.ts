@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpDataService } from '../../providers/http-data.service';
-import { Storage } from '@ionic/storage';
 import { ToastController, NavController } from '@ionic/angular';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StartupService } from 'src/app/providers/startup.service';
+import { ChatService } from 'src/app/providers/webim/chat.service';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +16,10 @@ export class LoginPage implements OnInit {
 
   constructor(
     public httpServ: HttpDataService,
-    public storage: Storage,
-    public router: Router,
     public route: ActivatedRoute,
     public toastCtrl: ToastController,
     public navCtrl: NavController,
-    public startupServ: StartupService,
-
+    public startServ: StartupService,
   ) { }
 
   ngOnInit() {
@@ -43,18 +40,21 @@ export class LoginPage implements OnInit {
       this.toastTip('请填写密码');
       return;
     }
-    this.httpServ.login(this.loginInfo).subscribe((res) => {
-      if (res.status == 1) {
-        this.startupServ.setToken(res.data.token);
-        this.startupServ.setStorage('HAS_LOGIN', true);
-        this.httpServ.sessiontoken().subscribe(data => {
-          this.startupServ.setSessionToken(data.data.session_token);
-          this.navCtrl.navigateForward('/tabs/manage')
-        })
+    this.httpServ.login(this.loginInfo).subscribe(([token, sessionToken]) => {
+      if (token.status == 1 && sessionToken.status == 1) {
+        // Get the redirect URL from our auth service
+        // If no redirect has been set, use the default
+        let redirect = this.startServ.redirectUrl ? this.startServ.redirectUrl : '/tabs/manage';
+        // Set our navigation extras object
+        // that passes on our global query params and fragment
+        let navigationExtras: NavigationExtras = {
+          queryParamsHandling: 'preserve',
+          preserveFragment: true
+        };
+        // Redirect the user
+        this.navCtrl.navigateForward([redirect], navigationExtras);
       }
-    }, (res) => {
-      console.log(res);
-    })
+    });
   }
 
   async toastTip(message: string) {

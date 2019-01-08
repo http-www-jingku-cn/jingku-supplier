@@ -1,0 +1,378 @@
+ion-content {
+    --ion-background-color: rgb(243, 244, 246);
+}
+
+:host {
+
+    .message {
+        padding: 12px;
+        overflow: auto;
+        height: 100%;
+
+        .show {
+            padding-bottom: 16px;
+
+            .time-wrap {
+                text-align: center;
+
+                .time {
+                    display: inline-block;
+                    color: #999999;
+                    font-size: 12px;
+                    border-radius: 20px;
+                    background: rgba(0, 0, 0, 0.03);
+                    padding: 4px 6px;
+                }
+            }
+
+            .msg {
+                .msghead {
+                    margin-bottom: 8px;
+                    margin-left: 50px;
+                    color: #cccccc;
+                    display: flex;
+                    font-size: 12px;
+
+                    .usename {
+                        order: 1;
+                        margin-right: 10px;
+                        margin-left: 0;
+                    }
+
+                    .msgtime {
+                        order: 2;
+                    }
+                }
+
+                .msgbody {
+                    display: flex;
+                    justify-content: flex-start;
+
+                    .avatar {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 5px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: rgba(0, 0, 0, .1);
+                        position: relative;
+                        margin-right: 8px;
+                        flex-shrink: 0;
+                        order: 1;
+                        overflow: hidden;
+                    }
+
+                    .msg-main {
+                        box-shadow: 0 0 2px rgba(0, 0, 0, 0.04);
+                        position: relative;
+                        max-width: 70%;
+                        order: 2;
+                        margin: 0 10px 0 0;
+                        flex-shrink: 0;
+
+                        .content {
+                            line-height: 1.8;
+                            background: #fff;
+                            border-radius: 5px;
+                            padding: 8px;
+                            position: relative;
+                            z-index: 2;
+                            width: 100%;
+                            word-break: break-word;
+                            white-space: pre-wrap;
+                            font-size: 14px;
+
+                            >img {
+                                vertical-align: bottom;
+                            }
+
+                        }
+
+                        &:after {
+                            content: '';
+                            position: absolute;
+                            box-shadow: 0 0 2px rgba(0, 0, 0, 0.04);
+                            display: block;
+                            display: block;
+                            width: 6px;
+                            height: 6px;
+                            left: -2px;
+                            background: #fff;
+                            top: 16px;
+                            transform: rotateZ(45deg);
+                            border-radius: 1px;
+                            z-index: 1;
+                        }
+                    }
+
+                    .spinner {
+                        align-self: center;
+                        order: 3;
+                        width: 16px;
+                    }
+
+                    .icon {
+                        align-self: center;
+                        order: 3;
+                        font-size: 24px;
+                        color: #e60000;
+                    }
+                }
+
+            }
+
+            &.my {
+
+
+                .msg {
+
+                    .msghead {
+                        margin-right: 50px;
+                        margin-left: 0;
+                        justify-content: flex-end;
+
+                        .usename {
+                            order: 2;
+                            margin-left: 10px;
+                            margin-right: 0;
+                        }
+
+                        .msgtime {
+                            order: 1;
+                        }
+                    }
+
+                    .msgbody {
+                        justify-content: flex-end;
+
+                        .avatar {
+                            margin-right: 0;
+                            margin-left: 8px;
+                            order: 3;
+                        }
+
+                        .msg-main {
+                            order: 2;
+                            margin: 0 0 0 10px;
+
+                            .content {
+                                background: rgba(20, 117, 247, 1);
+                                color: #ffffff;
+
+                                a {
+                                    color: #ffffff;
+                                }
+                            }
+
+                            &:after {
+                                background: rgba(20, 117, 247, 1);
+                                right: -2px;
+                                left: unset;
+                            }
+                        }
+
+                        .spinner {
+                            order: 1;
+                        }
+
+                        .icon {
+                            order: 1;
+                        }
+                    }
+                }
+
+            }
+
+            &.custom {
+
+
+                .msg {
+
+                    .msghead {}
+
+                    .msgbody {
+                        .avatar {}
+
+                        .msg-main {
+
+                            .content_o {
+                                background: #fff;
+                                border-radius: 5px;
+                                padding: 8px;
+
+                                .goods,
+                                .order {
+                                    display: flex;
+                                    text-decoration: none;
+                                    align-items: center;
+
+                                    img {
+                                        display: block;
+                                        min-width: 65px;
+                                        min-height: 65px;
+                                        max-width: 65px;
+                                        max-height: 65px;
+                                        border: 1px solid #f0f0f0;
+                                    }
+
+                                    .info {
+                                        margin: 8px;
+                                        display: flex;
+                                        flex-direction: column;
+
+                                        .name {
+                                            text-align: left;
+                                            width: 100%;
+                                            flex: 1;
+                                            word-break: break-all;
+                                        }
+
+                                        .bottom {
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: space-between;
+
+                                            .price {
+                                                color: #ff0000;
+                                            }
+
+                                            .status {
+                                                color: #1676F7;
+                                                background: #D2E6F9;
+                                                padding: 4px 8px;
+                                                border-radius: 27px;
+                                                font-size: 12px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            &:after {
+                                display: none;
+                            }
+                        }
+
+                        .spinner {}
+
+                        .icon {}
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    .footer {
+        .toolbar {
+            .toolbar-content {
+                display: flex;
+                align-items: center;
+
+                form {
+                    flex: 1;
+                    position: relative;
+                    height: 42px;
+                    padding: 0 48px 0 16px;
+                    border-radius: 33px;
+                    background: rgb(250, 248, 249);
+                    border: 1px solid rgb(232, 232, 232);
+
+                    .input_msg {
+                        height: 100%;
+                        width: 100%;
+                        background: none;
+                        border: 0;
+                    }
+
+                    .face {
+                        position: absolute;
+                        height: 26px;
+                        top: 8px;
+                        right: 10px;
+                    }
+                }
+
+                .voice {
+                    height: 28px;
+                    margin: 12px 12px 12px 8px;
+                }
+
+                .add {
+                    color: #1475f7;
+                    font-size: 24px;
+                    height: 28px;
+                    margin: 12px 8px 12px 10px;
+                }
+
+                .sendbtn {
+                    background: #1475f7;
+                    color: #ffffff;
+                    padding: 8px 10px;
+                    border-radius: 6px;
+                    font-size: 1rem;
+                    margin-right: 4px;
+                }
+            }
+        }
+    }
+
+    .addbox,
+    .facebox {
+        height: 190px;
+        background: #fafafa;
+        overflow-y: auto;
+        padding: 10px;
+        border-top: 1px solid #f0f0f0;
+
+        .face {
+            width: 10%;
+            display: inline-block;
+            margin-bottom: 8px;
+
+            img {
+                display: block;
+                margin: auto;
+            }
+        }
+
+        .btns {
+            .btn {
+                margin-right: 10px;
+                text-align: center;
+                float: left;
+                margin-bottom: 8px;
+                font-size: 12px;
+                color: #666666;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                .img {
+
+                    border: 1px solid #f0f0f0;
+                    height: 60px;
+                    width: 60px;
+                    position: relative;
+                    overflow: hidden;
+                    padding: 10px;
+                    border-radius: 12px;
+                    background: #ffffff;
+                    margin-bottom: 4px;
+
+                    input {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        opacity: 0;
+                        top: 0;
+                        left: 0;
+                    }
+                }
+            }
+        }
+    }
+}

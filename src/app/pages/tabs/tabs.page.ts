@@ -1,5 +1,8 @@
 import { Component, ElementRef } from '@angular/core';
 import { injectStyles } from 'shadow-dom-inject-styles';
+import { NavController } from '@ionic/angular';
+import { ChatService } from 'src/app/providers/webim/chat.service';
+import { StartupService } from 'src/app/providers/startup.service';
 
 @Component({
   selector: 'app-tabs',
@@ -8,7 +11,11 @@ import { injectStyles } from 'shadow-dom-inject-styles';
 })
 export class TabsPage {
 
-  constructor(private el: ElementRef) {
+  constructor(
+    private el: ElementRef,
+    public chatServ: ChatService,
+    public startServ: StartupService,
+  ) {
   }
 
   ngOnInit() {
@@ -24,7 +31,6 @@ export class TabsPage {
           }
       `;
       injectStyles(toolbar, 'ion-tab-button', styles);
-    }, 50);
- */
+    }, 50); */
   }
 }

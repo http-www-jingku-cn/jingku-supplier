@@ -1,0 +1,100 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/messages"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{parmas.name}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content tappable (click)="showfacebox=false;showaddbox=false;showsendbtn=false;content.resize()">
+{{customeServ?.currMsg}}
+    <div class="message">
+        <div class="show" *ngFor="let msg of customeServ?.currMsg" [class.my]="msg.isSelfSend" [class.custom]="msg.custom">
+            <div class="time-wrap">
+                <div class="time">
+                    {{msg?.time}}
+                </div>
+            </div>
+            <div class="msg">
+                <div class="msghead">
+                    <span class="usename">{{msg.fromAccountNick}}</span>&nbsp;&nbsp;
+                    <!-- <span class="msgtime">{{msg.time}}</span> -->
+                </div>
+                <div class="msgbody">
+                    <div class="avatar">
+                        <img sImgLazyLoad="{{msg?.fromAccountImage}}" alt="">
+                    </div>
+                    <div class="msg-main">
+                        <div class="content" *ngIf="msg.msgContent" [innerHTML]="msg.msgContent | bypassSecurityTrustHtml"></div>
+                        <div class="content_o" *ngIf="msg.custom">
+                            <div class="order" *ngIf="msg.custom?.order_id">
+                                <img [sImgLazyLoad]="msg.custom?.img" />
+                                <div class="info">
+                                    <div class="name" *ngIf="msg.custom?.order_sn">订单编号：{{msg.custom.order_sn}}</div>
+                                    <div class="bottom">
+                                        <div class="price">
+                                            <ng-container *ngIf="msg.custom?.order_amount">{{msg.custom.total_fee}}</ng-container>
+                                        </div>
+                                        <div class="status" *ngIf="msg.custom?.status">
+                                            {{msg.custom.status}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="goods" *ngIf="msg.custom?.goods_id">
+                                <img [sImgLazyLoad]="msg.custom?.img" />
+                                <div class="info">
+                                    <div class="name" *ngIf="msg.custom?.goods_name">{{msg.custom.goods_name}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ion-spinner name="crescent" *ngIf="msg.sending"></ion-spinner>
+                <ion-icon name="ios-alert" *ngIf="msg?.sendErr" (click)="showReSend(msg.msgContent,msg.random)"></ion-icon>
+            </div>
+        </div>
+    </div>
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <!-- <img class="voice" src="./assets/icon/voice.png" alt=""> -->
+        <form (ngSubmit)="sendMsg(input_msg)">
+            <input type="text" #input_msg class="input_msg" (focus)="showsendbtn=true" [(ngModel)]="text" autocomplete="off"
+                name="sendmsg" placeholder="请输入您想要咨询的问题" (click)="showfacebox=false;showaddbox=false;content.resize()" />
+            <img class="face" tappable (click)="showfacebox=!showfacebox;showaddbox=false;content.resize()" src="./assets/icon/emoji.png"
+                alt="">
+        </form>
+        <img class="add" src="./assets/icon/add_contacts.png" tappable (click)="showaddbox=!showaddbox;showfacebox=false;content.resize()">
+        <button class="sendbtn" *ngIf="showsendbtn" (click)="sendMsg(input_msg)">发送</button>
+    </ion-toolbar>
+    <div class="addbox" *ngIf="showaddbox">
+        <div class="btns">
+            <div class="btn">
+                <div class="img">
+                    <img sImgLazyLoad="./assets/icon/pic.png" alt="">
+                    <input type="file" (change)="customeServ.fileOnChange($event.target)">
+                </div>
+                <div class="txt">照片</div>
+            </div>
+            <div class="btn">
+                <div class="img">
+                    <img sImgLazyLoad="./assets/icon/file.png" alt="">
+                    <input type="file" (change)="customeServ.uploadFile($event.target)">
+                </div>
+                <div class="txt">文件</div>
+            </div>
+        </div>
+    </div>
+    <div class="facebox" *ngIf="showfacebox">
+        <div class="faces">
+            <div class="face" *ngFor="let item of customeServ.getEmotions()" tappable (click)="insertText(input_msg,item)">
+                <img src="{{item[1]}}" alt="">
+            </div>
+        </div>
+    </div>
+</ion-footer>
