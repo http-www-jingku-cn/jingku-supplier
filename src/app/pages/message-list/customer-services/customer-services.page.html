@@ -8,10 +8,9 @@
 </ion-header>
 
 
-<ion-content tappable (click)="showfacebox=false;showaddbox=false;showsendbtn=false;content.resize()">
-{{customeServ?.currMsg}}
+<ion-content tappable (click)="showfacebox=false;showaddbox=false;showsendbtn=false;">
     <div class="message">
-        <div class="show" *ngFor="let msg of customeServ?.currMsg" [class.my]="msg.isSelfSend" [class.custom]="msg.custom">
+        <div class="show" *ngFor="let msg of chatServ?.currMsg" [class.my]="msg.isSelfSend" [class.custom]="msg.custom">
             <div class="time-wrap">
                 <div class="time">
                     {{msg?.time}}
@@ -51,9 +50,9 @@
                             </div>
                         </div>
                     </div>
+                    <ion-spinner class="spinner" name="crescent" *ngIf="msg.sending"></ion-spinner>
+                    <ion-icon class="icon" name="ios-alert" *ngIf="msg?.sendErr" (click)="showReSend(msg.msgContent,msg.random)"></ion-icon>
                 </div>
-                <ion-spinner name="crescent" *ngIf="msg.sending"></ion-spinner>
-                <ion-icon name="ios-alert" *ngIf="msg?.sendErr" (click)="showReSend(msg.msgContent,msg.random)"></ion-icon>
             </div>
         </div>
     </div>
@@ -62,29 +61,31 @@
 
 <ion-footer>
     <ion-toolbar>
-        <!-- <img class="voice" src="./assets/icon/voice.png" alt=""> -->
-        <form (ngSubmit)="sendMsg(input_msg)">
-            <input type="text" #input_msg class="input_msg" (focus)="showsendbtn=true" [(ngModel)]="text" autocomplete="off"
-                name="sendmsg" placeholder="请输入您想要咨询的问题" (click)="showfacebox=false;showaddbox=false;content.resize()" />
-            <img class="face" tappable (click)="showfacebox=!showfacebox;showaddbox=false;content.resize()" src="./assets/icon/emoji.png"
-                alt="">
-        </form>
-        <img class="add" src="./assets/icon/add_contacts.png" tappable (click)="showaddbox=!showaddbox;showfacebox=false;content.resize()">
-        <button class="sendbtn" *ngIf="showsendbtn" (click)="sendMsg(input_msg)">发送</button>
+        <!-- <img class="voice" src="./assets/icons/voice.png" alt=""> -->
+        <div class="foot-inner-wrap">
+            <form (ngSubmit)="sendMsg(input_msg)">
+                <input type="text" #input_msg class="input_msg" (focus)="showsendbtn=true" [(ngModel)]="text"
+                    autocomplete="off" name="sendmsg" placeholder="请输入您想要咨询的问题" (click)="showfacebox=false;showaddbox=false;" />
+                <img class="face" tappable (click)="showfacebox=!showfacebox;showaddbox=false;" src="./assets/icons/emoji.png"
+                    alt="">
+            </form>
+            <img class="add" src="./assets/icons/add_contacts.png" tappable (click)="showaddbox=!showaddbox;showfacebox=false;">
+            <button class="sendbtn" *ngIf="text&&showsendbtn" (click)="sendMsg(input_msg)">发送</button>
+        </div>
     </ion-toolbar>
     <div class="addbox" *ngIf="showaddbox">
         <div class="btns">
             <div class="btn">
                 <div class="img">
-                    <img sImgLazyLoad="./assets/icon/pic.png" alt="">
-                    <input type="file" (change)="customeServ.fileOnChange($event.target)">
+                    <img sImgLazyLoad="./assets/icons/pic.png" alt="">
+                    <input type="file" (change)="chatServ.fileOnChange($event.target)">
                 </div>
                 <div class="txt">照片</div>
             </div>
             <div class="btn">
                 <div class="img">
-                    <img sImgLazyLoad="./assets/icon/file.png" alt="">
-                    <input type="file" (change)="customeServ.uploadFile($event.target)">
+                    <img sImgLazyLoad="./assets/icons/file.png" alt="">
+                    <input type="file" (change)="chatServ.uploadFile($event.target)">
                 </div>
                 <div class="txt">文件</div>
             </div>
@@ -92,7 +93,7 @@
     </div>
     <div class="facebox" *ngIf="showfacebox">
         <div class="faces">
-            <div class="face" *ngFor="let item of customeServ.getEmotions()" tappable (click)="insertText(input_msg,item)">
+            <div class="face" *ngFor="let item of chatServ.getEmotions()" tappable (click)="insertText(input_msg,item)">
                 <img src="{{item[1]}}" alt="">
             </div>
         </div>

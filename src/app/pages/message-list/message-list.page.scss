@@ -1,3 +1,7 @@
+ion-content {
+    --ion-background-color: rgb(243, 244, 246);
+}
+
 .no-message {
     height: 100%;
     text-align: center;
@@ -24,10 +28,14 @@
     }
 }
 
-.item.item-block {
+ion-item-sliding {
+
+    ion-item {
+        --ion-item-background: #ffffff;
+    }
 
     h3 {
-        font-size: 1.4rem !important;
+        font-size: 14px !important;
         margin-bottom: 6px !important;
         color: #000000;
     }
@@ -41,7 +49,7 @@
         justify-content: center;
         background: rgba(0, 0, 0, .1);
         position: relative;
-
+        margin: 10px 10px 10px 0;
         .unread {
             position: absolute;
             top: -5px;
@@ -58,7 +66,12 @@
             justify-content: center;
         }
     }
-
+    .msg-body{
+        p{
+        font-size: 12px;
+            color: #ccc;
+        }
+    }
     .right {
 
         display: flex;
@@ -67,6 +80,7 @@
 
         ion-note {
             margin-bottom: 8px;
+            font-size: 12px;
         }
 
         .badge {
@@ -74,9 +88,5 @@
             // color: #f53d3d !important;
         }
 
-    }
-
-    p {
-        font-size: 1rem;
     }
 }

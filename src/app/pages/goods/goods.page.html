@@ -9,7 +9,9 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中..."></ion-refresher-content>
   </ion-refresher>
 
-  <s-goods-card [data]="goodsList"></s-goods-card>
+  <div padding-top>
+      <s-goods-card [data]="goodsList"></s-goods-card>
+  </div>
 
   <ion-infinite-scroll threshold="400px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载..."></ion-infinite-scroll-content>

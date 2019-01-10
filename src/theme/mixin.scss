@@ -10,8 +10,6 @@
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: $clamp;
-        /*! autoprefixer: off */
         -webkit-box-orient: vertical;
-        /* autoprefixer: on */
     }
 }

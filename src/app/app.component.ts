@@ -27,9 +27,6 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      if (this.StartupServ.hasLogin) {
-        // this.navCtrl.navigateRoot('tabs');
-      }
     });
   }
 }

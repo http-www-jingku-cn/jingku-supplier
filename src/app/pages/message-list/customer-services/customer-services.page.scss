@@ -28,7 +28,7 @@ ion-content {
             .msg {
                 .msghead {
                     margin-bottom: 8px;
-                    margin-left: 50px;
+                    margin-left: 40px;
                     color: #cccccc;
                     display: flex;
                     font-size: 12px;
@@ -266,55 +266,53 @@ ion-content {
     }
 
     .footer {
-        .toolbar {
-            .toolbar-content {
-                display: flex;
-                align-items: center;
+        .foot-inner-wrap {
+            display: flex;
+            align-items: center;
 
-                form {
-                    flex: 1;
-                    position: relative;
-                    height: 42px;
-                    padding: 0 48px 0 16px;
-                    border-radius: 33px;
-                    background: rgb(250, 248, 249);
-                    border: 1px solid rgb(232, 232, 232);
+            form {
+                flex: 1;
+                position: relative;
+                height: 42px;
+                padding: 0 48px 0 16px;
+                border-radius: 33px;
+                background: rgb(250, 248, 249);
+                border: 1px solid rgb(232, 232, 232);
 
-                    .input_msg {
-                        height: 100%;
-                        width: 100%;
-                        background: none;
-                        border: 0;
-                    }
-
-                    .face {
-                        position: absolute;
-                        height: 26px;
-                        top: 8px;
-                        right: 10px;
-                    }
+                .input_msg {
+                    height: 100%;
+                    width: 100%;
+                    background: none;
+                    border: 0;
                 }
 
-                .voice {
-                    height: 28px;
-                    margin: 12px 12px 12px 8px;
+                .face {
+                    position: absolute;
+                    height: 26px;
+                    top: 8px;
+                    right: 10px;
                 }
+            }
 
-                .add {
-                    color: #1475f7;
-                    font-size: 24px;
-                    height: 28px;
-                    margin: 12px 8px 12px 10px;
-                }
+            .voice {
+                height: 28px;
+                margin: 12px 12px 12px 8px;
+            }
 
-                .sendbtn {
-                    background: #1475f7;
-                    color: #ffffff;
-                    padding: 8px 10px;
-                    border-radius: 6px;
-                    font-size: 1rem;
-                    margin-right: 4px;
-                }
+            .add {
+                color: #1475f7;
+                font-size: 24px;
+                height: 28px;
+                margin: 12px 8px 12px 10px;
+            }
+
+            .sendbtn {
+                background: #1475f7;
+                color: #ffffff;
+                padding: 8px 10px;
+                border-radius: 6px;
+                font-size: 1rem;
+                margin-right: 4px;
             }
         }
     }

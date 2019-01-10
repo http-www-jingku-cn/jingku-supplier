@@ -5,6 +5,9 @@
 </ion-header> -->
 
 <ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中..."></ion-refresher-content>
+  </ion-refresher>
   <div class="page-wrap">
     <div class="card card1">
       <div class="user" tappable [routerLink]="['/manage/account-management']">
