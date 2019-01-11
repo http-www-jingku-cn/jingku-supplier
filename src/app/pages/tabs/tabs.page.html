@@ -4,24 +4,25 @@
 
     <ion-tab-button tab="manage">
       <ion-icon name="settings"></ion-icon>
-      <ion-label>管理中心</ion-label>
+      <ion-label>个人中心</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="goods">
-      <ion-icon name="contacts"></ion-icon>
-      <!-- <ion-icon src="./assets/icons/svg/tab-goods.svg"></ion-icon> -->
+      <!-- <ion-icon name="contacts"></ion-icon> -->
+      <ion-icon src="./assets/icons/svg/tab-goods.svg"></ion-icon>
       <ion-label>商品</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="messages">
-      <ion-icon name="information-circle"></ion-icon>
-      <!-- <ion-icon src="./assets/icons/svg/tab-service.svg"></ion-icon> -->
+      <!-- <ion-icon name="information-circle"></ion-icon> -->
+      <ion-icon src="./assets/icons/svg/tab-service.svg"></ion-icon>
+      <ion-badge *ngIf="chatServ?.sumTotal">{{chatServ.sumTotal>=100?'99+':chatServ.sumTotal}}</ion-badge>
       <ion-label>客服</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="market">
-      <ion-icon name="contacts"></ion-icon>
-      <!-- <ion-icon src="./assets/icons/svg/tab-market.svg"></ion-icon> -->
+      <!-- <ion-icon name="contacts"></ion-icon> -->
+      <ion-icon src="./assets/icons/svg/tab-market.svg"></ion-icon>
       <ion-label>行情</ion-label>
     </ion-tab-button>
 

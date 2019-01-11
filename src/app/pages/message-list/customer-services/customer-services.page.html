@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header translucent>
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/tabs/messages"></ion-back-button>
@@ -8,7 +8,7 @@
 </ion-header>
 
 
-<ion-content tappable (click)="showfacebox=false;showaddbox=false;showsendbtn=false;">
+<ion-content fullscreen tappable (click)="showfacebox=false;showaddbox=false;showsendbtn=false;">
     <div class="message">
         <div class="show" *ngFor="let msg of chatServ?.currMsg" [class.my]="msg.isSelfSend" [class.custom]="msg.custom">
             <div class="time-wrap">

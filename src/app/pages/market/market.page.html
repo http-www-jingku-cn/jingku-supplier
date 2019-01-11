@@ -1,12 +1,12 @@
-<!-- <ion-header translucent>
+<ion-header translucent>
   <ion-toolbar>
     <ion-title>行情</ion-title>
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
 
-<ion-content padding-top (ionScrollStart)="clickContent()" fullscreen>
+<ion-content (ionScrollStart)="clickContent()">
 
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中..."></ion-refresher-content>
   </ion-refresher>
 

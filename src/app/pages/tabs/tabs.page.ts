@@ -1,6 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
-import { injectStyles } from 'shadow-dom-inject-styles';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/providers/webim/chat.service';
 import { StartupService } from 'src/app/providers/startup.service';
 import { HttpDataService } from 'src/app/providers/http-data.service';
@@ -8,19 +6,20 @@ import { HttpDataService } from 'src/app/providers/http-data.service';
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss']
+  styleUrls: ['tabs.page.scss'],
 })
-export class TabsPage {
+export class TabsPage implements OnInit {
   supplierInfo: any;
 
   constructor(
     public chatServ: ChatService,
-    public httpServ: HttpDataService,
-    public startupServ: StartupService,
+    private httpServ: HttpDataService,
+    private startupServ: StartupService,
   ) {
-  }
 
+  }
   ngOnInit() {
+
     this.httpServ.supplierInfo({}, { showLoading: true }).subscribe(res => {
       if (res.status == 1) {
         this.supplierInfo = res.data;

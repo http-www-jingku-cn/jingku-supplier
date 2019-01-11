@@ -12,7 +12,7 @@ import { ChatService } from 'src/app/providers/webim/chat.service';
 })
 export class LoginPage implements OnInit {
 
-  public loginInfo: { member?: string, pass?: string } = { member: 'beijing', pass: 'admin123123' };
+  public loginInfo: { member?: string, pass?: string } = { member: '', pass: '' };
 
   constructor(
     public httpServ: HttpDataService,

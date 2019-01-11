@@ -20,7 +20,7 @@ ion-content {
         margin-bottom: 3px;
     }
 
-    .close {
+    .close-btn {
         position: absolute;
         right: 10px;
         top: 10px;
@@ -73,9 +73,11 @@ ion-content {
                 font-size: 47px;
                 color: #808080;
             }
-            ion-img{
+
+            ion-img {
                 height: 100%;
             }
+
             input {
                 position: absolute;
                 width: 100%;
