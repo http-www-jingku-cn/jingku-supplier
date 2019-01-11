@@ -17,6 +17,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { DefaultInterceptor } from './providers/default.interceptor';
 import { StartupService } from './providers/startup.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
 
 export function StartupServiceFactory(startupService: StartupService): Function {
   return () => startupService.load();
@@ -33,7 +36,10 @@ export function StartupServiceFactory(startupService: StartupService): Function 
     }),
     IonicStorageModule.forRoot(),
     HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    BrowserAnimationsModule,
+    FormsModule,
+    NgZorroAntdMobileModule
   ],
   providers: [
     StatusBar,
