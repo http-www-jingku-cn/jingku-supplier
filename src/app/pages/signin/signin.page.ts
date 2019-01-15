@@ -10,6 +10,9 @@ import { HttpDataService } from 'src/app/providers/http-data.service';
 })
 export class SigninPage implements OnInit {
 
+  frdb_code_zm = '';
+  frdb_code_fm = '';
+  company_yyzz = '';
   formData = {
     user_name: '',//用户名
     password: '',//密码
@@ -47,8 +50,8 @@ export class SigninPage implements OnInit {
     this.getRegionlist(1)
   }
   private wait: number = 60;
-  private disabled: Boolean = false;
-  private value: String = '发送验证码';
+  disabled: Boolean = false;
+  value: String = '发送验证码';
   private timer: any;
   private time() {
     if (this.wait == 0) {
@@ -100,7 +103,7 @@ export class SigninPage implements OnInit {
       }
     })
   }
-  signin() {
+  signin(signinForm: any) {
     this.httpServ.register(this.formData).subscribe(res => {
       if (res.status == 1) {
         this.navCtrl.navigateBack(['/login', { user_name: this.formData.user_name }]);

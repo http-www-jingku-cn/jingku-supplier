@@ -1,47 +1,47 @@
 <ion-header translucent>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button [defaultHref]="'/manage/order-info/'+orderId"></ion-back-button>
-    </ion-buttons>
-    <ion-title>发货记录</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button [defaultHref]="'/manage/order-info/'+orderId"></ion-back-button>
+        </ion-buttons>
+        <ion-title>发货记录</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <div class="no-list" *ngIf="orderList&&orderList?.length == 0">
-    <ion-icon src="./assets/icons/svg/nolist.svg"></ion-icon>
-    <span></span>
-  </div>
-  <ion-card *ngFor="let order of data?.list">
-    <div class="head">
-      <span class="sn">订单编号：{{order?.order_sn}}</span>
-      <div class="status">{{order?.status_name}}</div>
+    <div class="no-list" *ngIf="data?.list&&data?.list?.length == 0">
+        <ion-icon src="./assets/icons/svg/nolist.svg"></ion-icon>
+        <span></span>
     </div>
-    <div class="goods-list">
-      <div class="goods" *ngFor="let goods of order?.goods_list" tappable [routerLink]="['/manage/ship-order-info',order.delivery_id,{is_ship:1}]">
-        <div class="img">
-          <ion-img [sImgLazyLoad]="goods.goods_img"></ion-img>
+    <ion-card *ngFor="let order of data?.list">
+        <div class="head">
+            <span class="sn">订单编号：{{order?.order_sn}}</span>
+            <div class="status">{{order?.status_name}}</div>
         </div>
-        <div class="right">
-          <div class="info">
-            <div class="info-wrap">
-              <h1 class="name">{{goods?.goods_name}}</h1>
-              <div class="obj">
-                <pre class="key">规　　格：</pre>
-                <pre class="value">{{goods?.goods_attr}}</pre>
-              </div>
-              <div class="obj">
-                <pre class="key">品　　牌：</pre>
-                <pre class="value">{{goods?.brand_name}}</pre>
-              </div>
-              <div class="obj">
-                <pre class="key">发货数量：</pre>
-                <pre class="value">{{goods?.send_number}}</pre>
-              </div>
+        <div class="goods-list">
+            <div class="goods" *ngFor="let goods of order?.goods_list" tappable [routerLink]="['/manage/ship-order-info',order.delivery_id,{is_ship:1}]">
+                <div class="img">
+                    <ion-img [sImgLazyLoad]="goods.goods_img"></ion-img>
+                </div>
+                <div class="right">
+                    <div class="info">
+                        <div class="info-wrap">
+                            <h1 class="name">{{goods?.goods_name}}</h1>
+                            <div class="obj">
+                                <pre class="key">规　　格：</pre>
+                                <pre class="value">{{goods?.goods_attr}}</pre>
+                            </div>
+                            <div class="obj">
+                                <pre class="key">品　　牌：</pre>
+                                <pre class="value">{{goods?.brand_name}}</pre>
+                            </div>
+                            <div class="obj">
+                                <pre class="key">发货数量：</pre>
+                                <pre class="value">{{goods?.send_number}}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </ion-card>
+    </ion-card>
 </ion-content>

@@ -60,7 +60,7 @@ export class MarketPage implements OnInit {
     }
   }
 
-  clickContent(event) {//滑动或者点击页面隐藏点赞评论按钮
+  clickContent() {//滑动或者点击页面隐藏点赞评论按钮
     this.list.forEach((value, index) => {
       this.list[index].showbtns = false;
     })

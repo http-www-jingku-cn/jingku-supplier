@@ -11,6 +11,7 @@ import { PopoversService } from 'src/app/providers/popovers/popovers.service';
 export class GoodsInfoPage implements OnInit {
   goodsId: string;
   data: any;
+  slideOpts = {};
 
   constructor(
     public httpServ: HttpDataService,

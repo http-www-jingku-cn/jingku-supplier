@@ -11,7 +11,7 @@ import { ChatService } from 'src/app/providers/webim/chat.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  showPsw:boolean = false;
   public loginInfo: { member?: string, pass?: string } = { member: '', pass: '' };
 
   constructor(

@@ -16,7 +16,9 @@ export class CustomerServicesPage implements OnInit {
   parmas: InfoMap
 
   text: string = '';
-
+  showsendbtn:boolean = false;
+  showaddbox:boolean = false;
+  showfacebox:boolean = false;
 
   constructor(
     public navCtrl: NavController,
