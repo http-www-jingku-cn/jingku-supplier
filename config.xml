@@ -22,6 +22,12 @@
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="auto-hide-splash-screen" value="false" />
+    <feature name="CDVWKWebViewEngine">
+        <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+    <preference name="WKPort" value="8081" />
+    <allow-navigation href="http://localhost:8081/*" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -85,7 +91,6 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <engine name="android" spec="7.1.4" />
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
     <plugin name="ionic-plugin-deeplinks" spec="1.0.17">
         <variable name="URL_SCHEME" value="jingku-suppliers" />
@@ -106,4 +111,6 @@
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
+    <engine name="android" spec="7.1.4" />
+    <engine name="ios" spec="4.5.5" />
 </widget>
