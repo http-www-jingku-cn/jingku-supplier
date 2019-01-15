@@ -123,7 +123,7 @@ export class OrderInfoDPage implements OnInit {
     })
   }
   download(id) {
-    let url = 'https://www.jingku.cn/Distribution/downloadPdf?order_id=' + id + '&token=' + this.startup.token;
+    let url = 'http://price.jingkoo.net/public/scrm/publics/downloadPdf?order_id=' + id + '&token=' + this.startup.token;
     this.ib.create(url, '_system');
     /* this.httpServ.downloadpdf({
       id: id
