@@ -34,4 +34,10 @@ export class MessageListPage implements OnInit {
     };
     this.navCtrl.navigateForward(['/tabs/messages/customer-services', params]);
   }
+
+  doRefresh(event) {
+    this.chatServ.initRecentContactList(() => {
+      event.target.complete();
+    }, null);
+  }
 }

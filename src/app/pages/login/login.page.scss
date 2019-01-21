@@ -38,15 +38,19 @@ ion-content {
 
         .input-icon {
             color: #CECECE;
-            font-size: 24px;
+            font-size: 22px;
             margin-right: 8px;
+        }
+
+        .ion-input {
+            font-size: 14px;
         }
 
         .s_h {
             margin-right: 0;
 
             img {
-                width: 32px;
+                width: 24px;
                 display: block;
             }
         }

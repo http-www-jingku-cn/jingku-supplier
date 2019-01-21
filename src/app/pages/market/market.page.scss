@@ -50,12 +50,16 @@ section {
 
             .img {
                 display: flex;
-                align-items: center;
                 justify-content: center;
                 min-height: 100px;
-                max-height: 3000px;
+                max-height: 300px;
                 overflow: hidden;
                 margin-bottom: 2%;
+                width: 70%;
+
+                ion-img {
+                    height: 100%;
+                }
             }
 
             &.multi {
@@ -231,6 +235,16 @@ section {
             background: #fff;
             border-radius: 4px;
             --padding-start: 10px;
+        }
+
+        .comment {
+            display: flex;
+            align-items: center;
+
+            >.button {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
         }
     }
 }

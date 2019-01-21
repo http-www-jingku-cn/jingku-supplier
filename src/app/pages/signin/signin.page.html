@@ -44,7 +44,7 @@
           <div class="item-name">*手机号</div>
         </div>
         <div class="input">
-          <ion-input clearInput name="mobile" [(ngModel)]="formData.mobile"></ion-input>
+          <ion-input clearInput name="mobile" type="tel" [(ngModel)]="formData.mobile"></ion-input>
         </div>
       </div>
       <div class="item">
@@ -53,7 +53,7 @@
         </div>
         <div class="item-main">
           <div class="input">
-            <ion-input clearInput name="mobile_code" [(ngModel)]="formData.mobile_code"></ion-input>
+            <ion-input clearInput name="mobile_code" type="number" [(ngModel)]="formData.mobile_code"></ion-input>
           </div>
           <div class="get-mobile-code" [class.disabled]="disabled" tappable (click)="getMobileCode()">{{value}}</div>
         </div>
@@ -83,12 +83,14 @@
         <div class="item-head">
           <div class="item-name">*身份证复印件<br /><br />正面</div>
           <div class="choose">
-            <ion-icon src="./assets/icons/svg/upload_img.svg"></ion-icon>
-            <span>点此上传</span>
+            <ng-container *ngIf="!frdb_code_zm">
+              <ion-icon src="./assets/icons/svg/upload_img.svg"></ion-icon>
+              <span>点此上传</span>
+            </ng-container>
+            <ng-container *ngIf="frdb_code_zm">
+              <ion-img [sImgLazyLoad]="frdb_code_zm"></ion-img>
+            </ng-container>
             <input type="file" (sGetImage)="formData.frdb_code_zm = $event.img_url;frdb_code_zm = $event.base64">
-          </div>
-          <div class="show" *ngIf="frdb_code_zm">
-            <ion-img [sImgLazyLoad]="frdb_code_zm"></ion-img>
           </div>
         </div>
       </div>
@@ -96,12 +98,14 @@
         <div class="item-head">
           <div class="item-name">*身份证复印件<br /><br />反面</div>
           <div class="choose">
-            <ion-icon src="./assets/icons/svg/upload_img.svg"></ion-icon>
-            <span>点此上传</span>
+            <ng-container *ngIf="!frdb_code_fm">
+              <ion-icon src="./assets/icons/svg/upload_img.svg"></ion-icon>
+              <span>点此上传</span>
+            </ng-container>
+            <ng-container *ngIf="frdb_code_fm">
+              <ion-img [sImgLazyLoad]="frdb_code_fm"></ion-img>
+            </ng-container>
             <input type="file" (sGetImage)="formData.frdb_code_fm = $event.img_url;frdb_code_fm = $event.base64">
-          </div>
-          <div class="show" *ngIf="frdb_code_fm">
-            <ion-img [sImgLazyLoad]="frdb_code_fm"></ion-img>
           </div>
         </div>
       </div>
@@ -165,12 +169,14 @@
         <div class="item-head">
           <div class="item-name">*营业执照</div>
           <div class="choose">
-            <ion-icon src="./assets/icons/svg/upload_img.svg"></ion-icon>
-            <span>点此上传</span>
+            <ng-container *ngIf="!company_yyzz">
+              <ion-icon src="./assets/icons/svg/upload_img.svg"></ion-icon>
+              <span>点此上传</span>
+            </ng-container>
+            <ng-container *ngIf="company_yyzz">
+              <ion-img [sImgLazyLoad]="company_yyzz"></ion-img>
+            </ng-container>
             <input type="file" (sGetImage)="formData.company_yyzz = $event.img_url;company_yyzz = $event.base64">
-          </div>
-          <div class="show" *ngIf="company_yyzz">
-            <ion-img [sImgLazyLoad]="company_yyzz"></ion-img>
           </div>
         </div>
       </div>

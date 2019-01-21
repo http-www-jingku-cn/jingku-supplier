@@ -135,7 +135,7 @@ export class OrderListDPage implements OnInit {
     })
   }
   check(id) {
-    this.httpServ.orderagree({ id: id }).subscribe(res => {
+    this.httpServ.orderagree({ id: id }, { showToast: false }).subscribe(res => {
       if (res.code == '0010') {
         this.navCtrl.navigateForward(['/manage/revise-contract', id]);
       } else if (res.status == 1) {

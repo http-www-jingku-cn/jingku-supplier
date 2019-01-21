@@ -20,7 +20,6 @@
     "@angular/http": "~7.2.0",
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
-    "@angular/pwa": "0.11.0",
     "@angular/router": "~7.2.0",
     "@angular/service-worker": "~7.2.0",
     "@ionic-native/camera": "^5.0.0-beta.22",

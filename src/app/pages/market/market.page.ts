@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpDataService } from 'src/app/providers/http-data.service';
-import { IonInput, IonInfiniteScroll } from '@ionic/angular';
+import { IonInput, IonInfiniteScroll, ModalController } from '@ionic/angular';
+// import { previewImage } from 'src/assets/plugins/previewImage.min.js';
+// import { SparkMD5 } from 'src/assets/plugins/md5/spark-md5.js';
 
 @Component({
   selector: 'app-market',
@@ -19,7 +21,7 @@ export class MarketPage implements OnInit {
 
   constructor(
     public httpServ: HttpDataService,
-
+    public modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -104,27 +106,25 @@ export class MarketPage implements OnInit {
   submitComment(event) {
     var event = event || window.event;//消除浏览器差异  
     const id = this.currentLog.id;
-    if (event.keyCode == 13) {
-      this.showinput = false;//关闭输入框
-      this.httpServ.writeComment({
-        type: 3,
-        cid: id,
-        content: this.commentValue,
-        id: this.currentComment ? this.currentComment.id : null
-      }, { showLoading: false }).subscribe(res => {
-        if (res.status == 1) {
-          this.commentValue = '';
-          this.httpServ.plan_info({ id: id }, { showLoading: false }).subscribe(plan_info => {
-            if (plan_info.status == 1) {
-              this.list.map(item => {
-                if (item.id == id) {
-                  return Object.assign(item, plan_info.data);
-                }
-              })
-            }
-          })
-        }
-      })
-    }
+    this.showinput = false;//关闭输入框
+    this.httpServ.writeComment({
+      type: 3,
+      cid: id,
+      content: this.commentValue,
+      id: this.currentComment ? this.currentComment.id : null
+    }, { showLoading: false }).subscribe(res => {
+      if (res.status == 1) {
+        this.commentValue = '';
+        this.httpServ.plan_info({ id: id }, { showLoading: false }).subscribe(plan_info => {
+          if (plan_info.status == 1) {
+            this.list.map(item => {
+              if (item.id == id) {
+                return Object.assign(item, plan_info.data);
+              }
+            })
+          }
+        })
+      }
+    })
   }
 }
