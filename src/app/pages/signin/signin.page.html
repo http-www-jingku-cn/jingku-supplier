@@ -53,7 +53,7 @@
         </div>
         <div class="item-main">
           <div class="input">
-            <ion-input clearInput name="mobile_code" type="number" [(ngModel)]="formData.mobile_code"></ion-input>
+            <ion-input clearInput name="mobile_code" type="tel" [(ngModel)]="formData.mobile_code"></ion-input>
           </div>
           <div class="get-mobile-code" [class.disabled]="disabled" tappable (click)="getMobileCode()">{{value}}</div>
         </div>
@@ -186,12 +186,12 @@
         </div>
         <div class="datetime">
           <div class="date">
-            <ion-datetime displayFormat="YYYY-MM-DD" placeholder="请选择" cancelText="取消" doneText="确定"></ion-datetime>
+            <ion-datetime [(ngModel)]="formData.company_datelin_start" name="company_datelin_start" displayFormat="YYYY-MM-DD" placeholder="请选择" cancelText="取消" doneText="确定"></ion-datetime>
             <ion-icon src="./assets/icons/svg/icon_date.svg"></ion-icon>
           </div>
           <span>—</span>
           <div class="date">
-            <ion-datetime displayFormat="YYYY-MM-DD" max="2118" placeholder="请选择" cancelText="取消" doneText="确定"></ion-datetime>
+            <ion-datetime [(ngModel)]="formData.company_datelin_end" name="company_datelin_end" displayFormat="YYYY-MM-DD" max="2118" placeholder="请选择" cancelText="取消" doneText="确定"></ion-datetime>
             <ion-icon src="./assets/icons/svg/icon_date.svg"></ion-icon>
           </div>
         </div>

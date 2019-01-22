@@ -5,6 +5,7 @@ import { HttpDataService } from 'src/app/providers/http-data.service';
 import { PopoversService } from 'src/app/providers/popovers/popovers.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { StartupService } from 'src/app/providers/startup.service';
+import { baseurl } from 'src/app/providers/default.interceptor';
 
 @Component({
   selector: 'app-order-list-d',
@@ -80,6 +81,7 @@ export class OrderListDPage implements OnInit {
     this.httpServ.orderList({
       distribution_status: this.distribution_status,
       page: 1,
+      code: 'distribution',
       size: 20
     }, { showLoading: false }).subscribe(res => {
       this.infiniteScroll.disabled = false;
@@ -181,7 +183,7 @@ export class OrderListDPage implements OnInit {
     })
   }
   download(id) {
-    let url = 'http://price.jingkoo.net/public/scrm/Seal/downloadPdf?id=' + id + '&token=' + this.startup.token;
+    let url = baseurl + '/public/scrm/Seal/downloadPdf?id=' + id + '&token=' + this.startup.token;
     this.ib.create(url, '_system');
     /* this.httpServ.downloadpdf({
       id: id

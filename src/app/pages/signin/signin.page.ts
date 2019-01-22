@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { HttpDataService } from 'src/app/providers/http-data.service';
+import { PopoversService } from 'src/app/providers/popovers/popovers.service';
 
 @Component({
   selector: 'app-signin',
@@ -44,6 +45,7 @@ export class SigninPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public httpServ: HttpDataService,
+    public popoversServ: PopoversService,
   ) { }
 
   ngOnInit() {
@@ -106,6 +108,7 @@ export class SigninPage implements OnInit {
   signin(signinForm: any) {
     this.httpServ.register(this.formData).subscribe(res => {
       if (res.status == 1) {
+        this.popoversServ.presentToast(res.info);
         this.navCtrl.navigateBack(['/login', { user_name: this.formData.user_name }]);
       }
     })

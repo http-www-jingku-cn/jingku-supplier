@@ -1,7 +1,7 @@
 
 import { Directive, Input, HostListener } from '@angular/core';
 
-import previewImage from 'src/assets/plugins/previewImage.min';
+import previewImage from 'src/assets/plugins/previewImage';
 
 @Directive({
   selector: '[sPreviewImages]'

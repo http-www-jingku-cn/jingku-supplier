@@ -20,7 +20,7 @@
     <ion-datetime displayFormat="YYYY-MM-DD" [min]="minDate" [max]="maxDate" placeholder="请选择" [(ngModel)]="endtime" cancelText="取消"
       doneText="确定"></ion-datetime>
     <h1>任务金额</h1>
-    <ion-input [debounce]="300" clearInput placeholder="请填写任务金额" [(ngModel)]="task_amount"></ion-input>
+    <ion-input [debounce]="300" type="tel" clearInput placeholder="请填写任务金额" [(ngModel)]="task_amount"></ion-input>
     <h1>是否线下</h1>
     <ion-select [(ngModel)]="is_xianxia" okText="确定" cancelText="取消" placeholder="请选择" [interfaceOptions]="customAlertOptions">
       <ion-select-option [value]="1">是</ion-select-option>

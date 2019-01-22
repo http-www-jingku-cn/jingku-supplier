@@ -93,7 +93,7 @@
                 <ion-button fill="outline" size="small" *ngIf="!!order?.operable_list?.download">下载</ion-button>
                 <ion-button fill="outline" size="small" *ngIf="!!order?.operable_list?.opc ">导入opc</ion-button>
                 <ion-button fill="outline" size="small" *ngIf="composite_status == 102 || composite_status == 105"
-                    [routerLink]="['/manage/logistics-tracking',orderId]">物流跟踪</ion-button>
+                    [routerLink]="['/manage/logistics-tracking',order.id]">物流跟踪</ion-button>
             </div>
         </div>
     </div>
