@@ -87,6 +87,7 @@ ion-content {
                                 vertical-align: bottom;
                             }
 
+
                         }
 
                         &:after {
@@ -103,6 +104,77 @@ ion-content {
                             transform: rotateZ(45deg);
                             border-radius: 1px;
                             z-index: 1;
+                        }
+
+                        &.image-elem {
+                            .content {
+                                padding: 0;
+                            }
+
+                            &:after {
+                                display: none;
+                            }
+                        }
+
+                        &.file-elem {}
+
+                        &.custom-elem {
+                            .content {
+                                background: #fff;
+                                border-radius: 5px;
+                                padding: 8px;
+
+                                .goods,
+                                .order {
+                                    display: flex;
+                                    text-decoration: none;
+                                    align-items: center;
+
+                                    img {
+                                        display: block;
+                                        min-width: 65px;
+                                        min-height: 65px;
+                                        max-width: 65px;
+                                        max-height: 65px;
+                                        border: 1px solid #f0f0f0;
+                                    }
+
+                                    .info {
+                                        margin: 8px;
+                                        display: flex;
+                                        flex-direction: column;
+
+                                        .name {
+                                            text-align: left;
+                                            width: 100%;
+                                            flex: 1;
+                                            word-break: break-all;
+                                        }
+
+                                        .bottom {
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: space-between;
+
+                                            .price {
+                                                color: #ff0000;
+                                            }
+
+                                            .status {
+                                                color: #1676F7;
+                                                background: #D2E6F9;
+                                                padding: 4px 8px;
+                                                border-radius: 27px;
+                                                font-size: 12px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            &:after {
+                                display: none;
+                            }
                         }
                     }
 
@@ -179,84 +251,6 @@ ion-content {
                         .icon {
                             order: 1;
                         }
-                    }
-                }
-
-            }
-
-            &.custom {
-
-
-                .msg {
-
-                    .msghead {}
-
-                    .msgbody {
-                        .avatar {}
-
-                        .msg-main {
-
-                            .content_o {
-                                background: #fff;
-                                border-radius: 5px;
-                                padding: 8px;
-
-                                .goods,
-                                .order {
-                                    display: flex;
-                                    text-decoration: none;
-                                    align-items: center;
-
-                                    img {
-                                        display: block;
-                                        min-width: 65px;
-                                        min-height: 65px;
-                                        max-width: 65px;
-                                        max-height: 65px;
-                                        border: 1px solid #f0f0f0;
-                                    }
-
-                                    .info {
-                                        margin: 8px;
-                                        display: flex;
-                                        flex-direction: column;
-
-                                        .name {
-                                            text-align: left;
-                                            width: 100%;
-                                            flex: 1;
-                                            word-break: break-all;
-                                        }
-
-                                        .bottom {
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: space-between;
-
-                                            .price {
-                                                color: #ff0000;
-                                            }
-
-                                            .status {
-                                                color: #1676F7;
-                                                background: #D2E6F9;
-                                                padding: 4px 8px;
-                                                border-radius: 27px;
-                                                font-size: 12px;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            &:after {
-                                display: none;
-                            }
-                        }
-
-                        .spinner {}
-
-                        .icon {}
                     }
                 }
 

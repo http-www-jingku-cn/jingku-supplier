@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Events } from '@ionic/angular';
 import { PopoversService } from '../popovers/popovers.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
-/* import * as webim from 'src/assets/plugins/sdk/webim.js';
-import 'src/assets/plugins/sdk/json2.js';
-import 'src/assets/plugins/md5/spark-md5.js'; */
+// import 'src/assets/plugins/sdk/json2.js';
+// import 'src/assets/plugins/md5/spark-md5.js';
+import * as webim from 'src/assets/plugins/sdk/webim.js';
 
-declare let webim: any;
+// declare let webim: any;
 
 export interface loginInfo {
   sdkAppID; //用户所属应用id,必填
@@ -45,12 +46,14 @@ export interface InfoMap {
 export class ChatService {
   sumTotal: number;//会话未读总数
 
+  webim = webim;
+
   constructor(
     private event: Events,
     private popoversServ: PopoversService,
+    private ib: InAppBrowser,
   ) {
     console.log('Hello CustomeServicesProvider Provider');
-
     //表情标识字符和索引映射关系对象，用户可以自定义
     webim.EmotionDataIndexs = {
       "[):]": 0,
@@ -221,73 +224,73 @@ export class ChatService {
   };
 
   onApplyJoinGroupRequestNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onApplyJoinGroupAcceptNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onApplyJoinGroupRefuseNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onKickedGroupNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onDestoryGroupNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onCreateGroupNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onInvitedJoinGroupNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onQuitGroupNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onSetedGroupAdminNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onCanceledGroupAdminNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onRevokeGroupNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onReadedSyncGroupNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onCustomGroupNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onInvitedJoinGroupNotifyRequest(res) {
-    console.log(res)
+    console.warn(res)
   }
   onFriendAddNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onFriendDeleteNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onPendencyAddNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onPendencyDeleteNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onBlackListAddNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onBlackListDeleteNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onMsgReadedNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onMultipleDeviceKickedOut(res) {
     webim.Log.error("多终端登录，被T了");
   }
   onProfileModifyNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   //监听连接状态回调变化事件
   onConnNotify(resp) {
@@ -337,17 +340,17 @@ export class ChatService {
     this.initRecentContactList(() => { }, () => { })
   }
   onBigGroupMsgNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onGroupInfoChangeNotify(res) {
-    console.log(res)
+    console.warn(res)
   }
   onKickedEventCall() {
     // this.popoversServ.openAlertBox('被其他登录实例踢下线',()=>{})
     console.log('被其他登录实例踢下线')
   }
   onAppliedDownloadUrl(res) {
-    console.log(res)
+    console.warn(res)
   }
   //监听事件
   listeners = {
@@ -1200,27 +1203,63 @@ export class ChatService {
         }
       });
     }
-
-    let CUSTOM = null;
+    let msgItem: any = {
+      originMsgData: msg,
+      fromAccountNick: fromAccountNick,
+      fromAccountImage: fromAccountImage,
+      isSelfSend: isSelfSend,
+      sessType: sessType,
+      time: webim.Tool.formatTimeStamp(msg.getTime()),
+      sending: msg.sending,
+      msgContent: msgContent,
+      random: msg.random,
+    }
     for (let i = 0; i < msg.getElems().length; i++) {
       let elem = msg.getElems()[i];
       let type = elem.getType(); //获取元素类型
       let content = elem.getContent(); //获取元素对象
       switch (type) {
         case webim.MSG_ELEMENT_TYPE.CUSTOM:
+          msgItem.msg_element_type = 'CUSTOM';
           let ext = content.getExt(); //扩展信息
           let strs = ext.split("&");
-          let param: any = {}
           for (let i = 0; i < strs.length; i++) {
             let result = strs[i].split("=");
             let key = result[0];
             let value = result[1];
-            param[key] = value;
+            msgItem.custom[key] = value;
           }
-          CUSTOM = param;
-          msgContent = null;
+          msgItem.msgContent = null;
           break;
-
+        case webim.MSG_ELEMENT_TYPE.FILE:
+          msgItem.msg_element_type = 'FILE';
+          let fileSize, unitStr;
+          fileSize = content.getSize();
+          unitStr = "Byte";
+          if (fileSize >= 1024) {
+            fileSize = Math.round(fileSize / 1024);
+            unitStr = "KB";
+          }
+          msgItem.file = {
+            uuid: content.uuid,
+            name: content.name,
+            fileSize: fileSize,
+            unitStr: unitStr
+          };
+          msgItem.msgContent = null;
+          break;
+        case webim.MSG_ELEMENT_TYPE.IMAGE:
+            msgItem.msg_element_type = 'IMAGE';
+            if (i <= msg.getElems().length - 2) {
+            let customMsgElem = msg.getElems()[i + 1]; //获取保存图片名称的自定义消息elem
+            let imgName = customMsgElem.getContent().getData(); //业务可以自定义保存字段，demo中采用data字段保存图片文件名
+            msgItem.elem = this.convertImageMsgToHtml(content, imgName);
+            i++; //下标向后移一位
+          } else {
+            msgItem.elem = this.convertImageMsgToHtml(content, null);
+          }
+          msgItem.msgContent = null;
+          break;
         default:
           webim.Log.error('未知消息元素类型: elemType=' + type);
           break;
@@ -1228,36 +1267,18 @@ export class ChatService {
     }
 
     if (prepend) {
-      this.currMsg.unshift({
-        originMsgData: msg,
-        fromAccountNick: fromAccountNick,
-        fromAccountImage: fromAccountImage,
-        isSelfSend: isSelfSend,
-        sessType: sessType,
-        time: webim.Tool.formatTimeStamp(msg.getTime()),
-        sending: msg.sending,
-        msgContent: msgContent,
-        random: msg.random,
-        custom: CUSTOM
-      })
+      this.currMsg.unshift(msgItem);
     } else {
-      this.currMsg.push({
-        fromAccountNick: fromAccountNick,
-        fromAccountImage: fromAccountImage,
-        isSelfSend: isSelfSend,
-        sessType: sessType,
-        time: webim.Tool.formatTimeStamp(msg.getTime()),
-        sending: msg.sending,
-        msgContent: msgContent,
-        random: msg.random,
-        custom: CUSTOM
-      })
+      this.currMsg.push(msgItem);
       setTimeout(() => {
         this.event.publish('im:addMsg');
       }, 100);
     }
   }
-
+  onDownFile(uuid) {
+    let downFileUrl = webim.downFileUrl(uuid);
+    this.ib.create(downFileUrl, '_system');
+  }
   //把消息转换成Html
 
   convertMsgtoHtml(msg) {
@@ -1348,7 +1369,14 @@ export class ChatService {
     if (!oriImage) {
       oriImage = smallImage;
     }
-    return "<img name='" + imageName + "' src='" + smallImage.getUrl() + "#" + bigImage.getUrl() + "#" + oriImage.getUrl() + "' style='cursor: pointer;' id='" + content.getImageId() + "' bigImgUrl='" + bigImage.getUrl() + "' (click)='imageClick(this)' />";
+    return {
+      imageName:imageName,
+      smallImage:smallImage.getUrl(),
+      bigImage:bigImage.getUrl(),
+      oriImage:oriImage.getUrl(),
+      id:content.getImageId()
+    }
+    // return "<img name='" + imageName + "' src='" + smallImage.getUrl() + "#" + bigImage.getUrl() + "#" + oriImage.getUrl() + "' style='cursor: pointer;' id='" + content.getImageId() + "' bigImgUrl='" + bigImage.getUrl() + "' (click)='imageClick(this)' />";
   }
   //解析语音消息元素
 

@@ -7238,9 +7238,19 @@ var webim = { // namespace object webim
     webim.onDownFile = function (uuid) {
         window.open(Resources.downloadMap["uuid_" + uuid]);
     };
-
+    webim.downFileUrl = function (uuid) {
+        return Resources.downloadMap["uuid_" + uuid];
+    };
     //检查是否登录
     webim.checkLogin = function (cbErr, isNeedCallBack) {
         return checkLogin(cbErr, isNeedCallBack);
     };
 })(webim);
+
+if ("object" == typeof exports && "object" == typeof module) {
+    module.exports = webim
+} if ("object" == typeof exports) {
+    exports.webim = webim
+} else {
+    window["webim"] = webim
+}

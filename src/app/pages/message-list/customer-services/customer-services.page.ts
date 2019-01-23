@@ -3,8 +3,8 @@ import { InfoMap, ChatService } from 'src/app/providers/webim/chat.service';
 import { NavController, Events } from '@ionic/angular';
 import { HttpDataService } from 'src/app/providers/http-data.service';
 import { ActivatedRoute } from '@angular/router';
+import * as webim from 'src/assets/plugins/sdk/webim.js';
 
-declare var webim: any;
 
 @Component({
   selector: 'app-customer-services',

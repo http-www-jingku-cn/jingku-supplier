@@ -10,7 +10,7 @@
 
 <ion-content fullscreen tappable (click)="showfacebox=false;showaddbox=false;showsendbtn=false;">
     <div class="message">
-        <div class="show" *ngFor="let msg of chatServ?.currMsg" [class.my]="msg.isSelfSend" [class.custom]="msg.custom">
+        <div class="show" *ngFor="let msg of chatServ?.currMsg" [class.my]="msg.isSelfSend">
             <div class="time-wrap">
                 <div class="time">
                     {{msg?.time}}
@@ -25,9 +25,20 @@
                     <div class="avatar">
                         <img sImgLazyLoad="{{msg?.fromAccountImage}}" alt="">
                     </div>
-                    <div class="msg-main">
-                        <div class="content" *ngIf="msg.msgContent" [innerHTML]="msg.msgContent | bypassSecurityTrustHtml"></div>
-                        <div class="content_o" *ngIf="msg.custom">
+                    <div class="msg-main image-elem" *ngIf="msg.msg_element_type=='IMAGE'">
+                        <div class="content ">
+                            <img [src]="msg.elem.smallImage" [sPreviewImages]="[msg.elem.bigImage]" />
+                        </div>
+                    </div>
+                    <div class="msg-main file-elem" *ngIf="msg.msg_element_type=='FILE'">
+                        <div class="content"><a href="javascript:;" (click)="chatServ.onDownFile(msg.file.uuid)">{{msg.file.name
+                                + msg.file.fileSize + msg.file.unitStr}}</a></div>
+                    </div>
+                    <div class="msg-main text-elem" *ngIf="msg.msgContent">
+                        <div class="content" [innerHTML]="msg.msgContent | bypassSecurityTrustHtml"></div>
+                    </div>
+                    <div class="msg-main custom-elem" *ngIf="msg.custom">
+                        <div class="content">
                             <div class="order" *ngIf="msg.custom?.order_id">
                                 <img [sImgLazyLoad]="msg.custom?.img" />
                                 <div class="info">
