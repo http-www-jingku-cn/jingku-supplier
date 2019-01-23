@@ -10,8 +10,8 @@ import { StartupService } from './startup.service';
 import { Storage } from '@ionic/storage';
 
 /*设置请求的基地址，方便替换*/
-export const baseurl: string = 'http://price.jingkoo.net';
-// export const baseurl: string = 'http://price.jingku.cn';
+// export const baseurl: string = 'http://price.jingkoo.net';
+export const baseurl: string = 'http://price.jingku.cn';
 
 /**
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`

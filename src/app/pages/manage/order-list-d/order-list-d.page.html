@@ -61,8 +61,8 @@
         <ion-button fill="outline" size="small" *ngIf="!!order?.operable_list?.examine" (click)="check(order.id)">审核</ion-button>
         <ion-button fill="outline" size="small" *ngIf="!!order?.operable_list?.prepare" (click)="prepare(order)">配货
         </ion-button>
-        <ion-button fill="outline" size="small" *ngIf="!!order?.operable_list?.split" [routerLink]="['/manage/order-info',order.id,{order_status:1}]">出库</ion-button>
-        <ion-button fill="outline" size="small" *ngIf="!!order?.operable_list?.to_delivery" [routerLink]="['/manage/ship-order',{order_id: order.id}]">去发货</ion-button>
+        <ion-button fill="outline" size="small" *ngIf="!!order?.operable_list?.split" [routerLink]="['/manage/order-info',order.id,{order_status:1,from:'distribution'}]">出库</ion-button>
+        <ion-button fill="outline" size="small" *ngIf="!!order?.operable_list?.to_delivery" [routerLink]="['/manage/ship-order',{order_id: order.id,from:'distribution'}]">去发货</ion-button>
         <ion-button fill="outline" size="small" *ngIf="!!order?.operable_list?.seal" (click)="seal(order.id)">盖章</ion-button>
         <ion-button fill="outline" size="small" *ngIf="!!order?.operable_list?.sign" (click)="sign(order.id)">签署</ion-button>
         <ion-button fill="outline" size="small" *ngIf="!!order?.operable_list?.look" (click)="look(order.id)">查看</ion-button>

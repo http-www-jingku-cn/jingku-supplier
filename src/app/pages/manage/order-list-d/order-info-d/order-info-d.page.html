@@ -110,12 +110,12 @@
 <ion-footer *ngIf="data && data.order_info?.colligate_order!='ywx' && data.order_info?.colligate_order!='dfk'">
     <ion-toolbar>
         <div class="btns">
-            <button class="bac" *ngIf="!!data?.operable_list?.refuse" (click)="refuse()">审核</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.refuse" (click)="refuse()">拒绝</button>
             <button class="bac" *ngIf="!!data?.operable_list?.examine" (click)="check(orderId)">审核</button>
             <button class="bac" *ngIf="!!data?.operable_list?.prepare" (click)="prepare()">配货</button>
-            <button class="bac" *ngIf="!!data?.operable_list?.split&&orderStatus!=1" [routerLink]="['/manage/order-info',orderId,{order_status:1}]">出库</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.split&&orderStatus!=1" [routerLink]="['/manage/order-info',orderId,{order_status:1,from:'distribution'}]">出库</button>
             <button class="bac" *ngIf="!!data?.operable_list?.split&&orderStatus==1" (click)="generateInvoice()">生成发货单</button>
-            <button class="bac" *ngIf="!!data?.operable_list?.to_delivery" [routerLink]="['/manage/ship-order',{order_id: orderId}]">去发货</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.to_delivery" [routerLink]="['/manage/ship-order',{order_id: orderId,from:'distribution'}]">去发货</button>
             <button class="bac" *ngIf="!!data?.operable_list?.seal" (click)="seal(orderId)">盖章</button>
             <button class="bac" *ngIf="!!data?.operable_list?.sign" (click)="sign(orderId)">签署</button>
             <button class="bac" *ngIf="!!data?.operable_list?.look" (click)="look(orderId)">查看</button>

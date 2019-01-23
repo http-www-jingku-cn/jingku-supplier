@@ -19,9 +19,6 @@ export interface HttpOptions {
 })
 export class HttpDataService {
 
-  // baseUrl: string = 'http://newapp.jingkoo.net';
-  baseUrl: string = 'http://price.jingkoo.net';
-
   constructor(
     private http: HttpClient,
     private startupServ: StartupService,
@@ -123,7 +120,7 @@ export class HttpDataService {
   private extractData(res, options?: HttpOptions) {
     let body = res;
     if (body.status == 0) {
-      options.showToast && this.popoversServ.presentToast(body.error_description);
+      options.showToast && this.popoversServ.presentToast(body.error_description || body.info);
     } else if (body.response_code == 2) {
       this.logout().subscribe(() => {//退出登录
         this.goTo('/login');

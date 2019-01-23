@@ -11,6 +11,7 @@ export class LogisticsTrackingPage implements OnInit {
   orderId: string;
   data: any;
   is_delivery: boolean;
+  errorInfo: any;
 
   constructor(
     public httpServ: HttpDataService,
@@ -32,11 +33,12 @@ export class LogisticsTrackingPage implements OnInit {
     } else {
       params = { id: this.orderId };
     }
-    this.httpServ.order_shipping(params).subscribe(res => {
+    this.httpServ.order_shipping(params, { showToast: false }).subscribe(res => {
       if (res.status == 1) {
         this.data = res.data;
       } else {
         this.data = [];
+        this.errorInfo = res.error_description;
       }
     })
   }

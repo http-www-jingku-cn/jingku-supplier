@@ -14,6 +14,8 @@ export class ShipOrderInfoPage implements OnInit {
   data: any;
   delivery_id: string;
   orderStatus: any;
+  params: any;
+  stateForm: string;
 
   constructor(
     public httpServ: HttpDataService,
@@ -30,6 +32,8 @@ export class ShipOrderInfoPage implements OnInit {
       this.getData();
     });
     this.route.paramMap.subscribe(params => {
+      this.params = params['params'];
+      this.stateForm = params.get('from');
       this.delivery_id = params.get('id');
       this.getData();
     });
@@ -52,7 +56,7 @@ export class ShipOrderInfoPage implements OnInit {
       if (res.status == 1) {
         this.msgServ.presentToast(res.info);
         this.events.publish('order-list:refresh');
-        this.navCtrl.navigateBack(['/manage/order-info', this.data.delivery_info.order_id]);
+        this.navCtrl.navigateBack([this.stateForm == 'distribution' ? '/manage/order-info-d' : '/manage/order-info', this.data.delivery_info.order_id]);
       }
     })
   }
@@ -62,7 +66,7 @@ export class ShipOrderInfoPage implements OnInit {
         id: this.data.delivery_info.delivery_id,
       }).subscribe(res => {
         if (res.status == 1) {
-          this.navCtrl.navigateBack(['/manage/order-info', this.data.delivery_info.order_id, { xxx: 'xxx' }]);
+          this.navCtrl.navigateBack([this.stateForm == 'distribution' ? '/manage/order-info-d' : '/manage/order-info', this.data.delivery_info.order_id, { xxx: 'xxx' }]);
         }
       })
     } else {
@@ -77,7 +81,7 @@ export class ShipOrderInfoPage implements OnInit {
       }).subscribe(res => {
         if (res.status == 1) {
           this.getData();
-          this.navCtrl.navigateBack(['/manage/order-info', this.data.delivery_info.order_id, { xxx: 'xxx' }]);
+          this.navCtrl.navigateBack([this.stateForm == 'distribution' ? '/manage/order-info-d' : '/manage/order-info', this.data.delivery_info.order_id, { xxx: 'xxx' }]);
         }
       })
     }

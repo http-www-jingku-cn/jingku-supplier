@@ -22,6 +22,7 @@ export class WriteExpressNumberPage implements OnInit {
   shipping_code: string;
   id: string;
   edit: boolean;
+  stateFrom: string;
 
   constructor(
     public httpServ: HttpDataService,
@@ -34,9 +35,10 @@ export class WriteExpressNumberPage implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.id = params.get('id');
+      this.id = params.get('id');//发货单ID
       this.orderId = params.get('order_id');
       this.edit = +params.get('edit') == 1;
+      this.stateFrom = params.get('from');
       this.invoice_no = params.get('invoice_no');
     });
     this.getkShippingList();
@@ -74,7 +76,7 @@ export class WriteExpressNumberPage implements OnInit {
       this.navCtrl.goBack();
       return;
     }
-    this.navCtrl.navigateForward(['/manage/order-info', this.orderId, { xxx: 'xxx' }]);
+    this.navCtrl.navigateForward(['/manage/ship-order-info', this.id, { xxx: 'xxx' }]);
   }
   confirm() {
     /* if (!this.invoice_no) {
@@ -104,7 +106,7 @@ export class WriteExpressNumberPage implements OnInit {
       invoice_no: this.invoice_no
     }).subscribe(res => {
       if (res.status == 1) {
-        this.navCtrl.navigateBack(['/manage/order-info', this.orderId, { xxx: 'xxx' }]);
+        this.navCtrl.navigateForward(['/manage/ship-order-info', this.id, { xxx: 'xxx' }]);
       }
     })
   }

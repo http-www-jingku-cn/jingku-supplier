@@ -1,7 +1,7 @@
 <ion-header translucent>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="/manage/order-list"></ion-back-button>
+            <ion-back-button [defaultHref]="params.from=='distribution'?'/manage/order-list-d':'/manage/order-list'"></ion-back-button>
         </ion-buttons>
         <ion-title>订单详情</ion-title>
     </ion-toolbar>
@@ -197,16 +197,16 @@ yqx   已取消
                 <button *ngIf="orderStatus==2" class="bac" [routerLink]="['/manage/logistics-tracking',orderId]">物流跟踪</button> -->
 
             <!-- <button class="bac" *ngIf="!!data?.operable_list?.invoice" [routerLink]="['/manage/recent-goods-list',orderId]">发货记录</button> -->
-            <button class="bac" *ngIf="!!data?.operable_list?.examine">审核</button>
+            <!-- <button class="bac" *ngIf="!!data?.operable_list?.examine">审核</button> -->
             <button class="bac" *ngIf="!!data?.operable_list?.prepare" (click)="prepare()">配货</button>
             <button class="bac" *ngIf="!!data?.operable_list?.split&&orderStatus!=1" [routerLink]="['/manage/order-info',orderId,{order_status:1}]">出库</button>
             <button class="bac" *ngIf="!!data?.operable_list?.split&&orderStatus==1" (click)="generateInvoice()">生成发货单</button>
-            <button class="bac" *ngIf="!!data?.operable_list?.to_delivery" [routerLink]="['/manage/ship-order',{order_id: orderId}]">去发货</button>
-            <button class="bac" *ngIf="!!data?.operable_list?.seal">盖章</button>
-            <button class="bac" *ngIf="!!data?.operable_list?.sign">签署</button>
-            <button class="bac" *ngIf="!!data?.operable_list?.look">查看</button>
-            <button class="bac" *ngIf="!!data?.operable_list?.download">下载</button>
-            <button class="bac" *ngIf="!!data?.operable_list?.opc">导入opc</button>
+            <button class="bac" *ngIf="!!data?.operable_list?.to_delivery" [routerLink]="['/manage/ship-order',{order_id: orderId,from:params.from}]">去发货</button>
+            <!-- <button class="bac" *ngIf="!!data?.operable_list?.seal">盖章</button> -->
+            <!-- <button class="bac" *ngIf="!!data?.operable_list?.sign">签署</button> -->
+            <!-- <button class="bac" *ngIf="!!data?.operable_list?.look">查看</button> -->
+            <!-- <button class="bac" *ngIf="!!data?.operable_list?.download">下载</button> -->
+            <!-- <button class="bac" *ngIf="!!data?.operable_list?.opc">导入opc</button> -->
             <button class="bac" *ngIf="data.order_info?.colligate_order=='yfh' || data.order_info?.colligate_order=='ywc' "
                 [routerLink]="['/manage/logistics-tracking',orderId]">物流跟踪</button>
         </div>

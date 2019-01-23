@@ -17,6 +17,7 @@ export class OrderInfoPage implements OnInit {
   data: any;
   orderId: string;
   orderStatus: any;
+  params: any;
 
   constructor(
     public httpServ: HttpDataService,
@@ -50,6 +51,7 @@ export class OrderInfoPage implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.orderId = params.get('id');
       this.orderStatus = params.get('order_status');
+      this.params = params['params'];
       this.getData();
     });
   }
@@ -96,7 +98,14 @@ export class OrderInfoPage implements OnInit {
       send_number: send_number
     }).subscribe(res => {
       if (res.status == 1) {
-        this.router.navigate(['/manage/write-express-number', res.data[0], { order_id: this.orderId }]);
+
+        this.httpServ.orderInfo({ id: this.orderId }, { showLoading: false }).subscribe(res => {
+          if (res.status == 1) {
+            this.data = res.data;
+          }
+        })
+
+        this.router.navigate(['/manage/write-express-number', res.data[0], { order_id: this.orderId, from: this.params.from }]);
       }
     })
   }

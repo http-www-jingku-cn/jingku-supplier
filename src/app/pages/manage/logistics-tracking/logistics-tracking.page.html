@@ -8,7 +8,7 @@
 <ion-content fullscreen>
   <div class="noinfo" *ngIf="data?.length==0">
     <ion-icon src="./assets/icons/svg/noship.svg"></ion-icon>
-    <p>无物流信息</p>
+    <p>{{errorInfo || '无物流信息'}}</p>
   </div>
   <ng-container *ngFor="let box of data">
     <div class="track-wrap">

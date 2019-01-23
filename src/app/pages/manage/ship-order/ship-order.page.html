@@ -1,7 +1,7 @@
 <ion-header translucent>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/manage/order-list"></ion-back-button>
+      <ion-back-button [defaultHref]="params.from=='distribution'?'/manage/order-list-d':'/manage/order-list'"></ion-back-button>
     </ion-buttons>
     <ion-title>发货单</ion-title>
   </ion-toolbar>
@@ -18,7 +18,7 @@
       <div class="status">{{order?.status_name}}</div>
     </div>
     <div class="goods-list">
-      <div class="goods" *ngFor="let goods of order?.goods_list" tappable [routerLink]="['/manage/ship-order-info',order.delivery_id,{is_ship:1}]">
+      <div class="goods" *ngFor="let goods of order?.goods_list" tappable [routerLink]="['/manage/ship-order-info',order.delivery_id,{is_ship:1,from:params.from}]" queryParamsHandling="preserve">
         <div class="img">
           <ion-img [sImgLazyLoad]="goods.goods_img"></ion-img>
         </div>

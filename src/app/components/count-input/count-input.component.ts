@@ -68,7 +68,7 @@ export class CountInputComponent implements OnInit {
   increase() {
     this.valueChange.emit(this.value += this.rank);
   }
-  inputEvent() {
+  inputEvent(value) {
     this.valueChange.emit(this.value);
   }
   input(value: any) {

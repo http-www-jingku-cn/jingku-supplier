@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ShipOrderPage implements OnInit {
   data: any;
   orderId: string;
+  params: any;
 
   constructor(
     public httpServ: HttpDataService,
@@ -18,6 +19,7 @@ export class ShipOrderPage implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
+      this.params = params['params'];
       this.orderId = params.get('order_id');
       this.getData();
     });

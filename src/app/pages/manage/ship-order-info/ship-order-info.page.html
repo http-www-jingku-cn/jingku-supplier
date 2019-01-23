@@ -53,7 +53,9 @@
         <ng-container *ngIf="data?.delivery_info?.is_shangm==1">
           <p>
             <span class="key">
-              <pre>配送方式：上门取货</pre></span> <span class="value">{{data?.delivery_info?.invoice_no}}</span>
+              <pre>配送方式：</pre>
+            </span>
+            <span class="value">上门取货</span>
           </p>
         </ng-container>
       </div>
@@ -106,7 +108,7 @@
     <div class="btns">
       <button class="" (click)="delete()">删除</button>
       <button class="bac" *ngIf="data?.delivery_info?.status==2" (click)="delivery()">发货</button><!-- 0  已发货   1  退货  2 待发货 -->
-      <button class="bac" *ngIf="data?.delivery_info?.status==2&&data?.delivery_info?.is_shangm==0" [routerLink]="['/manage/write-express-number',data.delivery_info.delivery_id,{edit:1,invoice_no:data?.delivery_info?.invoice_no||'',shipping_code:data?.delivery_info?.code||''}]">修改物流</button>
+      <button class="bac" *ngIf="data?.delivery_info?.is_shangm==0" [routerLink]="['/manage/write-express-number',data.delivery_info.delivery_id,{edit:1,invoice_no:data?.delivery_info?.invoice_no||'',shipping_code:data?.delivery_info?.code||''}]">修改物流</button>
     </div>
   </ion-toolbar>
 </ion-footer>
