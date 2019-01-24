@@ -2,17 +2,17 @@
   <div class="form-wrap">
     <form #loginForm="ngForm" (ngSubmit)="goToHome(loginForm)" (keyup.enter)="goToHome(loginForm)" novalidate>
       <div class="login-txt">登录</div>
-
+      <input type="password" style="display: none;" /><!-- 兼容Chrome阻止自动填充用户名密码 -->
       <ion-item>
         <ion-icon class="input-icon" src="./assets/icons/svg/user.svg"></ion-icon>
-        <ion-input autocomplete="off" autocorrect="off" [(ngModel)]="loginInfo.member" clearInput="true" name="loginusername"
+        <ion-input autocomplete="new-member" autocorrect="off" [(ngModel)]="loginInfo.member" clearInput="true" name="loginusername"
           type="text" spellcheck="false" placeholder="用户名" required>
         </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-icon class="input-icon" src="./assets/icons/svg/lock-o.svg"></ion-icon>
-        <ion-input autocomplete="off" autocorrect="off" [(ngModel)]="loginInfo.pass" clearInput="true" name="loginpassword"
+        <ion-input autocomplete="new-password" autocorrect="off" [(ngModel)]="loginInfo.pass" clearInput="true" name="loginpassword"
           [type]="showPsw?'text':'password'" required placeholder="输入密码">
         </ion-input>
         <div class="s_h" item-end tappable (click)="showPsw=!showPsw">

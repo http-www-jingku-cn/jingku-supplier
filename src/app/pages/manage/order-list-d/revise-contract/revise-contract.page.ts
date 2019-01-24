@@ -41,7 +41,7 @@ export class ReviseContractPage implements OnInit {
     });
   }
   cancel() {
-    this.navCtrl.goBack();
+    this.navCtrl.back();
   }
   confirm() {
     this.httpServ.subcontract({
@@ -52,7 +52,7 @@ export class ReviseContractPage implements OnInit {
       is_xianxia: this.is_xianxia
     }).subscribe(res => {
       if (res.status == 1) {
-        this.navCtrl.goBack();
+        this.navCtrl.back();
       }
     })
   }

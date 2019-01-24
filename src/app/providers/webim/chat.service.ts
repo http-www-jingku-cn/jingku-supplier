@@ -680,11 +680,10 @@ export class ChatService {
 
           webim.syncMsgs(this.initUnreadMsgCount); //初始化最近会话的消息未读数
 
-          if (cbOK) //回调
-            cbOK();
-
         }
-
+        
+        if (cbOK) //回调
+        cbOK();
       },
       cbErr
     );

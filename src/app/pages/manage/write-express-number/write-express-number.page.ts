@@ -73,7 +73,7 @@ export class WriteExpressNumberPage implements OnInit {
   }
   cancel() {
     if (this.edit) {
-      this.navCtrl.goBack();
+      this.navCtrl.back();
       return;
     }
     this.navCtrl.navigateForward(['/manage/ship-order-info', this.id, { xxx: 'xxx' }]);
@@ -95,7 +95,7 @@ export class WriteExpressNumberPage implements OnInit {
       }).subscribe(res => {
         if (res.status == 1) {
           this.events.publish('ship-order-info:refresh');
-          this.navCtrl.goBack();
+          this.navCtrl.back();
         }
       })
       return;

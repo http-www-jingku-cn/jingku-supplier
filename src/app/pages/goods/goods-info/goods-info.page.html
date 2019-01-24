@@ -16,6 +16,9 @@
   </ion-slides>
   <!-- <div padding *ngIf="data&&!data?.goods_info?.goods_desc">无商品详情</div> -->
   <div class="desc" [innerHTML]="data?.goods_info?.goods_desc | bypassSecurityTrustHtml"></div>
+
+  <s-scroll-to-top slot="fixed"></s-scroll-to-top>
+
 </ion-content>
 
 

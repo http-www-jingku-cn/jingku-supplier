@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpDataService } from 'src/app/providers/http-data.service';
 import { IonInfiniteScroll, Events } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { NativeService } from 'src/app/providers/native/native.service';
 import { PopoversService } from 'src/app/providers/popovers/popovers.service';
 
@@ -123,5 +121,4 @@ export class OrderListPage implements OnInit {
       event.target.disabled = true;
     }
   }
-
 }

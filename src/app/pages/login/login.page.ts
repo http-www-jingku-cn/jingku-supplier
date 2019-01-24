@@ -11,7 +11,7 @@ import { ChatService } from 'src/app/providers/webim/chat.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  showPsw:boolean = false;
+  showPsw: boolean = false;
   public loginInfo: { member?: string, pass?: string } = { member: '', pass: '' };
 
   constructor(
@@ -27,6 +27,12 @@ export class LoginPage implements OnInit {
       let user_name = params.get('user_name');
       if (user_name) {
         this.loginInfo.member = user_name;
+      } else {
+        this.startServ.getStorage('username').then(username => {
+          if (username) {
+            this.loginInfo.member = username;
+          }
+        })
       };
     });
   }
@@ -42,6 +48,7 @@ export class LoginPage implements OnInit {
     }
     this.httpServ.login(this.loginInfo).subscribe(([token, sessionToken]) => {
       if (token.status == 1 && sessionToken.status == 1) {
+        this.startServ.setStorage('username', this.loginInfo.member);
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
         let redirect = this.startServ.redirectUrl ? this.startServ.redirectUrl : '/tabs/manage';

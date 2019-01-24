@@ -9,6 +9,11 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中..."></ion-refresher-content>
   </ion-refresher>
 
+  <div class="no-list" *ngIf="(chatServ.recentSessMap | keys).length == 0">
+    <ion-icon src="./assets/icons/svg/no-message.svg"></ion-icon>
+    <div class="text">无消息</div>
+  </div>
+
   <ion-list>
 
     <ion-item-sliding *ngFor="let item of chatServ.recentSessMap | keys">
@@ -31,5 +36,6 @@
     </ion-item-sliding>
 
   </ion-list>
+  <s-scroll-to-top slot="fixed"></s-scroll-to-top>
 
 </ion-content>

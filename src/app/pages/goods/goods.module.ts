@@ -12,9 +12,6 @@ const routes: Routes = [
   {
     path: '',
     component: GoodsPage
-  }, {
-    path: 'goodsList',
-    loadChildren: './goods-list/goods-list.module#GoodsListPageModule',
   },
   { path: 'goods-info/:id', loadChildren: './goods-info/goods-info.module#GoodsInfoPageModule' },
 ];

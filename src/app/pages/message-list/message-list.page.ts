@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChatService, RecentSessMap } from 'src/app/providers/webim/chat.service';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, IonList } from '@ionic/angular';
 import { HttpDataService } from 'src/app/providers/http-data.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { HttpDataService } from 'src/app/providers/http-data.service';
 })
 export class MessageListPage implements OnInit {
 
+  @ViewChild(IonList) msgList: IonList;
   constructor(
     public chatServ: ChatService,
     public router: Router,
@@ -36,8 +37,12 @@ export class MessageListPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.chatServ.initRecentContactList(() => {
-      event.target.complete();
-    }, null);
+    this.msgList.closeSlidingItems().then(() => {
+      this.chatServ.initRecentContactList(() => {
+        event.target.complete();
+      }, () => {
+        event.target.complete();
+      });
+    });
   }
 }

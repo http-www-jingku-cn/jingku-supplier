@@ -1,22 +1,20 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GoodsListPage } from './goods-list.page';
+import { ScrollToTopComponent } from './scroll-to-top.component';
 
-describe('GoodsListPage', () => {
-  let component: GoodsListPage;
-  let fixture: ComponentFixture<GoodsListPage>;
+describe('ScrollToTopComponent', () => {
+  let component: ScrollToTopComponent;
+  let fixture: ComponentFixture<ScrollToTopComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GoodsListPage ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      declarations: [ ScrollToTopComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GoodsListPage);
+    fixture = TestBed.createComponent(ScrollToTopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

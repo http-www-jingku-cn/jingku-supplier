@@ -1,6 +1,18 @@
 ion-content {
     --ion-background-color: rgb(243, 244, 246);
 }
+.no-list {
+    text-align: center;
+    padding-top: 60px;
+
+    ion-icon {
+        margin: auto;
+        font-size: 125px;
+    }
+    .text{
+        color: #cccccc;
+    }
+}
 
 .no-message {
     height: 100%;

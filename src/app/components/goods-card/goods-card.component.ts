@@ -28,7 +28,6 @@ export class GoodsCardComponent implements OnInit {
     this.animateItems = this.data || [];
   }
   goInfoPage(id) {
-    console.log(id)
     this.navCtrl.navigateForward(['/tabs/goods/goods-info', id])
   }
 }
