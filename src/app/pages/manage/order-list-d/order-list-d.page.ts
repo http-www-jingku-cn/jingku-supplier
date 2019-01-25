@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IonInfiniteScroll, NavController, Events } from '@ionic/angular';
+import { IonInfiniteScroll, NavController, Events, IonContent } from '@ionic/angular';
 import { HttpDataService } from 'src/app/providers/http-data.service';
 import { PopoversService } from 'src/app/providers/popovers/popovers.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -15,6 +15,7 @@ import { baseurl } from 'src/app/providers/default.interceptor';
 export class OrderListDPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  @ViewChild(IonContent) content: IonContent;
 
   data: any;
   orderList;
@@ -111,6 +112,7 @@ export class OrderListDPage implements OnInit {
     }
   }
   segmentChanged(index) {
+    this.content.scrollToTop();
     this.pageIndex = index;
     this.getData();
   }

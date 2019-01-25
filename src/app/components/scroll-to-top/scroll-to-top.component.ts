@@ -8,6 +8,8 @@ import { IonContent } from '@ionic/angular';
 })
 export class ScrollToTopComponent implements OnInit {
 
+  timer: any;
+
   constructor(
     public element: ElementRef,
     public renderer: Renderer,
@@ -22,6 +24,10 @@ export class ScrollToTopComponent implements OnInit {
     this.content.scrollEvents = true;
     this.content.ionScroll.subscribe((d) => {
       if (d) {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+          this.renderer.setElementClass(this.element.nativeElement, "fab-button-fadeout", true);
+        }, 1000);
         this.renderer.setElementClass(this.element.nativeElement, "fab-button-fadein", d.detail.scrollTop >= d.target.clientHeight);
         this.renderer.setElementClass(this.element.nativeElement, "fab-button-fadeout", d.detail.scrollTop < d.target.clientHeight);
       }
