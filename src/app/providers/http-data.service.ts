@@ -299,4 +299,28 @@ export class HttpDataService {
   getFileImg(data?, options?: HttpOptions) {//评论
     return this.post('/public/scrm/Publics/GetFileImg', data, options);
   }
+  machiningIndex(data?, options?: HttpOptions) {//来镜加工列表
+    return this.post('/public/scrm/Machining/index', data, options);
+  }
+  machiningInfo(data?, options?: HttpOptions) {//来镜加工详情
+    return this.post('/public/scrm/Machining/info', data, options);
+  }
+  machiningUpdate(data?, options?: HttpOptions) {//来镜加工详情
+    return this.post('/public/scrm/Machining/update', data, options);
+  }
+  returnsIndex(data?, options?: HttpOptions) {//退货单详情
+    return this.post('/public/scrm/Returns/index', data, options);
+  }
+  returnsInfo(data?, options?: HttpOptions) {//退货单详情
+    return this.post('/public/scrm/Returns/info', data, options);
+  }
+  barcodeBarCodeInfo(data?, options?: HttpOptions) {//
+    return this.post('/public/scrm/Barcode/barCodeInfo', data, options);
+  }
+  barcodeBarCodeList(data?, options?: HttpOptions) {//
+    return this.post('/public/scrm/Barcode/barCodeList', data, options);
+  }
+  barcodeBarCodeBinding(data?, options?: HttpOptions) {//绑定二维码
+    return this.post('/public/scrm/Barcode/barCodeBinding', data, options);
+  }
 }

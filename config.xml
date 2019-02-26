@@ -26,6 +26,7 @@
         <param name="ios-package" value="CDVWKWebViewEngine" />
     </feature>
     <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+    <preference name ="UseScheme" value ="true"/> 
     <preference name="WKPort" value="8081" />
     <allow-navigation href="http://localhost:8081/*" />
     <platform name="android">

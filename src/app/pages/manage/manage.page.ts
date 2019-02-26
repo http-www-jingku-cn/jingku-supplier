@@ -15,7 +15,6 @@ import { zip } from 'rxjs';
 export class ManagePage implements OnInit {
   counts: any;
   supplierInfo: any;
-  sss: number;
 
   constructor(
     public router: Router,
@@ -24,8 +23,6 @@ export class ManagePage implements OnInit {
     public startupServ: StartupService,
     public chatServ: ChatService,
   ) {
-    this.sss = 222;
-    this.sss = 222;
     
   }
 
