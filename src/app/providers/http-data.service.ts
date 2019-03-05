@@ -308,7 +308,7 @@ export class HttpDataService {
   machiningUpdate(data?, options?: HttpOptions) {//来镜加工详情
     return this.post('/public/scrm/Machining/update', data, options);
   }
-  returnsIndex(data?, options?: HttpOptions) {//退货单详情
+  returnsIndex(data?, options?: HttpOptions) {//退货单列表
     return this.post('/public/scrm/Returns/index', data, options);
   }
   returnsInfo(data?, options?: HttpOptions) {//退货单详情

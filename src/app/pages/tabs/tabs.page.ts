@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/providers/webim/chat.service';
 import { StartupService } from 'src/app/providers/startup.service';
 import { HttpDataService } from 'src/app/providers/http-data.service';
+import { ScanPage } from '../scan/scan.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
@@ -12,10 +14,11 @@ export class TabsPage implements OnInit {
   supplierInfo: any;
 
   constructor(
-    public chatServ: ChatService,
+    private chatServ: ChatService,
     private httpServ: HttpDataService,
     private startupServ: StartupService,
-  ) {
+    private modalController: ModalController,
+    ) {
 
   }
   ngOnInit() {
@@ -39,5 +42,19 @@ export class TabsPage implements OnInit {
         })
       }
     })
+  }
+  
+  async openScan() {
+    
+    const modal = await this.modalController.create({
+      component: ScanPage,
+      mode: 'md',
+
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+   
   }
 }

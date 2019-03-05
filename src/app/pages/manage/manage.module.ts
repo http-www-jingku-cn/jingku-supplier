@@ -34,6 +34,8 @@ const routes: Routes = [
   { path: 'recent-goods-list/:id', loadChildren: './order-list/recent-goods-list/recent-goods-list.module#RecentGoodsListPageModule' },
   { path: 'revise-contract/:id', loadChildren: './order-list-d/revise-contract/revise-contract.module#ReviseContractPageModule' },
   { path: 'account-management', loadChildren: './account-management/account-management.module#AccountManagementPageModule' },
+  { path: 'mirror-process', loadChildren: './mirror-process/mirror-process.module#MirrorProcessPageModule' },
+  { path: 'returns', loadChildren: './returns/returns.module#ReturnsPageModule' },
 ];
 
 @NgModule({
@@ -44,6 +46,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [ManagePage]
+  declarations: [ManagePage],
 })
 export class ManagePageModule { }

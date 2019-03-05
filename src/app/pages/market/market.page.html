@@ -4,9 +4,9 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content (ionScrollStart)="clickContent()">
+<ion-content fullscreen (ionScrollStart)="clickContent()" (click)="clickContent()">
 
-    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles"
             refreshingText="刷新中..."></ion-refresher-content>
     </ion-refresher>

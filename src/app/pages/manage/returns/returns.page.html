@@ -1,0 +1,92 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/manage"></ion-back-button>
+    </ion-buttons>
+    <ion-title>返修退换</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中..."></ion-refresher-content>
+  </ion-refresher>
+  <div class="no-list" *ngIf="orderList&&orderList?.length == 0">
+    <ion-icon src="./assets/icons/svg/nolist.svg"></ion-icon>
+    <span></span>
+  </div>
+  <div class="list">
+    <div class="card" *ngFor="let order of orderList" tappable [routerLink]="['/manage/returns/info',order.return_id]">
+      <div class="head">
+        <div class="name">
+          <!-- <ion-icon class="input-icon" src="./assets/icons/svg/user.svg"></ion-icon> -->
+          <span>{{order.return_user}}</span>
+        </div>
+        <div class="status">{{order.return_type}}</div>
+      </div>
+      <div class="its">
+        <div class="it">
+          <div class="key">订单号　：</div>
+          <div class="value">{{order.order_sn}}</div>
+        </div>
+        <div class="it" *ngIf="order.dateline">
+          <div class="key">下单时间：</div>
+          <div class="value">{{order.dateline}}</div>
+        </div>
+      </div>
+      <ng-container *ngIf="order?.goods?.length==1">
+        <div class="goods-info" *ngFor="let goods of order?.goods">
+          <div class="goods-info-inner">
+            <div class="img">
+              <ion-img [sImgLazyLoad]="goods.goods_thumb"></ion-img>
+            </div>
+            <div class="center">
+              <div class="goods-name">{{goods.goods_name}}</div>
+              <div class="attr">
+                <span *ngIf="goods.qiujing">球镜：{{goods.qiujing}}</span>
+                <span *ngIf="goods.zhujing">柱镜：{{goods.zhujing}}</span>
+                <span *ngIf="goods.zhouwei">轴位：{{goods.zhouwei}}</span>
+                <span [innerHtml]="goods.goods_attr"></span>
+              </div>
+            </div>
+            <div class="right">
+              <div class="price">
+                {{goods.formated_goods_price}}
+              </div>
+              <div class="num">
+                x{{goods.return_number || 0}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="order?.goods?.length>1">
+        <div class="goods-info">
+          <div class="goods-info-inner">
+            <div class="img" *ngFor="let goods of order?.goods">
+              <ion-img [sImgLazyLoad]="goods.goods_thumb"></ion-img>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ion-item class="return_status" button detail lines="none">
+        <ion-label>
+          <ion-icon name="time" style="color: #e60000;font-size: 24px;" *ngIf="order?.return_status==0"></ion-icon>
+          <ion-icon name="checkmark-circle-outline" style="color: #e60000;font-size: 24px;" *ngIf="order?.return_status!=0"></ion-icon>
+          <span>{{order?.status}}</span>
+        </ion-label>
+      </ion-item>
+
+      <div class="btns">
+        <ion-button fill="outline" size="small">查看</ion-button>
+      </div>
+    </div>
+  </div>
+  <s-scroll-to-top slot="fixed"></s-scroll-to-top>
+  <ion-infinite-scroll threshold="400px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

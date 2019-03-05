@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
+import { ScanPage } from '../scan/scan.page';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { TabsPage } from './tabs.page';
     FormsModule,
     TabsPageRoutingModule,
   ],
-  declarations: [TabsPage]
+  declarations: [TabsPage, ScanPage],
+  entryComponents: [ScanPage]
 })
 export class TabsPageModule { }

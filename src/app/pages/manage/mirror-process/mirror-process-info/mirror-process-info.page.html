@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/manage/mirror-process"></ion-back-button>
+    </ion-buttons>
+    <ion-title>详情</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <section class="main_detail" *ngIf="data">
+    <div>
+      <span class="name">加工单号</span>
+      <span class="value">{{data?.info?.sn||'无'}}</span>
+    </div>
+    <div *ngIf="data?.info?.bonus>0">
+      <span class="name">优惠金额</span>
+      <span class="value" style="color: #e60000;">{{data?.info?.bonus_format||'无'}}</span>
+    </div>
+    <div>
+      <span class="name">加工费用</span>
+      <span class="value" style="color: #e60000;">{{data?.info?.amount_format||'无'}}</span>
+    </div>
+    <div>
+      <span class="name">下单时间</span>
+      <span class="value">{{data?.info?.add_time||'无'}}</span>
+    </div>
+    <div>
+      <span class="name">收货地址</span>
+      <span class="value">{{data?.info?.address||'无'}}</span>
+    </div>
+    <div>
+      <span class="name">加工地址</span>
+      <span class="value">{{data?.setting?.province_name + data?.setting?.city_name + data?.setting?.district_name +
+        data?.setting?.address}}</span>
+    </div>
+    <div>
+      <span class="name">订单状态</span>
+      <span class="value" style="color: #e60000;">{{data?.info?.status_info||'无'}}</span>
+    </div>
+  </section>
+  <div class="main_cfd" *ngFor="let item of data?.goods_list;let i = index;">
+    <header tappable (click)="item.showBody = !item.showBody">
+      <div class="head_title">
+        加工处方单{{i+1}}
+        <div class="icon-tool">
+          <ion-icon [name]="item.showBody?'ios-arrow-up':'ios-arrow-down'"></ion-icon>
+        </div>
+      </div>
+    </header>
+    <section>
+      <div class="choose">
+        <div tappable>
+          <div class="icon">
+            <img [sImgLazyLoad]="item?.eyeglass_cfg?.right?.goods?.goods_thumb" alt="">
+          </div>
+          <div class="txt">眼镜片-右眼(R)</div>
+        </div>
+        <div tappable>
+          <div class="icon">
+            <img [sImgLazyLoad]="item?.eyeglass_cfg?.left?.goods?.goods_thumb" alt="">
+          </div>
+          <div class="txt">眼镜片-左眼(L)</div>
+        </div>
+        <div tappable (click)="item.showBody = !item.showBody" *ngIf="!item?.frame_from_goods?.rec_id">
+          <div class="icon">
+            <img [sImgLazyLoad]="'./assets/icon/avatar_default.jpg'">
+          </div>
+          <div class="txt">镜架</div>
+        </div>
+        <div tappable *ngIf="item?.frame_from_goods?.rec_id">
+          <div class="icon">
+            <img [sImgLazyLoad]="item?.frame_from_goods?.goods_thumb">
+          </div>
+          <div class="txt">镜架</div>
+        </div>
+      </div>
+      <div class="pro_main" *ngIf="item.showBody">
+        <div class="eye right_eye">
+          <div class="h_title">右眼</div>
+          <div class="t_labels">
+            <div class="lab">球镜：{{item?.eyeglass_cfg?.right?.qiujing||'无'}}</div>
+            <div class="lab">柱镜：{{item?.eyeglass_cfg?.right?.zhujing||'无'}}</div>
+          </div>
+          <div class="m_list">
+            <div class="li" [style.display]="!item?.eyeglass_cfg?.right?.zhouxiang?'none':'flex'">
+              <div class="name">轴位</div>
+              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.right?.zhouxiang}}"></ion-input>
+            </div>
+            <div class="li" [style.display]="!item?.eyeglass_cfg?.right?.add?'none':'flex'">
+              <div class="name">ADD</div>
+              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.right?.add}}"></ion-input>
+            </div>
+            <div class="li" [style.display]="!item?.eyeglass_cfg?.right?.jytj?'none':'flex'">
+              <div class="name">近用瞳距</div>
+              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.right?.jytj}}"></ion-input>
+            </div>
+            <div class="li" [style.display]="!item?.eyeglass_cfg?.right?.tongju?'none':'flex'">
+              <div class="name">瞳距</div>
+              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.right?.tongju}}"></ion-input>
+            </div>
+            <div class="li" [style.display]="!item?.eyeglass_cfg?.right?.tonggao?'none':'flex'">
+              <div class="name">瞳高</div>
+              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.right?.tonggao}}"></ion-input>
+            </div>
+          </div>
+        </div>
+        <div class="eye left_eye">
+          <div class="h_title">左眼</div>
+          <div class="t_labels">
+            <div class="lab" *ngIf="item?.eyeglass_cfg?.left?.qiujing">球镜：{{item?.eyeglass_cfg?.left?.qiujing}}</div>
+            <div class="lab" *ngIf="item?.eyeglass_cfg?.left?.zhujing">柱镜：{{item?.eyeglass_cfg?.left?.zhujing}}</div>
+          </div>
+          <div class="m_list">
+            <div class="li" [style.display]="!item?.eyeglass_cfg?.left?.zhouxiang?'none':'flex'">
+              <div class="name">轴位</div>
+              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.left?.zhouxiang}}"></ion-input>
+            </div>
+            <div class="li" [style.display]="!item?.eyeglass_cfg?.left?.add?'none':'flex'">
+              <div class="name">ADD</div>
+              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.left?.add}}"></ion-input>
+            </div>
+            <div class="li" [style.display]="!item?.eyeglass_cfg?.left?.jytj?'none':'flex'">
+              <div class="name">近用瞳距</div>
+              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.left?.jytj}}"></ion-input>
+            </div>
+            <div class="li" [style.display]="!item?.eyeglass_cfg?.left?.tongju?'none':'flex'">
+              <div class="name">瞳距</div>
+              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.left?.tongju}}"></ion-input>
+            </div>
+            <div class="li" [style.display]="!item?.eyeglass_cfg?.left?.tonggao?'none':'flex'">
+              <div class="name">瞳高</div>
+              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.left?.tonggao}}"></ion-input>
+            </div>
+          </div>
+        </div>
+        <div class="eye frame">
+          <div class="h_title">镜架</div>
+          <div class="t_labels">
+            <div class="lab">镜架来源：{{item?.frame_from_goods?'订单选择':'客户自备'}}</div>
+            <div class="lab">镜架品牌：{{item?.frame_attr?.pinpai||'无'}}</div>
+            <div class="lab">镜架型号：{{item?.frame_attr?.xinghao||'无'}}</div>
+            <div class="lab">加工类型：{{item?.frame_attr?.mach_type_name||'无'}}</div>
+            <div class="lab">镜架备注：{{item?.frame_attr?.beizhu||'无'}}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</ion-content>

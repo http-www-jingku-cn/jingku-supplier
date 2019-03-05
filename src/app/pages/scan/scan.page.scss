@@ -1,0 +1,109 @@
+ion-content {
+    --background: #f0f0f0;
+    --overflow: hidden;
+}
+
+.qrscanner {
+    background: none;
+
+    &-area {
+        width: 100%;
+        height: 100%; // background: url(../assets/images/scanner.svg) no-repeat center center;
+        background-size: contain;
+        position: relative;
+    }
+
+    .view {
+        position: absolute;
+        top: 20%;
+        height: 250px;
+        width: 250px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 0 0 9000px rgba(0, 0, 0, 0.5);
+
+        .angle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #44b549;
+        }
+
+        .angle1 {
+            left: 0;
+            top: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .angle2 {
+            right: 0;
+            top: 0;
+            border-bottom: none;
+            border-left: none;
+        }
+
+        .angle3 {
+            bottom: 0;
+            left: 0;
+            border-top: none;
+            border-right: none;
+        }
+
+        .angle4 {
+            right: 0;
+            bottom: 0;
+            border-left: none;
+            border-top: none;
+        }
+    }
+}
+
+.through-line {
+    left: 25%;
+    width: 50%;
+    height: 1px;
+    border-radius: 50%;
+    background: #44b549;
+    opacity: .4;
+    box-shadow: 0 0 5px 2px #44b549;
+    position: absolute;
+    animation: myfirst 2s linear infinite alternate;
+}
+
+@keyframes myfirst {
+    0% {
+        top: 30%;
+    }
+
+    25% {
+        top: 35%;
+    }
+
+    50% {
+        top: 40%;
+    }
+
+    75% {
+        top: 45%;
+    }
+
+    100% {
+        top: 50%;
+    }
+}
+
+.button-bottom {
+
+    width: 100%;
+    position: absolute;
+    bottom: 80px;
+    display: flex;
+    justify-content: center;
+
+    .icon-camera {
+        margin: 8px;
+    }
+}

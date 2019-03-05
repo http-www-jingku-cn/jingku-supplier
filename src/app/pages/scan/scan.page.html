@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>二维码条码</ion-title>
+    <ion-buttons slot="end" (click)="closeModel();">
+      <ion-button color="dark">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-scroll [ngClass]="{'qrscanner':isShow}">
+  <div [ngClass]="{'qrscanner-area':isShow}">
+    <div class="view">
+      <div class="angle angle1"></div>
+      <div class="angle angle2"></div>
+      <div class="angle angle3"></div>
+      <div class="angle angle4"></div>
+    </div>
+  </div>
+  <div [ngClass]="{'through-line':isShow}"></div>
+  <div class="button-bottom">
+    <ion-button (click)="toggleLight()" shape="round" color="light" class="icon-camera" margin-right>
+      <ion-icon slot="icon-only" name="flash"></ion-icon>
+    </ion-button>
+    <ion-button (click)="toggleCamera()" shape="round" color="light" class="icon-camera">
+      <ion-icon slot="icon-only" name="reverse-camera"></ion-icon>
+    </ion-button>
+  </div>
+</ion-content>

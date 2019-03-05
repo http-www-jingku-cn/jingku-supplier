@@ -1,0 +1,126 @@
+$defaultColor: #cbcbcb;
+$color: #50c65f;
+
+.scroll-content {
+    background: #fff !important;
+}
+
+.fore1 {
+    .sn {
+        padding: 15px 14px;
+        color: #666;
+        font-size: 14px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+}
+
+@mixin complete {
+    position: absolute;
+    top: -29px;
+    color: #fff;
+    background: $color;
+    border-radius: 10px;
+    padding: 1px 3px;
+    white-space: nowrap;
+    font-size: 1rem;
+
+    span {
+        border-width: 5px;
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-top: 5px solid $color;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+    }
+}
+
+.progressBar {
+    display: flex;
+    color: $defaultColor;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 40px 0 50px;
+
+    .weiwc {
+        color: $color;
+        border-color: $color !important;
+
+        .complete {
+            background: $color;
+            color: $color;
+        }
+    }
+
+    .status-item {
+        text-align: center;
+        font-size: 1.3rem;
+        position: relative;
+        white-space: nowrap;
+        margin: 0 11px;
+
+        ion-icon {
+            font-size: 26px;
+        }
+
+        .text {
+            position: absolute;
+            left: 49%;
+            width: 62px;
+            top: 30px;
+            font-size: 1rem;
+            margin-left: -31px;
+            white-space: pre-wrap;
+        }
+
+        .complete {
+            @include complete;
+            margin-left: -10px;
+        }
+    }
+
+    .status-line {
+        width: 35px;
+        border-top: 2px $defaultColor solid;
+        position: relative;
+
+        .complete {
+            @include complete;
+            margin-left: -24px;
+            top: -41px;
+        }
+    }
+}
+
+.fore2 {
+    padding: 0 10px;
+
+    .title {
+        line-height: 3;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .main {
+        padding: 10px;
+    }
+
+    .imgs {
+        overflow: hidden;
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 73px;
+            margin-right: 10px;
+            float: left;
+        }
+    }
+
+    .time {
+        color: #666666;
+    }
+}

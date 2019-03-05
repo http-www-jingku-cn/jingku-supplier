@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/manage/returns"></ion-back-button>
+    </ion-buttons>
+    <ion-title>退换返修详情</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="data">
+    <div class="fore fore1">
+      <div class="sn">
+        服务单号：{{data?.info?.return_number}}
+        <!-- <span item-end ion-text color="danger">待审核</span> -->
+      </div>
+      <!-- <ion-item detail-push text-wrap tappable navPush="AuditProgressPage" navParams="return_id:return_id">
+          审核进度：您的服务单已申请成功
+      </ion-item> -->
+      <div class="progressBar" *ngIf="returnState!='-2'&&returnState!='-1'">
+        <div class="status-item" [class.weiwc]="returnState==5||returnState==10||returnState==4||returnState==2||returnState==3||returnState==1||returnState==9||returnState==8||returnState==0">
+          <div class="complete" *ngIf="returnState==0">已完成<span></span></div>
+          <ion-icon name="ios-checkmark-circle"></ion-icon>
+          <div class="text">提交审核</div>
+        </div>
+        <div class="status-line" [class.weiwc]="returnState==5||returnState==10||returnState==4||returnState==2||returnState==3||returnState==1||returnState==9||returnState==8">
+          <!-- <div class="complete" *ngIf="returnState==3">审核中<span></span></div> -->
+        </div>
+        <div class="status-item" [class.weiwc]="returnState==5||returnState==10||returnState==4||returnState==2||returnState==3||returnState==1||returnState==9||returnState==8">
+          <div class="complete" *ngIf="returnState==8">已完成<span></span></div>
+          <ion-icon name="ios-checkmark-circle"></ion-icon>
+          <div class="text">第三方卖家审核</div>
+        </div>
+        <div class="status-line" [class.weiwc]="returnState==5||returnState==10||returnState==4||returnState==2||returnState==3||returnState==1||returnState==9">
+          <div class="complete" *ngIf="returnState==9">已填写<span></span></div>
+        </div>
+        <div class="status-item" [class.weiwc]="returnState==5||returnState==10||returnState==4||returnState==2||returnState==3||returnState==1">
+          <div class="complete" *ngIf="returnState==1">已完成<span></span></div>
+          <ion-icon name="ios-checkmark-circle"></ion-icon>
+          <div class="text">第三方卖家收货</div>
+        </div>
+        <div class="status-line" [class.weiwc]="returnState==5||returnState==10||returnState==4||returnState==2||returnState==3">
+          <!-- <div class="complete" *ngIf="returnState==6">待退款<span></span></div> -->
+          <div class="complete" *ngIf="returnState==2">加工中<span></span></div>
+          <div class="complete" *ngIf="returnState==3">已寄出<span></span></div>
+        </div>
+        <!-- ————————————————————————————————————————————————————————— -->
+        <div class="status-item" [class.weiwc]="returnState==5||returnState==10||returnState==4">
+          <div class="complete" *ngIf="returnState==4">已完成<span></span></div>
+          <ion-icon name="ios-checkmark-circle"></ion-icon>
+          <div class="text" *ngIf="returnType==1">退款</div>
+          <!-- 买家收货 -->
+          <div class="text" *ngIf="returnType==2">等待买家收货</div>
+          <div class="text" *ngIf="returnType==3">等待买家收货</div>
+        </div>
+        <div class="status-line" [class.weiwc]="returnState==5||returnState==10">
+          <!-- <div class="complete" *ngIf="returnState==8">处理中<span></span></div> -->
+        </div>
+        <div class="status-item" [class.weiwc]="returnState==5||returnState==10">
+          <div class="complete" *ngIf="returnState==5||returnState==10">已完成<span></span></div>
+          <ion-icon name="ios-checkmark-circle"></ion-icon>
+          <div class="text">完成</div>
+        </div>
+      </div>
+      <!-- —————————————————————————— 取消申请 —————————————————————————— -->
+      <div class="progressBar" *ngIf="returnState=='-1'">
+        <div class="status-item" [class.weiwc]="returnState==0||returnState=='-1'">
+          <div class="complete" *ngIf="returnState==0">已完成<span></span></div>
+          <ion-icon name="ios-checkmark-circle"></ion-icon>
+          <div class="text">提交审核</div>
+        </div>
+        <div class="status-line" [class.weiwc]="returnState=='-1'">
+        </div>
+        <div class="status-item" [class.weiwc]="returnState=='-1'">
+          <div class="complete" *ngIf="returnState=='-1'">已完成<span></span></div>
+          <ion-icon name="ios-checkmark-circle"></ion-icon>
+          <div class="text">取消申请</div>
+        </div>
+      </div>
+      <!-- —————————————————————————— 拒绝申请 —————————————————————————— -->
+      <div class="progressBar" *ngIf="returnState=='-2'">
+        <div class="status-item" [class.weiwc]="returnState==0||returnState=='-2'">
+          <div class="complete" *ngIf="returnState==0">已完成<span></span></div>
+          <ion-icon name="ios-checkmark-circle"></ion-icon>
+          <div class="text">提交审核</div>
+        </div>
+        <div class="status-line" [class.weiwc]="returnState=='-2'">
+        </div>
+        <div class="status-item" [class.weiwc]="returnState=='-2'">
+          <div class="complete" *ngIf="returnState=='-2'">已完成<span></span></div>
+          <ion-icon name="ios-checkmark-circle"></ion-icon>
+          <div class="text">拒绝申请</div>
+        </div>
+      </div>
+    </div>
+    <div class="background"></div>
+    <div class="fore fore2">
+      <div class="title">问题描述</div>
+      <div class="main">
+        <div class="return_desc">
+          {{data?.info?.return_desc}}
+        </div>
+        <div class="imgs">
+          <img *ngFor="let img of data?.info?.imgs" [sImgLazyLoad]="img" border-f0 alt="">
+        </div>
+        <div class="time">{{data?.info?.add_time}}</div>
+      </div>
+    </div>
+  </ng-container>
+</ion-content>

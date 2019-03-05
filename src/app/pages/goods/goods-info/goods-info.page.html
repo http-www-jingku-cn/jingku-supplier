@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides pager="true" [options]="slideOpts">
+  <ion-slides pager="true" [options]="slideOpts" *ngIf="data?.goods_gallery?.length">
     <ion-slide *ngFor="let item of data?.goods_gallery">
       <h1>{{img_original}}</h1>
       <ion-img [sImgLazyLoad]="item.img_original"></ion-img>

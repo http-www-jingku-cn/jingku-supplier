@@ -1,4 +1,4 @@
-<ion-tabs translucent>
+<ion-tabs>
 
   <ion-tab-bar slot="bottom" translucent>
 
@@ -11,6 +11,11 @@
       <!-- <ion-icon name="contacts"></ion-icon> -->
       <ion-icon src="./assets/icons/svg/tab-goods.svg"></ion-icon>
       <ion-label>商品</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="openScan()">
+      <ion-icon name="qr-scanner"></ion-icon>
+      <ion-label>扫码</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="messages">

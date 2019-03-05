@@ -83,12 +83,14 @@ ion-back-button {
 }
 
 ion-toolbar {
-    --background: #fff;
+    // --background: #fff;
 }
 
 ion-tab-bar {
-    --background: #fff;
+    // --background: #fff;
 }
+
+ion-content {}
 
 .ios {
     --border-width: 0.55px;
@@ -96,4 +98,24 @@ ion-tab-bar {
 
 .md {
     --border-width: 1px;
+}
+
+.cameraView {
+    background: transparent;
+
+    ion-app {
+        ion-modal {
+            --background: transparent;
+        }
+
+        app-tabs {
+            display: none;
+        }
+
+        s-scan.ion-page {
+            ion-content {
+                --background: transparent;
+            }
+        }
+    }
 }

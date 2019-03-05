@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { NavController } from '@ionic/angular';
-import { switchMap } from 'rxjs/operators';
+import { NavController, ModalController } from '@ionic/angular';
 import { HttpDataService } from 'src/app/providers/http-data.service';
 import { StartupService } from 'src/app/providers/startup.service';
 import { ChatService } from 'src/app/providers/webim/chat.service';
 import { zip } from 'rxjs';
+
 
 @Component({
   selector: 'app-manage',
@@ -17,13 +17,13 @@ export class ManagePage implements OnInit {
   supplierInfo: any;
 
   constructor(
-    public router: Router,
-    public navCtrl: NavController,
-    public httpServ: HttpDataService,
-    public startupServ: StartupService,
-    public chatServ: ChatService,
+    private router: Router,
+    private navCtrl: NavController,
+    private httpServ: HttpDataService,
+    private startupServ: StartupService,
+    private chatServ: ChatService,
   ) {
-    
+
   }
 
   ngOnInit() {
@@ -61,4 +61,5 @@ export class ManagePage implements OnInit {
       }
     })
   }
+
 }
