@@ -195,7 +195,7 @@ export class HttpDataService {
     )
   }
   sessiontoken(data?, options?: HttpOptions) {
-    return this.post('http://price.jingkoo.net/public/scrm/Publics/_sessiontoken', data, options);
+    return this.post('/public/scrm/Publics/_sessiontoken', data, options);
   }
   captcha(data?, options?: HttpOptions) {//验证码
     return this.post('/public/scrm/publics/captcha', data, options);

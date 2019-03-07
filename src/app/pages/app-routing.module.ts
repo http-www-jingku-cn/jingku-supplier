@@ -27,7 +27,6 @@ const routes: Routes = [
     path: 'iframe-browser',
     loadChildren: './iframe-browser/iframe-browser.module#IframeBrowserPageModule',
   },
-  { path: 'scan', loadChildren: './scan/scan.module#ScanPageModule' },
   { path: '404', loadChildren: './not-found/not-found.module#NotFoundPageModule' },
   { path: '**', redirectTo: '/404' },
 

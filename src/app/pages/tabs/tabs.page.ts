@@ -14,7 +14,7 @@ export class TabsPage implements OnInit {
   supplierInfo: any;
 
   constructor(
-    private chatServ: ChatService,
+    public chatServ: ChatService,
     private httpServ: HttpDataService,
     private startupServ: StartupService,
     private modalController: ModalController,
