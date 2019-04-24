@@ -48,11 +48,12 @@ export class MirrorProcessPage implements OnInit {
         })
       }
     });
+    // this.doRefresh(event)
   }
 
   barcodeBarCodeBinding(id, event) {
     event.stopPropagation()
-    this.httpServ.barcodeBarCodeList({ sn: this.sn, id: id }).subscribe(res => {
+    this.httpServ.barcodeBarCodeBinding({ sn: this.sn, id: id }).subscribe(res => {
       if (res.status == 1) {
         this.popoversServ.presentToast(res.info);
         this.navCtrl.navigateForward(['/manage/mirror-process/info', id]);
@@ -94,5 +95,12 @@ export class MirrorProcessPage implements OnInit {
   }
   lookInfo(mid) {
     this.navCtrl.navigateForward(['/manage/mirror-process/info', mid]);
+  }
+  getData(orderId) {
+    this.httpServ.machiningInfo({ id: orderId }).subscribe(res => {
+      if (res.status == 1) {
+        this.data = res.data;
+      }
+    })
   }
 }

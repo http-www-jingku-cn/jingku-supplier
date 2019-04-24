@@ -20,11 +20,11 @@
     </div>
     <div>
       <span class="name">加工费用</span>
-      <span class="value" style="color: #e60000;">{{data?.info?.amount_format||'无'}}</span>
+      <span class="value" style="color: #e60000;">{{data?.info?.amount||'无'}}</span>
     </div>
     <div>
       <span class="name">下单时间</span>
-      <span class="value">{{data?.info?.add_time||'无'}}</span>
+      <span class="value">{{data?.info?.dateline||'无'}}</span>
     </div>
     <div>
       <span class="name">收货地址</span>
@@ -32,12 +32,12 @@
     </div>
     <div>
       <span class="name">加工地址</span>
-      <span class="value">{{data?.setting?.province_name + data?.setting?.city_name + data?.setting?.district_name +
-        data?.setting?.address}}</span>
+      <span class="value">{{data?.machining_setting?.city_name + data?.machining_setting?.district_name + data?.machining_setting?.contacts +
+        data?.machining_setting?.address}}</span>
     </div>
     <div>
       <span class="name">订单状态</span>
-      <span class="value" style="color: #e60000;">{{data?.info?.status_info||'无'}}</span>
+      <span class="value" style="color: #e60000;">{{data?.info?.s_status||'无'}}</span>
     </div>
   </section>
   <div class="main_cfd" *ngFor="let item of data?.goods_list;let i = index;">
@@ -131,14 +131,14 @@
             </div>
             <div class="li" [style.display]="!item?.eyeglass_cfg?.left?.tonggao?'none':'flex'">
               <div class="name">瞳高</div>
-              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.left?.tonggao}}"></ion-input>
+              <ion-input autocomplete="off" autocorrect="off" readonly class="inp" type="text" value="{{item?.eyeglass_cfg?.left?.tonggao}}"></ion-input> 
             </div>
           </div>
         </div>
         <div class="eye frame">
           <div class="h_title">镜架</div>
           <div class="t_labels">
-            <div class="lab">镜架来源：{{item?.frame_from_goods?'订单选择':'客户自备'}}</div>
+            <div class="lab">镜架来源：{{item?.frame_from.goods_id?'订单选择':'客户自备'}}</div>
             <div class="lab">镜架品牌：{{item?.frame_attr?.pinpai||'无'}}</div>
             <div class="lab">镜架型号：{{item?.frame_attr?.xinghao||'无'}}</div>
             <div class="lab">加工类型：{{item?.frame_attr?.mach_type_name||'无'}}</div>

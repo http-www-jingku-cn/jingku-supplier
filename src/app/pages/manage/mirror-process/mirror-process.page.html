@@ -66,13 +66,13 @@
         <div class="goods-info">
           <div class="goods-info-inner">
             <div class="img" *ngFor="let goods of order?.pian_goods">
-              <ion-img [sImgLazyLoad]="goods.goods_img"></ion-img>
+              <ion-img [sImgLazyLoad]="goods.goods_img" (click)="lookInfo(order.id,$event)"></ion-img>
             </div>
           </div>
         </div>
       </ng-container>
       <div class="btns">
-        <ion-button fill="outline" size="small">查看</ion-button>
+        <ion-button fill="outline" size="small"  (click)="lookInfo(order.id,$event)">查看</ion-button>
         <ion-button fill="outline" size="small" *ngIf="sn" (click)="barcodeBarCodeBinding(order.id,$event)">绑定</ion-button>
       </div>
     </div>
