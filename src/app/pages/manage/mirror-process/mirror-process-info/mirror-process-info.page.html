@@ -63,15 +63,15 @@
           </div>
           <div class="txt">眼镜片-左眼(L)</div>
         </div>
-        <div tappable (click)="item.showBody = !item.showBody" *ngIf="!item?.frame_from_goods?.rec_id">
+        <div tappable (click)="item.showBody = !item.showBody" *ngIf="!item?.frame_from?.goods_img">
           <div class="icon">
             <img [sImgLazyLoad]="'./assets/icon/avatar_default.jpg'">
           </div>
           <div class="txt">镜架</div>
         </div>
-        <div tappable *ngIf="item?.frame_from_goods?.rec_id">
+        <div tappable *ngIf="item?.frame_from?.goods_img">
           <div class="icon">
-            <img [sImgLazyLoad]="item?.frame_from_goods?.goods_thumb">
+            <img [sImgLazyLoad]="item?.frame_from?.goods_img">
           </div>
           <div class="txt">镜架</div>
         </div>
